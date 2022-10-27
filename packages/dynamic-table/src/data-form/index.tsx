@@ -1,7 +1,8 @@
 import type { DataRecord } from '@/interfaces/load-data-params'
 import { defineComponent, type PropType } from 'vue'
 import type { FormItemsOptions, PaginationOptions } from '..'
-import { createFormItem } from './create-form-item'
+import { renderFormActions } from './render-form-actions'
+import { renderFormItem } from './render-form-item'
 
 export default defineComponent({
   name: 'DataForm',
@@ -17,7 +18,7 @@ export default defineComponent({
      * 数据源
      */
     dataSource: {
-      type: Array as PropType<DataRecord>,
+      type: Object as PropType<DataRecord>,
       required: true
     },
     /**
@@ -36,7 +37,9 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const formItems = props.forms.map(createFormItem)
+    const formItems = props.forms.map((form) => renderFormItem(form))
+
+    const formActions = renderFormActions()
 
     // 提交表单
     const onSubmit = () => {
@@ -57,6 +60,7 @@ export default defineComponent({
           onSubmit={onSubmit}
           onReset={onReset}>
           {formItems}
+          {formActions}
         </vxe-form>
       )
     }

@@ -30,10 +30,10 @@ function toRenderTemplate(options?: FormItemOptions) {
  * @param options
  * @returns
  */
-export function createFormItem(options: FormItemOptions) {
+export function renderFormItem(form: FormItemOptions) {
   return h(
     FormItem,
-    { field: options.key, title: options.title },
-    toRenderTemplate(options)
+    { field: form.key, title: form.title },
+    toRenderTemplate(form)
   )
 }

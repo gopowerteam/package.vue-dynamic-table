@@ -1,7 +1,7 @@
 import type { TableColumnsOptions } from '@/interfaces/table-column-options'
 import type { DataRecord } from '@/interfaces/load-data-params'
 import { defineComponent, type PropType } from 'vue'
-import { createTableColumn } from './create-table-column'
+import { renderTableColumn } from './render-table-column'
 
 export default defineComponent({
   name: 'DataTable',
@@ -22,7 +22,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const columns = props.columns.map(createTableColumn)
+    const columns = props.columns.map(renderTableColumn)
+
     return () => <vxe-table data={props.dataSource}>{columns}</vxe-table>
   }
 })

@@ -30,7 +30,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    vue({ reactivityTransform: true }),
+    vue(),
     vueJsx(),
     dts({
       entryRoot: resolvePath()

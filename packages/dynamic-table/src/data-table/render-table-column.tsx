@@ -31,7 +31,7 @@ function toRenderTemplate(options?: TableColumnOptions) {
  * @param options
  * @returns
  */
-export function createTableColumn(options: TableColumnOptions) {
+export function renderTableColumn(options: TableColumnOptions) {
   return h(
     Column,
     { field: options.key, title: options.title },
