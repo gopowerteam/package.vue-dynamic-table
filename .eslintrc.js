@@ -34,6 +34,22 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-explicit-any': ['off']
       }
+    },
+    {
+      files: ['**/*.vue'], // 只处理 vue 文件
+      extends: [
+        // vue3支持引入
+        // 'plugin:vue/vue3-essential',
+        'plugin:vue/vue3-strongly-recommended',
+        'plugin:vue/vue3-recommended',
+        'plugin:prettier-vue/recommended',
+        // typescript支持引入
+        '@vue/typescript'
+      ],
+      rules: {
+        'vue/multi-word-component-names': ['off'],
+        'no-console': ['warn']
+      }
     }
   ]
 }

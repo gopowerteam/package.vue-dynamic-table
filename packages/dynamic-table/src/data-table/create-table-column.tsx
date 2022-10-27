@@ -1,0 +1,40 @@
+import type { TableColumnOptions } from '@/interfaces/table-column-options'
+import { h } from 'vue'
+import { Column } from 'vxe-table'
+import { DynamicTable, type DataRecord } from '..'
+import { tableColumnRenders as renders } from '../data-table-columns'
+
+/**
+ * 生成Render模板
+ * @param render
+ * @returns
+ */
+function toRenderTemplate(options?: TableColumnOptions) {
+  if (!options?.render) {
+    return undefined
+  }
+
+  // 获取渲染模板
+  const templateRender = options.render({
+    ...renders,
+    ...(DynamicTable?.$override?.table || {})
+  })
+
+  // 获取deault slot
+  return {
+    default: ({ row }: { row: DataRecord }) => templateRender(row, options)
+  }
+}
+
+/**
+ * 创建表格列
+ * @param options
+ * @returns
+ */
+export function createTableColumn(options: TableColumnOptions) {
+  return h(
+    Column,
+    { field: options.key, title: options.title },
+    toRenderTemplate(options)
+  )
+}

@@ -3,15 +3,22 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev:request": "ts-node ./src/request/index.ts",
-    "dev:request-generate": "ts-node ./src/request-generate/index.ts"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "update:request": "npx request-generate"
   },
   "dependencies": {
-    "@gopowerteam/request": "*",
-    "@gopowerteam/request-generate": "*"
+    "@gopowerteam/request": "^0.1.8",
+    "@gopowerteam/request-generate": "^0.1.7",
+    "@gopowerteam/vue-dynamic-table": "workspace: *",
+    "@vue/runtime-core": "^3.2.41",
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vue/tsconfig": "^0.1.3",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0"
   }
 }
