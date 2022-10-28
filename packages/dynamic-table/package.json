@@ -1,6 +1,6 @@
 {
   "name": "@gopowerteam/vue-dynamic-table",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",
@@ -8,6 +8,10 @@
     "test:unit": "vitest --environment jsdom --root src/",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
@@ -39,5 +43,18 @@
     "vite": "^3.1.8",
     "vite-plugin-dts": "^1.6.6",
     "vitest": "^0.24.3"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gopowerteam/package.vue-dynamic-table.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gopowerteam/package.vue-dynamic-table/issues"
+  },
+  "homepage": "https://github.com/gopowerteam/package.vue-dynamic-table",
+  "license": "MIT"
 }

@@ -21,7 +21,7 @@ export default defineConfig({
     },
     rollupOptions: {
       treeshake: true,
-      external: ['vue', 'vxe-table', 'dayjs'],
+      external: ['vue', 'vxe-table', 'dayjs', 'mitt'],
       output: {
         exports: 'named',
         globals: {
