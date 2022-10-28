@@ -1,4 +1,5 @@
 import type { DataRecord, TableColumnOptions } from '@/interfaces'
+import { getColumnValue } from '@/utils/get-column-value'
 
 function generateText(
   options: RenderTextColumnOptions,
@@ -13,7 +14,7 @@ function generateText(
     return options.text
   }
 
-  return record[column.key]
+  return getColumnValue(record, column)
 }
 
 function generatColor(options: RenderTextColumnOptions, record: DataRecord) {

@@ -1,4 +1,5 @@
 import type { DataRecord, TableColumnOptions } from '@/interfaces'
+import { getColumnValue } from '@/utils/get-column-value'
 
 const DEFAULT_SPARATOR = ' '
 
@@ -26,7 +27,7 @@ function formatText(value: string, separator?: string) {
 
 export function renderPhoneColumn(options: RenderTextColumnOptions) {
   return (record: DataRecord, column: TableColumnOptions) => {
-    const phone = record[column.key]
+    const phone = getColumnValue(record, column)
     const value = formatText(
       options?.safe ? encryptText(phone) : phone,
       options?.separator

@@ -1,5 +1,6 @@
 import type { TableColumnsOptions } from '@/interfaces'
 import type { DataRecord } from '@/interfaces/load-data-params'
+import { setColumnValue } from '@/utils/set-column-value'
 import { ref, type Ref } from 'vue'
 
 export function createTableSource(
@@ -16,8 +17,9 @@ export function createTableSource(
     if (formats.length > 0) {
       return value.map((record) => {
         // format操作
-        formats.forEach(({ key, formatter }) => {
-          formatter && (record[key] = formatter(record))
+        formats.forEach((column) => {
+          const formatter = column.formatter
+          formatter && setColumnValue(record, column, formatter(record))
         })
         return record
       })
