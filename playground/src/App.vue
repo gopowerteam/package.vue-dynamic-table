@@ -87,6 +87,7 @@ const columns: TableColumnsOptions = [
     key: 'username',
     title: '用户名',
     form: {
+      rules: [{ required: true, message: '请输入名称' }],
       render: (r) => r.input({ placeholder: 'asd' })
     }
   },

@@ -1,5 +1,5 @@
 import type { FormItemRender } from './form-item-render'
-
+import type { VxeTableDefines } from 'vxe-table'
 /**
  * 表单项配置
  */
@@ -8,6 +8,7 @@ export interface FormItemOptions {
   title: string
   render?: FormItemRender
   collapsed?: boolean
+  rules?: VxeTableDefines.ValidatorRule[]
   default?: any | (() => any)
 }
 

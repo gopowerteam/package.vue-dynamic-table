@@ -14,6 +14,11 @@ import { createTableSource } from './create-table-source'
 export default defineComponent({
   name: 'DynamicTable',
   props: {
+    loadAuto: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
     // 加载数据源
     loadData: {
       type: Function as PropType<(params: LoadDataParams) => void>,
@@ -63,7 +68,9 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      onLoadData()
+      if (props.loadAuto) {
+        onLoadData()
+      }
     })
 
     return () => {

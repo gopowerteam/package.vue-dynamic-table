@@ -1,6 +1,6 @@
 import type { DataRecord } from '@/interfaces/load-data-params'
 import { defineComponent, type PropType } from 'vue'
-import type { VxeFormEvents } from 'vxe-table'
+import type { VxeFormEvents, VxeTableDefines } from 'vxe-table'
 import type { FormItemsOptions, PaginationOptions } from '..'
 import { renderFormActions } from './render-form-actions'
 import { renderFormItem } from './render-form-item'
@@ -42,6 +42,15 @@ export default defineComponent({
 
     const formActions = renderFormActions(props.forms)
 
+    const formRules = props.forms.reduce<
+      Record<string, VxeTableDefines.ValidatorRule[]>
+    >((r, form) => {
+      if (form.rules) {
+        r[form.key] = form.rules
+      }
+      return r
+    }, {})
+
     // 提交表单
     const onSubmit: VxeFormEvents.Submit = () => {
       props.pagination?.reset()
@@ -53,18 +62,17 @@ export default defineComponent({
       props.pagination?.reset()
     }
 
-    if (formItems.length === 0) {
-      return <></>
-    } else {
-      return () => (
+    return () => (
+      <div style="margin-bottom:15px;">
         <vxe-form
           data={props.dataSource}
+          rules={formRules}
           onSubmit={onSubmit}
           onReset={onReset}>
           {formItems}
           {formActions}
         </vxe-form>
-      )
-    }
+      </div>
+    )
   }
 })
