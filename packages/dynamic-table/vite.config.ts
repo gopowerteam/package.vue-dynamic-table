@@ -20,7 +20,8 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', 'vxe-table'],
+      treeshake: true,
+      external: ['vue', 'vxe-table', 'dayjs'],
       output: {
         exports: 'named',
         globals: {

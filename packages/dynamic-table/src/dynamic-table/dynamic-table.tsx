@@ -10,6 +10,7 @@ import DataPage from '../data-page'
 import { createFormSource } from './create-form-source'
 import { createFormItemOptions } from '@/data-form/create-form-item-options'
 import { createTableSource } from './create-table-source'
+import { events } from '@/utils/events-helper'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -51,6 +52,10 @@ export default defineComponent({
     const [tableSource, updateTableSource] = createTableSource(props.columns)
     // 创建Form数据源
     const [formSource] = createFormSource(forms)
+
+    events.on('reload', () => {
+      onLoadData()
+    })
 
     /**
      * 加载表单数据

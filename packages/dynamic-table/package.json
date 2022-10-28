@@ -12,6 +12,8 @@
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
+    "dayjs": "^1.11.6",
+    "mitt": "^3.0.0",
     "vue": "^3.2.41",
     "vxe-table": "^4.3.5",
     "xe-utils": "^3.5.7"

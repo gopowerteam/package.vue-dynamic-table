@@ -25,7 +25,7 @@ function formatText(value: string, separator?: string) {
     .replace(/M/g, '*')
 }
 
-export function renderPhoneColumn(options: RenderTextColumnOptions) {
+export function renderPhoneColumn(options?: RenderTextColumnOptions) {
   return (record: DataRecord, column: TableColumnOptions) => {
     const phone = getColumnValue(record, column)
     const value = formatText(
@@ -33,7 +33,7 @@ export function renderPhoneColumn(options: RenderTextColumnOptions) {
       options?.separator
     )
 
-    if (options.callable) {
+    if (options?.callable) {
       return (
         <a
           style="text-decoration:none;"

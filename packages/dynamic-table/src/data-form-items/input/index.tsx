@@ -1,12 +1,12 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
 
-export function renderInputItem(renderOptions: RenderInputItemOptions) {
-  return (data: DataRecord, itemOptions: FormItemOptions) => {
+export function renderInputItem(options?: RenderInputItemOptions) {
+  return (data: DataRecord, form: FormItemOptions) => {
     return (
       <vxe-input
-        v-model={data[itemOptions.key]}
-        placeholder={renderOptions.placeholder}
-        clearable={renderOptions.clearable}></vxe-input>
+        v-model={data[form.key]}
+        placeholder={options?.placeholder}
+        clearable={options?.clearable}></vxe-input>
     )
   }
 }

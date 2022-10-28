@@ -3,6 +3,7 @@
     :pagination="pageService"
     rowKey="id"
     :load-data="loadData"
+    :forms="forms"
     :columns="columns"></data-table>
 </template>
 
@@ -13,10 +14,13 @@ import type {
   A
 } from '@gopowerteam/request/dist/request-adapter.interface-bd32c0be'
 import type {
+  FormItemOptions,
+  FormItemsOptions,
   LoadDataParams,
   PaginationOptions,
   TableColumnsOptions
 } from '@gopowerteam/vue-dynamic-table'
+import { formItemRenders } from '@gopowerteam/vue-dynamic-table/dist/data-form-items'
 import { ref, type Ref } from 'vue'
 import { AdministratorService } from './http/services/AdministratorService'
 const administratorService = new AdministratorService()
@@ -83,10 +87,31 @@ function loadData({ form, update }: LoadDataParams) {
     })
 }
 
+const forms: FormItemsOptions = [
+  {
+    key: 'test1',
+    title: 'test1',
+    render: (r) =>
+      r.select({
+        default: 'b',
+        options: new Map([
+          ['a', 'aaa'],
+          ['b', 'bbb']
+        ]),
+        autoSumbit: true
+      })
+  }
+]
+
 const columns: TableColumnsOptions = [
   {
     key: 'id',
     title: '名称'
+  },
+  {
+    key: 'createdAt',
+    title: 'date',
+    render: (r) => r.date()
   },
   {
     key: 'phone',
