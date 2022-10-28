@@ -7,6 +7,7 @@ export interface FormItemOptions {
   key: string
   title: string
   render?: FormItemRender
+  collapsed?: boolean
   default?: any | (() => any)
 }
 

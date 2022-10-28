@@ -1,6 +1,6 @@
 import type { TableColumnRender } from './table-column-render'
 import type { DataRecord } from './load-data-params'
-import type { FormItemRender } from './form-item-render'
+import type { FormItemOptions } from './form-item-options'
 
 /**
  * 列配置
@@ -11,7 +11,7 @@ export interface TableColumnOptions {
   index?: string
   fixed?: 'left' | 'right'
   render?: TableColumnRender
-  form?: FormItemRender
+  form?: Omit<FormItemOptions, 'key' | 'title'>
   formatter?: DataFormatter
 }
 

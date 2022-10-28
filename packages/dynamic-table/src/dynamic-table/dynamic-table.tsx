@@ -51,7 +51,15 @@ export default defineComponent({
      * 加载表单数据
      */
     const onLoadData = () => {
-      props.loadData({ form: unref(formSource), update: updateTableSource })
+      const formData = { ...unref(formSource) }
+
+      Object.keys(formData).forEach((key) => {
+        if (formData[key] === null) {
+          delete formData[key]
+        }
+      })
+
+      props.loadData({ form: formData, update: updateTableSource })
     }
 
     onMounted(() => {

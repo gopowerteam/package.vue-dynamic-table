@@ -1,5 +1,6 @@
 import type { DataRecord } from '@/interfaces/load-data-params'
 import { defineComponent, type PropType } from 'vue'
+import type { VxeFormEvents } from 'vxe-table'
 import type { FormItemsOptions, PaginationOptions } from '..'
 import { renderFormActions } from './render-form-actions'
 import { renderFormItem } from './render-form-item'
@@ -26,7 +27,7 @@ export default defineComponent({
      */
     loadData: {
       type: Function as PropType<() => void>,
-      required: false
+      required: true
     },
     /**
      * 分页配置
@@ -39,16 +40,17 @@ export default defineComponent({
   setup(props) {
     const formItems = props.forms.map((form) => renderFormItem(form))
 
-    const formActions = renderFormActions()
+    const formActions = renderFormActions(props.forms)
 
     // 提交表单
-    const onSubmit = () => {
-      //TODO: 待处理
+    const onSubmit: VxeFormEvents.Submit = () => {
+      props.pagination?.reset()
+      props.loadData()
     }
 
     // 重置表弟
-    const onReset = () => {
-      //TODO: 待处理
+    const onReset: VxeFormEvents.Reset = () => {
+      props.pagination?.reset()
     }
 
     if (formItems.length === 0) {

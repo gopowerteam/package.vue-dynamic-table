@@ -1,5 +1,11 @@
+import type { FormItemOptions } from '..'
+
+/**
+ * Submit Button
+ * @returns
+ */
 function submitButton() {
-  return (
+  return () => (
     <vxe-button
       type="submit"
       status="primary"
@@ -8,29 +14,35 @@ function submitButton() {
 }
 
 function resetButton() {
-  return (
+  return () => (
     <vxe-button
       type="reset"
-      status="primary"
       content="重置"></vxe-button>
   )
 }
 
-function renderFormItem(render: () => JSX.Element) {
+/**
+ * 渲染FormItem
+ * @param render
+ * @returns
+ */
+function renderFormItem(
+  render: (() => () => JSX.Element)[] | (() => () => JSX.Element),
+  collapseAction?: boolean
+) {
   return (
-    <vxe-form-item>
+    <vxe-form-item collapse-node={collapseAction}>
       {{
-        default: render
+        default: Array.isArray(render)
+          ? () => <>{render.map((r) => r()())}</>
+          : render()
       }}
     </vxe-form-item>
   )
 }
 
-export function renderFormActions() {
-  return (
-    <>
-      {renderFormItem(submitButton)}
-      {renderFormItem(resetButton)}
-    </>
-  )
+export function renderFormActions(forms: FormItemOptions[]) {
+  const hasCollapsed = forms.some((form) => form.collapsed)
+
+  return <>{renderFormItem([submitButton, resetButton], hasCollapsed)}</>
 }

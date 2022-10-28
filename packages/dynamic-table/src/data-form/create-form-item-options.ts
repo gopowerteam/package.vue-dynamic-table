@@ -16,7 +16,7 @@ export function createFormItemOptions(
       .map((column) => ({
         key: column.key,
         title: column.title,
-        render: column.form
+        ...column.form
       }))
   ]
 

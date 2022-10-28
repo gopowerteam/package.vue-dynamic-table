@@ -33,7 +33,12 @@ function toRenderTemplate(options?: FormItemOptions) {
 export function renderFormItem(form: FormItemOptions) {
   return h(
     FormItem,
-    { field: form.key, title: form.title },
+    {
+      field: form.key,
+      title: form.title,
+      itemRender: {},
+      folding: form.collapsed
+    },
     toRenderTemplate(form)
   )
 }

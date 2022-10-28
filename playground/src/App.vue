@@ -1,5 +1,4 @@
 <template>
-  <div>111</div>
   <data-table
     :pagination="pageService"
     rowKey="id"
@@ -52,6 +51,10 @@ class PageService implements RequestPlugin, PaginationOptions {
     this.pageSize.value = size
   }
 
+  reset(): void {
+    this.pageIndex.value = 1
+  }
+
   before(options: R) {
     options.paramsQuery = {
       ...options.paramsQuery,
@@ -67,10 +70,12 @@ class PageService implements RequestPlugin, PaginationOptions {
 
 const pageService = new PageService(1, 1)
 
-function loadData({ update }: LoadDataParams) {
-  administratorService.findAdministrator({}, [pageService]).then(({ data }) => {
-    update(data)
-  })
+function loadData({ form, update }: LoadDataParams) {
+  administratorService
+    .findAdministrator(form, [pageService])
+    .then(({ data }) => {
+      update(data)
+    })
 }
 
 const columns: TableColumnsOptions = [
@@ -80,8 +85,18 @@ const columns: TableColumnsOptions = [
   },
   {
     key: 'username',
-    title: '测试',
-    form: (r) => r.input({ placeholder: 'asd' })
+    title: '用户名',
+    form: {
+      render: (r) => r.input({ placeholder: 'asd' })
+    }
+  },
+  {
+    key: 'realname',
+    title: '真实姓名',
+    form: {
+      collapsed: true,
+      render: (r) => r.input({ placeholder: 'asd' })
+    }
   }
 ]
 </script>
