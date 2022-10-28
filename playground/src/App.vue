@@ -74,7 +74,12 @@ function loadData({ form, update }: LoadDataParams) {
   administratorService
     .findAdministrator(form, [pageService])
     .then(({ data }) => {
-      update(data)
+      update(
+        data.map((x) => {
+          ;(x as any)['phone'] = '18899992222'
+          return x
+        })
+      )
     })
 }
 
@@ -84,8 +89,18 @@ const columns: TableColumnsOptions = [
     title: '名称'
   },
   {
+    key: 'phone',
+    title: '手机号',
+    render: (r) => r.phone({ safe: true, callable: true })
+  },
+  {
     key: 'username',
     title: '用户名',
+    render: (r) =>
+      r.text({
+        color: 'red',
+        text: 'aa123123123123120389012830120398aa123123123123120389012830120398aa123123123123120389012830120398aa123123123123120389012830120398aa123123123123120389012830120398'
+      }),
     form: {
       rules: [{ required: true, message: '请输入名称' }],
       render: (r) => r.input({ placeholder: 'asd' })

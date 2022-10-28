@@ -34,7 +34,13 @@ function toRenderTemplate(options?: TableColumnOptions) {
 export function renderTableColumn(options: TableColumnOptions) {
   return h(
     Column,
-    { field: options.key, title: options.title },
+    {
+      field: options.key,
+      title: options.title,
+      showOverflow: true,
+      showFooterOverflow: true,
+      showHeaderOverflow: true
+    },
     toRenderTemplate(options)
   )
 }
