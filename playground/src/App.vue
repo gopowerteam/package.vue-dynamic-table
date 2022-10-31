@@ -4,7 +4,14 @@
     rowKey="id"
     :load-data="loadData"
     :forms="forms"
-    :columns="columns"></data-table>
+    :columns="columns">
+    <template #actions>
+      <div>1231</div>
+      <div>1231</div>
+      <div>1231</div>
+      <div>1231</div>
+    </template>
+  </data-table>
 </template>
 
 <script setup lang="ts">

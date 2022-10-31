@@ -1,3 +1,4 @@
+import type { Slot } from 'vue'
 import type { FormItemOptions } from '..'
 
 /**
@@ -27,7 +28,10 @@ function resetButton() {
  * @returns
  */
 function renderFormItem(
-  render: (() => () => JSX.Element)[] | (() => () => JSX.Element),
+  render:
+    | (() => () => JSX.Element)[]
+    | (() => () => JSX.Element)
+    | (() => Slot),
   collapseAction?: boolean
 ) {
   return (
@@ -41,8 +45,19 @@ function renderFormItem(
   )
 }
 
-export function renderFormActions(forms: FormItemOptions[]) {
+function renderActionItems(actions?: Slot) {
+  if (actions) {
+    return actions().map((item) => renderFormItem(() => () => item))
+  }
+}
+
+export function renderFormActions(forms: FormItemOptions[], actions?: Slot) {
   const hasCollapsed = forms.some((form) => form.collapsed)
 
-  return <>{renderFormItem([submitButton, resetButton], hasCollapsed)}</>
+  return (
+    <>
+      {actions && renderActionItems(actions)}
+      {renderFormItem([submitButton, resetButton], hasCollapsed)}
+    </>
+  )
 }

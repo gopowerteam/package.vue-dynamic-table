@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   expose: ['tableSource', 'formSource'],
-  setup(props) {
+  setup(props, { slots }) {
     // 获取Form配置
     const forms = createFormItemOptions(props.columns, props.forms)
     // 创建Table数据源
@@ -86,7 +86,11 @@ export default defineComponent({
               dataSource={unref(formSource)}
               forms={forms}
               loadData={onLoadData}
-              pagination={props.pagination}></DataForm>
+              pagination={props.pagination}>
+              {{
+                actions: slots.actions
+              }}
+            </DataForm>
           )}
           <DataTable
             dataSource={unref(tableSource)}

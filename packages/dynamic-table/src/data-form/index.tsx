@@ -37,10 +37,10 @@ export default defineComponent({
       required: false
     }
   },
-  setup(props) {
+  setup(props, { slots }) {
     const formItems = props.forms.map((form) => renderFormItem(form))
 
-    const formActions = renderFormActions(props.forms)
+    const formActions = renderFormActions(props.forms, slots?.actions)
 
     const formRules = props.forms.reduce<
       Record<string, VxeTableDefines.ValidatorRule[]>
