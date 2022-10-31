@@ -21,13 +21,11 @@ import type {
   A
 } from '@gopowerteam/request/dist/request-adapter.interface-bd32c0be'
 import type {
-  FormItemOptions,
   FormItemsOptions,
   LoadDataParams,
   PaginationOptions,
   TableColumnsOptions
 } from '@gopowerteam/vue-dynamic-table'
-import { formItemRenders } from '@gopowerteam/vue-dynamic-table/dist/data-form-items'
 import { ref, type Ref } from 'vue'
 import { AdministratorService } from './http/services/AdministratorService'
 const administratorService = new AdministratorService()
