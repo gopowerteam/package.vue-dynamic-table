@@ -2,8 +2,8 @@ import type { DataRecord, TableColumnOptions } from '@/interfaces'
 import { getColumnValue } from '@/utils/get-column-value'
 
 function generateText(
-  options: RenderTextColumnOptions,
-  column: TableColumnOptions,
+  options: RenderTextColumnOptions<DataRecord>,
+  column: TableColumnOptions<DataRecord>,
   record: DataRecord
 ) {
   if (typeof options?.text === 'function') {
@@ -17,7 +17,10 @@ function generateText(
   return getColumnValue(record, column)
 }
 
-function generatColor(options: RenderTextColumnOptions, record: DataRecord) {
+function generatColor(
+  options: RenderTextColumnOptions<DataRecord>,
+  record: DataRecord
+) {
   if (typeof options?.color === 'function') {
     return options?.color(record)
   }
@@ -29,7 +32,10 @@ function generatColor(options: RenderTextColumnOptions, record: DataRecord) {
   return '#000'
 }
 
-function generatSize(options: RenderTextColumnOptions, record: DataRecord) {
+function generatSize(
+  options: RenderTextColumnOptions<DataRecord>,
+  record: DataRecord
+) {
   if (typeof options?.size === 'function') {
     return options?.size(record)
   }
@@ -41,7 +47,10 @@ function generatSize(options: RenderTextColumnOptions, record: DataRecord) {
   return '14px'
 }
 
-function generateStyle(options: RenderTextColumnOptions, record: DataRecord) {
+function generateStyle(
+  options: RenderTextColumnOptions<DataRecord>,
+  record: DataRecord
+) {
   const color = `color:${generatColor(options, record)};`
 
   const size = `font-size:${generatSize(options, record)};`
@@ -49,8 +58,10 @@ function generateStyle(options: RenderTextColumnOptions, record: DataRecord) {
   return [color, size].join('')
 }
 
-export function renderTextColumn(options?: RenderTextColumnOptions) {
-  return (record: DataRecord, column: TableColumnOptions) => {
+export function renderTextColumn(
+  options?: RenderTextColumnOptions<DataRecord>
+) {
+  return (record: DataRecord, column: TableColumnOptions<DataRecord>) => {
     const text = generateText(options || {}, column, record)
     const style = generateStyle(options || {}, record)
 
@@ -58,8 +69,8 @@ export function renderTextColumn(options?: RenderTextColumnOptions) {
   }
 }
 
-export interface RenderTextColumnOptions {
-  color?: string | ((record: DataRecord) => string)
-  text?: string | ((record: DataRecord) => string)
-  size?: string | ((record: DataRecord) => string)
+export interface RenderTextColumnOptions<T> {
+  color?: string | ((record: T) => string)
+  text?: string | ((record: T) => string)
+  size?: string | ((record: T) => string)
 }

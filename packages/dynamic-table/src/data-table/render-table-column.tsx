@@ -1,7 +1,7 @@
 import type { TableColumnOptions } from '@/interfaces/table-column-options'
 import { h } from 'vue'
 import { Column } from 'vxe-table'
-import { DynamicTable, type DataRecord } from '..'
+import { DynamicTable } from '..'
 import { tableColumnRenders as renders } from '../data-table-columns'
 
 /**
@@ -9,7 +9,7 @@ import { tableColumnRenders as renders } from '../data-table-columns'
  * @param render
  * @returns
  */
-function toRenderTemplate(options?: TableColumnOptions) {
+function toRenderTemplate<T>(options?: TableColumnOptions<T>) {
   if (!options?.render) {
     return undefined
   }
@@ -22,7 +22,7 @@ function toRenderTemplate(options?: TableColumnOptions) {
 
   // 获取deault slot
   return {
-    default: ({ row }: { row: DataRecord }) => templateRender(row, options)
+    default: ({ row }: { row: T }) => templateRender(row, options)
   }
 }
 
@@ -31,7 +31,7 @@ function toRenderTemplate(options?: TableColumnOptions) {
  * @param options
  * @returns
  */
-export function renderTableColumn(options: TableColumnOptions) {
+export function renderTableColumn<T>(options: TableColumnOptions<T>) {
   return h(
     Column,
     {

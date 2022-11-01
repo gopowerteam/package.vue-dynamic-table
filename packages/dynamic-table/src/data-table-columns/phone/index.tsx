@@ -26,7 +26,7 @@ function formatText(value: string, separator?: string) {
 }
 
 export function renderPhoneColumn(options?: RenderTextColumnOptions) {
-  return (record: DataRecord, column: TableColumnOptions) => {
+  return (record: DataRecord, column: TableColumnOptions<DataRecord>) => {
     const phone = getColumnValue(record, column)
     const value = formatText(
       options?.safe ? encryptText(phone) : phone,

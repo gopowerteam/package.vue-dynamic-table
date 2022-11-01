@@ -1,13 +1,11 @@
-import type { DataRecord } from '@/interfaces'
-
-export function renderButtonColumn(options: RenderButtonColumnOptions) {
-  return (record: DataRecord) => {
+export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
+  return (record: T) => {
     const buttons = (
       'buttons' in options ? options.buttons : [options]
-    ) as RenderSingleButtonColumnOptions[]
+    ) as RenderSingleButtonColumnOptions<T>[]
 
     const toBooleanValue = (
-      value: boolean | ((record: DataRecord) => boolean) | undefined,
+      value: boolean | ((record: T) => boolean) | undefined,
       defaultValue: boolean
     ) =>
       typeof value === 'function'
@@ -34,20 +32,20 @@ export function renderButtonColumn(options: RenderButtonColumnOptions) {
   }
 }
 
-export type RenderButtonColumnOptions =
-  | RenderSingleButtonColumnOptions
-  | RenderMultipleButtonColumnOptions
+export type RenderButtonColumnOptions<T> =
+  | RenderSingleButtonColumnOptions<T>
+  | RenderMultipleButtonColumnOptions<T>
 
-export interface RenderSingleButtonColumnOptions {
+export interface RenderSingleButtonColumnOptions<T> {
   text: string
-  callback: (record: DataRecord) => void
+  callback: (record: T) => void
   status?: 'primary' | 'success' | 'info' | 'warning' | 'danger'
   plain?: boolean
   round?: boolean
-  show?: boolean | ((record: DataRecord) => boolean)
-  disabled?: boolean | ((record: DataRecord) => boolean)
+  show?: boolean | ((record: T) => boolean)
+  disabled?: boolean | ((record: T) => boolean)
 }
 
-export interface RenderMultipleButtonColumnOptions {
-  buttons?: RenderSingleButtonColumnOptions[]
+export interface RenderMultipleButtonColumnOptions<T> {
+  buttons?: RenderSingleButtonColumnOptions<T>[]
 }

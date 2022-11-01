@@ -27,6 +27,7 @@ import type {
   TableColumnsOptions
 } from '@gopowerteam/vue-dynamic-table'
 import { ref, type Ref } from 'vue'
+import type { Administrator } from './http/models/Administrator'
 import { AdministratorService } from './http/services/AdministratorService'
 const administratorService = new AdministratorService()
 
@@ -108,7 +109,7 @@ const forms: FormItemsOptions = [
   }
 ]
 
-const columns: TableColumnsOptions = [
+const columns: TableColumnsOptions<Administrator> = [
   {
     key: 'id',
     title: '名称'

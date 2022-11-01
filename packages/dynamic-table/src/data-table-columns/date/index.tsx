@@ -13,7 +13,7 @@ const dateFormats = {
 }
 
 export function renderDateColumn(options?: RenderDateColumnOptions) {
-  return (record: DataRecord, column: TableColumnOptions) => {
+  return (record: DataRecord, column: TableColumnOptions<DataRecord>) => {
     const value = getColumnValue(record, column)
     const formatStr =
       typeof options?.format === 'function'

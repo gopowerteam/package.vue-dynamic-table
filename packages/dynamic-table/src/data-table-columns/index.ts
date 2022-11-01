@@ -11,3 +11,13 @@ export const tableColumnRenders = {
   date: renderDateColumn,
   button: renderButtonColumn
 }
+
+export function getTableColumnRenders<T>() {
+  return {
+    text: renderTextColumn,
+    phone: renderPhoneColumn,
+    dict: renderDictColumn,
+    date: renderDateColumn,
+    button: renderButtonColumn<T>
+  }
+}
