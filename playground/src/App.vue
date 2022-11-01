@@ -153,6 +153,8 @@ const columns: TableColumnsOptions<Administrator> = [
         buttons: [
           {
             text: '测试1',
+            confirm: true,
+            confirmText: 'gogogo',
             callback: (record) => {
               console.log(record)
             }

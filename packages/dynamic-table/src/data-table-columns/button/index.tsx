@@ -1,3 +1,5 @@
+import { VXETable } from 'vxe-table'
+
 export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
   return (record: T) => {
     const buttons = (
@@ -14,13 +16,27 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
         ? defaultValue
         : value
 
+    async function onCallback(button: RenderSingleButtonColumnOptions<T>) {
+      // 获取执行状态
+      const executable =
+        button.confirm === true
+          ? (await VXETable.modal.confirm(
+              button.confirmText || '您确定要执行该操作？'
+            )) === 'confirm'
+          : true
+
+      if (executable) {
+        button.callback(record)
+      }
+    }
+
     return (
       <>
         {buttons
           .filter((button) => toBooleanValue(button.show, true))
           .map((button) => (
             <vxe-button
-              onClick={() => button.callback(record)}
+              onClick={() => onCallback(button)}
               content={button.text}
               status={button.status || 'primary'}
               round={button.round}
@@ -44,6 +60,8 @@ export interface RenderSingleButtonColumnOptions<T> {
   round?: boolean
   show?: boolean | ((record: T) => boolean)
   disabled?: boolean | ((record: T) => boolean)
+  confirm?: boolean
+  confirmText?: string
 }
 
 export interface RenderMultipleButtonColumnOptions<T> {

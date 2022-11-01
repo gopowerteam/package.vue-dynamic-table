@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.5
+
+### Patch Changes
+
+- button 列添加 confirm 支持
+
 ## 0.0.4
 
 ### Patch Changes
