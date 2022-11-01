@@ -6,9 +6,9 @@ import type { DataRecord, TableColumnOptions } from '..'
  * @param column
  * @returns
  */
-export function setColumnValue(
+export function setColumnValue<T = DataRecord>(
   record: DataRecord,
-  column: TableColumnOptions,
+  column: TableColumnOptions<T>,
   value: any
 ): any {
   const [key, ...rest] = (column.index || column.key).split('.').reverse()

@@ -6,9 +6,9 @@ import type { DataRecord, TableColumnOptions } from '..'
  * @param column
  * @returns
  */
-export function getColumnValue(
+export function getColumnValue<T = DataRecord>(
   record: DataRecord,
-  column: TableColumnOptions
+  column: TableColumnOptions<T>
 ): any {
   return (column.index || column.key)
     .split('.')

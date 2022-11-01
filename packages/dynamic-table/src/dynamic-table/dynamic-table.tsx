@@ -44,8 +44,34 @@ export default defineComponent({
       required: false
     }
   },
-  expose: ['tableSource', 'formSource'],
-  setup(props, { slots }) {
+  expose: ['tableSource', 'formSource', 'reload'],
+  render() {
+    return (
+      <div>
+        {Object.keys(this.forms || {}).length > 0 && (
+          <DataForm
+            dataSource={unref(this.formSource)}
+            forms={this.formItems}
+            loadData={this.reload}
+            pagination={this.pagination}>
+            {{
+              actions: this.$slots.actions
+            }}
+          </DataForm>
+        )}
+        <DataTable
+          dataSource={unref(this.tableSource)}
+          columns={this.columns}></DataTable>
+
+        {this.pagination && (
+          <DataPage
+            loadData={this.reload}
+            pagination={this.pagination}></DataPage>
+        )}
+      </div>
+    )
+  },
+  setup(props) {
     // 获取Form配置
     const forms = createFormItemOptions(props.columns, props.forms)
     // 创建Table数据源
@@ -78,31 +104,11 @@ export default defineComponent({
       }
     })
 
-    return () => {
-      return (
-        <div>
-          {Object.keys(forms || {}).length > 0 && (
-            <DataForm
-              dataSource={unref(formSource)}
-              forms={forms}
-              loadData={onLoadData}
-              pagination={props.pagination}>
-              {{
-                actions: slots.actions
-              }}
-            </DataForm>
-          )}
-          <DataTable
-            dataSource={unref(tableSource)}
-            columns={props.columns}></DataTable>
-
-          {props.pagination && (
-            <DataPage
-              loadData={onLoadData}
-              pagination={props.pagination}></DataPage>
-          )}
-        </div>
-      )
+    return {
+      tableSource,
+      formSource,
+      formItems: forms,
+      reload: onLoadData
     }
   }
 })

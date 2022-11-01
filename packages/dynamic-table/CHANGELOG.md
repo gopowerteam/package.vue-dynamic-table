@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.6
+
+### Patch Changes
+
+- 添加 useTable 函数支持
+
 ## 0.0.5
 
 ### Patch Changes

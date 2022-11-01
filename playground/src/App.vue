@@ -1,12 +1,13 @@
 <template>
   <data-table
+    ref="table"
     :pagination="pageService"
     rowKey="id"
     :load-data="loadData"
     :forms="forms"
     :columns="columns">
     <template #actions>
-      <div>1231</div>
+      <button @click="() => table.reload()">reload</button>
       <div>1231</div>
       <div>1231</div>
       <div>1231</div>
@@ -26,6 +27,7 @@ import type {
   PaginationOptions,
   TableColumnsOptions
 } from '@gopowerteam/vue-dynamic-table'
+import { useTable } from '@gopowerteam/vue-dynamic-table'
 import { ref, type Ref } from 'vue'
 import type { Administrator } from './http/models/Administrator'
 import { AdministratorService } from './http/services/AdministratorService'
@@ -169,4 +171,8 @@ const columns: TableColumnsOptions<Administrator> = [
       })
   }
 ]
+
+const table = useTable('table')
+
+// console.log(table.value.reload())
 </script>
