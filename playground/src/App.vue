@@ -143,6 +143,27 @@ const columns: TableColumnsOptions = [
       collapsed: true,
       render: (r) => r.input({ placeholder: 'asd' })
     }
+  },
+  {
+    key: 'action',
+    title: '操作',
+    render: (r) =>
+      r.button({
+        buttons: [
+          {
+            text: '测试1',
+            callback: (record) => {
+              console.log(record)
+            }
+          },
+          {
+            text: '测试2',
+            callback: (record) => {
+              console.log(record)
+            }
+          }
+        ]
+      })
   }
 ]
 </script>

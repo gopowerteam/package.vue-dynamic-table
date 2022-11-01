@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.3
+
+### Patch Changes
+
+- 添加 Button 列
+
 ## 0.0.2
 
 ### Patch Changes
