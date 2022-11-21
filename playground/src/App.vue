@@ -1,21 +1,24 @@
 <template>
-  <data-table
-    ref="table"
-    :pagination="pageService"
-    rowKey="id"
-    :load-data="loadData"
-    :forms="forms"
-    :columns="columns">
-    <template #actions>
-      <button @click="() => table.reload()">reload</button>
-      <div>1231</div>
-      <div>1231</div>
-      <div>1231</div>
-    </template>
-  </data-table>
+  <ModalProvider>
+    <data-table
+      ref="table"
+      :pagination="pageService"
+      rowKey="id"
+      :load-data="loadData"
+      :forms="forms"
+      :columns="columns">
+      <template #actions>
+        <button @click="() => table.reload()">reload</button>
+        <div>1231</div>
+        <div>1231</div>
+        <div>1231</div>
+      </template>
+    </data-table>
+  </ModalProvider>
 </template>
 
 <script setup lang="ts">
+import { ModalProvider } from '@gopowerteam/vue-modal'
 import type { RequestPlugin } from '@gopowerteam/request'
 import type {
   R,
@@ -138,7 +141,7 @@ const columns: TableColumnsOptions<Administrator> = [
     render: (r) =>
       r.text({
         color: 'red',
-        text: 'aa123123123123120389012830120398aa123123123123120389012830120398aa123123123123120389012830120398aa123123123123120389012830120398aa123123123123120389012830120398'
+        text: '1'
       }),
     form: {
       rules: [{ required: true, message: '请输入名称' }],
@@ -152,6 +155,11 @@ const columns: TableColumnsOptions<Administrator> = [
       collapsed: true,
       render: (r) => r.input({ placeholder: 'asd' })
     }
+  },
+  {
+    key: 'preview',
+    title: 'test for preview',
+    render: (r) => r.view({ text: 'preview' })
   },
   {
     key: 'action',
@@ -180,5 +188,4 @@ const columns: TableColumnsOptions<Administrator> = [
 
 const table = useTable('table')
 
-// console.log(table.value.reload())
 </script>

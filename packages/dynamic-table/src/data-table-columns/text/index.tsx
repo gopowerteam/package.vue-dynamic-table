@@ -1,4 +1,5 @@
 import type { DataRecord, TableColumnOptions } from '@/interfaces'
+import { createRenderer } from '@/utils/create-renderer'
 import { getColumnValue } from '@/utils/get-column-value'
 
 function generateText(
@@ -61,12 +62,17 @@ function generateStyle(
 export function renderTextColumn(
   options?: RenderTextColumnOptions<DataRecord>
 ) {
-  return (record: DataRecord, column: TableColumnOptions<DataRecord>) => {
+  const render = (
+    record: DataRecord,
+    column: TableColumnOptions<DataRecord>
+  ) => {
     const text = generateText(options || {}, column, record)
     const style = generateStyle(options || {}, record)
 
     return <span style={style}>{text}</span>
   }
+
+  return createRenderer('text', render)
 }
 
 export interface RenderTextColumnOptions<T> {

@@ -11,6 +11,8 @@ import { createFormSource } from './create-form-source'
 import { createFormItemOptions } from '@/data-form/create-form-item-options'
 import { createTableSource } from './create-table-source'
 import { events } from '@/utils/events-helper'
+import RenderTableView from '@/data-table/render-table-view'
+import { useModal } from '@gopowerteam/vue-modal'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -79,8 +81,24 @@ export default defineComponent({
     // 创建Form数据源
     const [formSource] = createFormSource(forms)
 
+    const modal = useModal()
+
     events.on('reload', () => {
       onLoadData()
+    })
+
+    events.on('preview', ({ title, record, columns, labelWidth }) => {
+      modal.open({
+        component: RenderTableView,
+        title,
+        width: '80%',
+        props: {
+          record,
+          columns,
+          labelWidth,
+          options: props.columns
+        }
+      })
     })
 
     /**

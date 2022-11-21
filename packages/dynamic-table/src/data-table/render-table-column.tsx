@@ -1,4 +1,5 @@
 import type { TableColumnOptions } from '@/interfaces/table-column-options'
+import { RenderColumnType } from '@/utils/create-renderer'
 import { h } from 'vue'
 import { Column } from 'vxe-table'
 import { DynamicTable } from '..'
@@ -9,7 +10,7 @@ import { tableColumnRenders as renders } from '../data-table-columns'
  * @param render
  * @returns
  */
-function toRenderTemplate<T>(options?: TableColumnOptions<T>) {
+export function toRenderTemplate<T>(options?: TableColumnOptions<T>) {
   if (!options?.render) {
     return undefined
   }
@@ -22,7 +23,8 @@ function toRenderTemplate<T>(options?: TableColumnOptions<T>) {
 
   // 获取deault slot
   return {
-    default: ({ row }: { row: T }) => templateRender(row, options)
+    default: ({ row }: { row: T }) => templateRender(row, options),
+    [RenderColumnType]: templateRender.$type
   }
 }
 
@@ -41,6 +43,8 @@ export function renderTableColumn<T>(options: TableColumnOptions<T>) {
       showFooterOverflow: true,
       showHeaderOverflow: true
     },
-    toRenderTemplate(options)
+    {
+      default: toRenderTemplate(options)?.default
+    }
   )
 }

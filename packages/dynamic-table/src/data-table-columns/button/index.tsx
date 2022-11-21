@@ -1,7 +1,8 @@
+import { createRenderer } from '@/utils/create-renderer'
 import { VXETable } from 'vxe-table'
 
 export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
-  return (record: T) => {
+  const render = (record: T) => {
     const buttons = (
       'buttons' in options ? options.buttons : [options]
     ) as RenderSingleButtonColumnOptions<T>[]
@@ -46,6 +47,8 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
       </>
     )
   }
+
+  return createRenderer('button', render)
 }
 
 export type RenderButtonColumnOptions<T> =

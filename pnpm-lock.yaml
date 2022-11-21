@@ -50,6 +50,7 @@ importers:
 
   packages/dynamic-table:
     specifiers:
+      '@gopowerteam/vue-modal': ^0.1.12
       '@rushstack/eslint-patch': ^1.1.4
       '@types/jsdom': ^20.0.0
       '@types/node': ^16.11.68
@@ -73,6 +74,7 @@ importers:
       vxe-table: ^4.3.5
       xe-utils: ^3.5.7
     dependencies:
+      '@gopowerteam/vue-modal': 0.1.12_vue@3.2.41
       dayjs: 1.11.6
       mitt: 3.0.0
       vue: 3.2.41
@@ -102,6 +104,7 @@ importers:
       '@gopowerteam/request': ^0.1.8
       '@gopowerteam/request-generate': ^0.1.7
       '@gopowerteam/vue-dynamic-table': 'workspace: *'
+      '@gopowerteam/vue-modal': ^0.1.12
       '@vitejs/plugin-vue': ^3.1.0
       '@vue/runtime-core': ^3.2.41
       '@vue/tsconfig': ^0.1.3
@@ -112,6 +115,7 @@ importers:
       '@gopowerteam/request': 0.1.8
       '@gopowerteam/request-generate': 0.1.7_openapi-types@12.0.2
       '@gopowerteam/vue-dynamic-table': link:../packages/dynamic-table
+      '@gopowerteam/vue-modal': 0.1.12_vue@3.2.41
       '@vue/runtime-core': 3.2.41
       vue: 3.2.41
     devDependencies:
@@ -879,6 +883,14 @@ packages:
       qs: 6.11.0
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /@gopowerteam/vue-modal/0.1.12_vue@3.2.41:
+    resolution: {integrity: sha512-t+fcJmXaS8DZAVvfbzhgs905H82hrYXluuiSX2JrIvq10tp01mVsEWkaz3FaoCb/9cyldpoCHfTVfc0ctzJr0g==}
+    peerDependencies:
+      vue: ^3.0.5
+    dependencies:
+      vue: 3.2.41
     dev: false
 
   /@humanwhocodes/config-array/0.11.6:

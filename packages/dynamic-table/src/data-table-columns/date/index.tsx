@@ -1,4 +1,5 @@
 import type { DataRecord, TableColumnOptions } from '@/interfaces'
+import { createRenderer } from '@/utils/create-renderer'
 import { getColumnValue } from '@/utils/get-column-value'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
@@ -18,7 +19,10 @@ const dateFormats = {
  * @returns JSX
  */
 export function renderDateColumn(options?: RenderDateColumnOptions) {
-  return (record: DataRecord, column: TableColumnOptions<DataRecord>) => {
+  const render = (
+    record: DataRecord,
+    column: TableColumnOptions<DataRecord>
+  ) => {
     const value = getColumnValue(record, column)
     const formatStr =
       typeof options?.format === 'function'
@@ -29,6 +33,8 @@ export function renderDateColumn(options?: RenderDateColumnOptions) {
 
     return <span>{date.isValid() && date.format(formatStr)}</span>
   }
+
+  return createRenderer('date', render)
 }
 
 export interface RenderDateColumnOptions {
