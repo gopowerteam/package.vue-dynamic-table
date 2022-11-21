@@ -12,6 +12,11 @@ const dateFormats = {
   week: 'ddd'
 }
 
+/**
+ * 渲染Date Column
+ * @param options DateColumn列选项
+ * @returns JSX
+ */
 export function renderDateColumn(options?: RenderDateColumnOptions) {
   return (record: DataRecord, column: TableColumnOptions<DataRecord>) => {
     const value = getColumnValue(record, column)
@@ -20,7 +25,9 @@ export function renderDateColumn(options?: RenderDateColumnOptions) {
         ? options?.format()
         : dateFormats[options?.format || 'datetime']
 
-    return <span>{dayjs(value).format(formatStr)}</span>
+    const date = dayjs(value)
+
+    return <span>{date.isValid() && date.format(formatStr)}</span>
   }
 }
 

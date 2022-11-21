@@ -89,6 +89,7 @@ function loadData({ form, update }: LoadDataParams) {
       update(
         data.map((x) => {
           ;(x as any)['phone'] = '18899992222'
+          ;(x as any)['createdAt'] = ""
           return x
         })
       )
