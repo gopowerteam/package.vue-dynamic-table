@@ -89,7 +89,7 @@ function loadData({ form, update }: LoadDataParams) {
       update(
         data.map((x) => {
           ;(x as any)['phone'] = '18899992222'
-          ;(x as any)['createdAt'] = ""
+          ;(x as any)['createdAt'] = ''
           return x
         })
       )
@@ -109,6 +109,11 @@ const forms: FormItemsOptions = [
         ]),
         autoSumbit: true
       })
+  },
+  {
+    key: 'test2',
+    title: 'test2',
+    render: (r) => r.date({ type: 'year' })
   }
 ]
 
