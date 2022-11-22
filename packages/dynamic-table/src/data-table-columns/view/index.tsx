@@ -14,7 +14,7 @@ export function renderViewColumn(
       events.emit('preview', {
         title: options?.title || '数据详情',
         record,
-        columns: options?.columns || 3,
+        columns: options?.columns,
         labelWidth: options?.labelWidth,
         border: options?.border,
         borderColor: options?.borderColor,
