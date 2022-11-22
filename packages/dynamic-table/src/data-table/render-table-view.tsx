@@ -16,10 +16,22 @@ export default defineComponent({
     },
     columns: {
       type: Number,
-      required: true
+      default: 3
     },
     labelWidth: {
       type: Number
+    },
+    padding: {
+      type: Number,
+      default: () => 10
+    },
+    border: {
+      type: Boolean,
+      default: true
+    },
+    borderColor: {
+      type: String,
+      default: '#7f7f7f'
     }
   },
   setup(props) {
@@ -36,26 +48,70 @@ export default defineComponent({
         }
       })
 
+    // 生成Rows
+    const rows = columns.reduce<typeof columns[]>((r, item) => {
+      const tr =
+        r.length && r[r.length - 1].length < props.columns
+          ? r[r.length - 1]
+          : []
+
+      if (tr.length === 0) {
+        r.push(tr)
+      }
+
+      tr.push(item)
+
+      return r
+    }, [])
+
+    // Label样式
+    const labelStyle = [
+      'margin-right:10px;',
+      'color:rgba(0,0,0,0.7)',
+      props.labelWidth ? `min-width:${props.labelWidth}` : ''
+    ]
+
+    // Value样式
+    const valueStyle = ['word-break:break-all;']
+
+    // 单元格样式
+    const cellStyle = [
+      `padding:${props.padding}px;`,
+      props.border ? `border: 1px solid ${props.borderColor};` : '',
+      'border-collapse: collapse;'
+    ]
+
+    // 表格样式
+    const tableStyle = [
+      'width:100%;',
+      'margin:10px 0;',
+      props.border ? `border: 1px solid ${props.borderColor};` : '',
+      'border-collapse: collapse;'
+    ]
+
+    const toStyle = (style: (string | undefined)[]) =>
+      style.filter(Boolean).join('')
+
     return () => (
-      <div style="display:flex;flex-wrap:wrap;">
-        {columns.map((column) => (
-          <div style={`width:${((1 / props.columns) * 100).toPrecision(2)}%;`}>
-            <div style="padding:10px;">
-              <span
-                style={`margin-right:10px;${
-                  props.labelWidth ?? `min-width:${props.labelWidth}`
-                }`}>
-                {column.options.title}:
-              </span>
-              <span>
-                {column.render?.default
-                  ? column.render?.default({ row: props.record })
-                  : getColumnValue(props.record, column.options)}
-              </span>
-            </div>
-          </div>
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        style={toStyle(tableStyle)}>
+        {rows.map((items) => (
+          <tr>
+            {items.map((item) => (
+              <td style={toStyle(cellStyle)}>
+                <span style={toStyle(labelStyle)}>{item.options.title}:</span>
+                <span style={toStyle(valueStyle)}>
+                  {item.render?.default
+                    ? item.render?.default({ row: props.record })
+                    : getColumnValue(props.record, item.options)}
+                </span>
+              </td>
+            ))}
+          </tr>
         ))}
-      </div>
+      </table>
     )
   }
 })

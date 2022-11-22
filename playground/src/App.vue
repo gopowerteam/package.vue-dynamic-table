@@ -93,6 +93,7 @@ function loadData({ form, update }: LoadDataParams) {
         data.map((x) => {
           ;(x as any)['phone'] = '18899992222'
           ;(x as any)['createdAt'] = ''
+          ;(x as any)['uid'] = '001'
           return x
         })
       )
@@ -157,9 +158,9 @@ const columns: TableColumnsOptions<Administrator> = [
     }
   },
   {
-    key: 'preview',
-    title: 'test for preview',
-    render: (r) => r.view({ text: 'preview' })
+    key: 'uid',
+    title: 'uid',
+    render: (r) => r.view({ border: true, borderColor: 'red' })
   },
   {
     key: 'action',
@@ -187,5 +188,4 @@ const columns: TableColumnsOptions<Administrator> = [
 ]
 
 const table = useTable('table')
-
 </script>

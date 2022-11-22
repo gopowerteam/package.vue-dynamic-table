@@ -5,8 +5,11 @@ type Events = {
   preview: {
     title: string
     record: Record<string, any>
-    columns: number
+    columns?: number
     labelWidth?: string
+    border?: boolean
+    borderColor?: string
+    padding?: number
   }
   updateForm: Record<string, any>
 }

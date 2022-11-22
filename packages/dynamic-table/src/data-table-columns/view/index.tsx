@@ -15,14 +15,19 @@ export function renderViewColumn(
         title: options?.title || '数据详情',
         record,
         columns: options?.columns || 3,
-        labelWidth: options?.labelWidth
+        labelWidth: options?.labelWidth,
+        border: options?.border,
+        borderColor: options?.borderColor,
+        padding: options?.padding
       })
     }
 
     return (
-      <span onClick={onShowView}>
-        {options?.text ?? getColumnValue(record, column)}
-      </span>
+      <vxe-button
+        onClick={() => onShowView()}
+        content={options?.text ?? getColumnValue(record, column)}
+        status="primary"
+        type="text"></vxe-button>
     )
   }
 
@@ -35,4 +40,7 @@ export interface RenderViewColumnOptions<T> {
   type?: 'text' | 'button'
   columns?: number
   labelWidth?: string
+  border?: boolean
+  borderColor?: string
+  padding?: number
 }

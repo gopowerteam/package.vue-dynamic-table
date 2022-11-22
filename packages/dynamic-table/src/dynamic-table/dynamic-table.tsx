@@ -87,15 +87,13 @@ export default defineComponent({
       onLoadData()
     })
 
-    events.on('preview', ({ title, record, columns, labelWidth }) => {
+    events.on('preview', ({ title, ...config }) => {
       modal.open({
         component: RenderTableView,
         title,
         width: '80%',
         props: {
-          record,
-          columns,
-          labelWidth,
+          ...config,
           options: props.columns
         }
       })
