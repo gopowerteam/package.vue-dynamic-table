@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.13
+
+### Patch Changes
+
+- 添加 confirmPosition 支持
+
 ## 0.0.12
 
 ### Patch Changes

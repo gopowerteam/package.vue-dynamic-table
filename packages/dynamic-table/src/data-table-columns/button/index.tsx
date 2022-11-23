@@ -19,9 +19,11 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
 
     async function onCallback(button: RenderSingleButtonColumnOptions<T>) {
       // 计算Append容器修正位置
-      const getAppendPosition = () => {
-        const width = 420
-        const height = 150
+      const getConfirmPosition = () => {
+        if (button.confirmPosition) {
+          return button.confirmPosition
+        }
+
         if (!button.confirmAppend) {
           return {}
         }
@@ -34,6 +36,10 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
         if (!container) {
           return {}
         }
+
+        const width = 420
+        const height = 150
+
         // 获取容器区域尺寸
         const clientVisibleWidth = container.clientWidth
         const clientVisibleHeight = container.clientHeight
@@ -58,7 +64,7 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
               '确认',
               {
                 // 获取显示位置
-                ...getAppendPosition()
+                ...getConfirmPosition()
               }
             )) === 'confirm'
           : true
@@ -103,6 +109,7 @@ export interface RenderSingleButtonColumnOptions<T> {
   confirm?: boolean
   confirmText?: string
   confirmAppend?: string | HTMLElement
+  confirmPosition?: { left: number; top: number }
 }
 
 export interface RenderMultipleButtonColumnOptions<T> {
