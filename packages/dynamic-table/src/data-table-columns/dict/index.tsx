@@ -15,5 +15,5 @@ export function renderDictColumn(options: RenderDictColumnOptions) {
 }
 
 export interface RenderDictColumnOptions {
-  dict: Map<string | number, string | number>
+  dict: Map<string | number | boolean, string | number | boolean>
 }
