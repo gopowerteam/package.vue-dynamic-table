@@ -1,6 +1,6 @@
 {
   "name": "@gopowerteam/vue-dynamic-table",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",

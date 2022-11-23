@@ -1,5 +1,17 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.12
+
+### Patch Changes
+
+- confirmAppend 支持 HtmlElement 类型
+
+## 0.0.11
+
+### Patch Changes
+
+- 添加 confirmButton 显示容器支持
+
 ## 0.0.10
 
 ### Patch Changes

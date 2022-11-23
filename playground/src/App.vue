@@ -1,19 +1,23 @@
 <template>
   <ModalProvider>
-    <data-table
-      ref="table"
-      :pagination="pageService"
-      rowKey="id"
-      :load-data="loadData"
-      :forms="forms"
-      :columns="columns">
-      <template #actions>
-        <button @click="() => table.reload()">reload</button>
-        <div>1231</div>
-        <div>1231</div>
-        <div>1231</div>
-      </template>
-    </data-table>
+    <div
+      id="test"
+      style="background: rgba(0, 0, 0, 0.1); margin: 100px">
+      <data-table
+        ref="table"
+        :pagination="pageService"
+        rowKey="id"
+        :load-data="loadData"
+        :forms="forms"
+        :columns="columns">
+        <template #actions>
+          <button @click="() => table.reload()">reload</button>
+          <div>1231</div>
+          <div>1231</div>
+          <div>1231</div>
+        </template>
+      </data-table>
+    </div>
   </ModalProvider>
 </template>
 
@@ -172,6 +176,7 @@ const columns: TableColumnsOptions<Administrator> = [
             text: '测试1',
             confirm: true,
             confirmText: 'gogogo',
+            confirmAppend: '#test',
             callback: (record) => {
               console.log(record)
             }

@@ -18,11 +18,48 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
         : value
 
     async function onCallback(button: RenderSingleButtonColumnOptions<T>) {
+      // 计算Append容器修正位置
+      const getAppendPosition = () => {
+        const width = 420
+        const height = 150
+        if (!button.confirmAppend) {
+          return {}
+        }
+
+        const container =
+          typeof button.confirmAppend === 'string'
+            ? document.querySelector<HTMLElement>(button.confirmAppend)
+            : button.confirmAppend
+
+        if (!container) {
+          return {}
+        }
+        // 获取容器区域尺寸
+        const clientVisibleWidth = container.clientWidth
+        const clientVisibleHeight = container.clientHeight
+        // 计算Left,Top
+        const left = clientVisibleWidth / 2 - width / 2 + container.offsetLeft
+        const top = clientVisibleHeight / 2 - height / 2 + container.offsetTop
+
+        return {
+          position: {
+            left: left,
+            top: top
+          },
+          width,
+          height
+        }
+      }
       // 获取执行状态
       const executable =
         button.confirm === true
           ? (await VXETable.modal.confirm(
-              button.confirmText || '您确定要执行该操作？'
+              button.confirmText || '您确定要执行该操作？',
+              '确认',
+              {
+                // 获取显示位置
+                ...getAppendPosition()
+              }
             )) === 'confirm'
           : true
 
@@ -65,6 +102,7 @@ export interface RenderSingleButtonColumnOptions<T> {
   disabled?: boolean | ((record: T) => boolean)
   confirm?: boolean
   confirmText?: string
+  confirmAppend?: string | HTMLElement
 }
 
 export interface RenderMultipleButtonColumnOptions<T> {
