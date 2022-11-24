@@ -15,7 +15,10 @@ interface DynamicTableOptions {
       string,
       (
         options?: any
-      ) => (record: DataRecord, options: TableColumnOptions) => JSX.Element
+      ) => (
+        record: DataRecord,
+        options: TableColumnOptions<DataRecord>
+      ) => JSX.Element
     >
     form: Record<
       string,
@@ -26,11 +29,27 @@ interface DynamicTableOptions {
   }
 }
 
+/**
+ * 重制VxeTable Hooks重复加载问题
+ */
+function resetVxeTableHooks() {
+  const { store } =
+    (VXETable.hooks as unknown as {
+      store: Record<string, unknown>
+    }) || {}
+
+  for (const key in store) {
+    VXETable.hooks.delete(key)
+  }
+}
+
 export default {
   install(app, options?: DynamicTableOptions) {
+    resetVxeTableHooks()
+
     app.use(VXETable)
     app.component(options?.name || DynamicTable.name, DynamicTable)
-
+    // VXETable.hooks.mixin
     if (options?.override) {
       DynamicTable.$override = options.override
     }

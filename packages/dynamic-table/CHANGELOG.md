@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.15
+
+### Patch Changes
+
+- 解决 vxe-table hooks 重复注册问题
+
 ## 0.0.14
 
 ### Patch Changes
