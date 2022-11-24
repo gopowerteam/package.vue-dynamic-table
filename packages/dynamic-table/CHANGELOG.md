@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.16
+
+### Patch Changes
+
+- 添加列宽度配置
+
 ## 0.0.15
 
 ### Patch Changes
