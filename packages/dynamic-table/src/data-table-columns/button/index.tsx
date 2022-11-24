@@ -49,8 +49,8 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
 
         return {
           position: {
-            left: left,
-            top: top
+            left: left + (button?.confirmOffset?.left || 0),
+            top: top + (button?.confirmOffset?.top || 0)
           },
           width,
           height
@@ -109,6 +109,7 @@ export interface RenderSingleButtonColumnOptions<T> {
   confirm?: boolean
   confirmText?: string
   confirmAppend?: string | HTMLElement
+  confirmOffset?: { left: number; top: number }
   confirmPosition?: { left: number; top: number }
 }
 

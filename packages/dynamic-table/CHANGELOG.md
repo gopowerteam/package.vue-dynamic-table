@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.14
+
+### Patch Changes
+
+- 添加 confirmOffset 支持
+
 ## 0.0.13
 
 ### Patch Changes
