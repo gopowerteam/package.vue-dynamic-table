@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.17
+
+### Patch Changes
+
+- 优化 view 列支持
+
 ## 0.0.16
 
 ### Patch Changes
