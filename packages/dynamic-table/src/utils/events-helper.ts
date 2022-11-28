@@ -1,4 +1,6 @@
+import type { RenderSingleButtonColumnOptions } from '@/data-table-columns/button'
 import mitt from 'mitt'
+import type { DataRecord } from '..'
 
 type Events = {
   reload: void
@@ -10,6 +12,8 @@ type Events = {
     border?: boolean
     borderColor?: string
     padding?: number
+    exclude?: string[]
+    buttons?: RenderSingleButtonColumnOptions<DataRecord>[]
   }
   updateForm: Record<string, any>
 }

@@ -17,7 +17,7 @@ export interface TableColumnOptions<T> {
 }
 
 // 列配置
-export type TableColumnsOptions<T = DataRecord> = Array<TableColumnOptions<T>>
+export type TableColumnsOptions<T = DataRecord> = TableColumnOptions<T>[]
 
 // Formatter格式化
 export type DataFormatter = (

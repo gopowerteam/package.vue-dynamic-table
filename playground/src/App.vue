@@ -164,7 +164,21 @@ const columns: TableColumnsOptions<Administrator> = [
   {
     key: 'uid',
     title: 'uid',
-    render: (r) => r.view({ border: true, borderColor: 'red' })
+    render: (r) =>
+      r.view({
+        exclude: ['id'],
+        border: true,
+        borderColor: 'red',
+        buttons: [
+          {
+            text: '测试1',
+            confirm: true,
+            callback: (record) => {
+              console.log(record)
+            }
+          }
+        ]
+      })
   },
   {
     key: 'action',

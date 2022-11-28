@@ -1,8 +1,10 @@
+import type { RenderSingleButtonColumnOptions } from '@/data-table-columns/button'
 import { RenderColumnType } from '@/utils/create-renderer'
 import { getColumnValue } from '@/utils/get-column-value'
 import { defineComponent, type PropType } from 'vue'
-import type { TableColumnsOptions } from '..'
+import type { DataRecord, TableColumnsOptions } from '..'
 import { toRenderTemplate } from './render-table-column'
+import { VXETable } from 'vxe-table'
 
 export default defineComponent({
   props: {
@@ -32,6 +34,14 @@ export default defineComponent({
     borderColor: {
       type: String,
       default: '#7f7f7f'
+    },
+    exclude: {
+      type: Array as PropType<Array<string>>,
+      default: []
+    },
+    buttons: {
+      type: Array as PropType<RenderSingleButtonColumnOptions<DataRecord>[]>,
+      default: []
     }
   },
   setup(props) {
@@ -40,9 +50,10 @@ export default defineComponent({
         options: column,
         render: toRenderTemplate(column)
       }))
+      .filter(({ options }) => !props.exclude?.includes(options.key))
       .filter(({ render }) => {
-        if (render && render[RenderColumnType]) {
-          return !['view', 'button'].includes(render[RenderColumnType])
+        if (render?.[RenderColumnType]) {
+          return !['button'].includes(render[RenderColumnType])
         } else {
           return true
         }
@@ -92,26 +103,75 @@ export default defineComponent({
     const toStyle = (style: (string | undefined)[]) =>
       style.filter(Boolean).join('')
 
-    return () => (
-      <table
-        cellpadding="0"
-        cellspacing="0"
-        style={toStyle(tableStyle)}>
-        {rows.map((items) => (
-          <tr>
-            {items.map((item) => (
-              <td style={toStyle(cellStyle)}>
-                <span style={toStyle(labelStyle)}>{item.options.title}:</span>
-                <span style={toStyle(valueStyle)}>
-                  {item.render?.default
-                    ? item.render?.default({ row: props.record })
-                    : getColumnValue(props.record, item.options)}
-                </span>
-              </td>
+    const renderButtons = () => {
+      const toBooleanValue = (
+        value: boolean | ((record: DataRecord) => boolean) | undefined,
+        defaultValue: boolean
+      ) =>
+        typeof value === 'function'
+          ? value(props.record)
+          : value === undefined
+          ? defaultValue
+          : value
+
+      async function onCallback(
+        button: RenderSingleButtonColumnOptions<DataRecord>
+      ) {
+        // 获取执行状态
+        const executable =
+          button.confirm === true
+            ? (await VXETable.modal.confirm(
+                button.confirmText || '您确定要执行该操作？',
+                '确认'
+              )) === 'confirm'
+            : true
+
+        if (executable) {
+          button.callback(props.record)
+        }
+      }
+
+      return (
+        <div style="display:flex;justify-content:flex-end;">
+          {props.buttons
+            .filter((button) => toBooleanValue(button.show, true))
+            .map((button) => (
+              <vxe-button
+                onClick={() => onCallback(button)}
+                content={button.text}
+                status={button.status || 'primary'}
+                round={button.round}
+                disabled={toBooleanValue(button.disabled, false)}
+                type={button.plain === false ? 'text' : 'button'}></vxe-button>
             ))}
-          </tr>
-        ))}
-      </table>
+        </div>
+      )
+    }
+
+    return () => (
+      <>
+        <table
+          class="VIEW_COLUMN_TABLE"
+          cellpadding="0"
+          cellspacing="0"
+          style={toStyle(tableStyle)}>
+          {rows.map((items) => (
+            <tr>
+              {items.map((item) => (
+                <td style={toStyle(cellStyle)}>
+                  <span style={toStyle(labelStyle)}>{item.options.title}:</span>
+                  <span style={toStyle(valueStyle)}>
+                    {item.render?.default
+                      ? item.render?.default({ row: props.record })
+                      : getColumnValue(props.record, item.options)}
+                  </span>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+        {props.buttons?.length > 0 && renderButtons()}
+      </>
     )
   }
 })

@@ -1,1 +1,5 @@
 @import '@gopowerteam/vue-modal/dist/style.css';
+
+.modal-container > .modal-wrapper {
+  z-index: 1000 !important;
+}
