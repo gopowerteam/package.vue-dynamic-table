@@ -121,6 +121,7 @@ export default defineComponent({
         component: renderTableForm,
         title,
         width: '80%',
+        maskClosable: false,
         props: {
           ...config,
           items: props.editForms,

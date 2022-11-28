@@ -30,14 +30,15 @@ function toRenderTemplate(options?: FormItemOptions) {
  * @param options
  * @returns
  */
-export function renderFormItem(form: FormItemOptions) {
+export function renderFormItem(form: FormItemOptions, span?: string | number) {
   return h(
     FormItem,
     {
       field: form.key,
       title: form.title,
       itemRender: {},
-      folding: form.collapsed
+      folding: form.collapsed,
+      span
     },
     toRenderTemplate(form)
   )

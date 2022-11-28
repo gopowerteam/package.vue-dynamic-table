@@ -39,12 +39,14 @@ export default defineComponent({
     },
     columns: {
       type: Number,
-      default: 4
+      default: 3
     }
   },
   setup(props, { slots }) {
     const modal = useModal()
-    const formItems = props.forms.map((form) => renderFormItem(form))
+    const formItems = props.forms.map((form) =>
+      renderFormItem(form, 24 / props.columns)
+    )
     const formActions = renderEditFormActions(slots?.actions)
     const formRules = props.forms.reduce<
       Record<string, VxeTableDefines.ValidatorRule[]>
@@ -69,14 +71,12 @@ export default defineComponent({
           data={props.dataSource}
           rules={formRules}
           onSubmit={onSubmit}>
-          <div style="display:flex;flex-wrap:wrap">
-            {formItems.map((item) => (
-              <div style={`width:${((1 / props.columns) * 100).toFixed(2)}%;`}>
-                {item}
-              </div>
-            ))}
-          </div>
-          <div style="display:flex;justify-content:flex-end">{formActions}</div>
+          {formItems}
+          <vxe-form-item span={24}>
+            <div style="display:flex;justify-content:flex-end">
+              {formActions}
+            </div>
+          </vxe-form-item>
         </vxe-form>
       </div>
     )
