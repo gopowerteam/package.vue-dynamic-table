@@ -4,15 +4,20 @@ import type { LoadDataParams } from '@/interfaces/load-data-params'
 import type { PaginationOptions } from '@/interfaces/pagination-options'
 import { defineComponent, onMounted, unref, type PropType } from 'vue'
 
-import DataForm from '../data-form'
+import { DataSearchForm } from '../data-form'
 import DataTable from '../data-table'
 import DataPage from '../data-page'
 import { createFormSource } from './create-form-source'
 import { createFormItemOptions } from '@/data-form/create-form-item-options'
 import { createTableSource } from './create-table-source'
-import { events } from '@/utils/events-helper'
+import {
+  events,
+  type EditEventParamsters,
+  type PreviewEventParamsters
+} from '@/utils/events-helper'
 import RenderTableView from '@/data-table/render-table-view'
 import { useModal } from '@gopowerteam/vue-modal'
+import renderTableForm from '@/data-table/render-table-form'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -41,25 +46,29 @@ export default defineComponent({
       type: Array as PropType<TableColumnsOptions>,
       required: true
     },
-    forms: {
+    searchForms: {
+      type: Array as PropType<FormItemsOptions>,
+      required: false
+    },
+    editForms: {
       type: Array as PropType<FormItemsOptions>,
       required: false
     }
   },
-  expose: ['tableSource', 'formSource', 'reload'],
+  expose: ['tableSource', 'formSource', 'reload', 'edit', 'preview'],
   render() {
     return (
       <div>
-        {Object.keys(this.forms || {}).length > 0 && (
-          <DataForm
-            dataSource={unref(this.formSource)}
+        {Object.keys(this.searchForms || {}).length > 0 && (
+          <DataSearchForm
+            dataSource={unref(this.searchSource)}
             forms={this.formItems}
             loadData={this.reload}
             pagination={this.pagination}>
             {{
               actions: this.$slots.actions
             }}
-          </DataForm>
+          </DataSearchForm>
         )}
         <DataTable
           dataSource={unref(this.tableSource)}
@@ -75,18 +84,20 @@ export default defineComponent({
   },
   setup(props) {
     // 获取Form配置
-    const forms = createFormItemOptions(props.columns, props.forms)
+    const searchForms = createFormItemOptions(props.columns, props.searchForms)
     // 创建Table数据源
     const [tableSource, updateTableSource] = createTableSource(props.columns)
     // 创建Form数据源
-    const [formSource] = createFormSource(forms)
+    const [searchFormSource] = createFormSource(searchForms)
 
     const modal = useModal()
 
+    // 监听Reload
     events.on('reload', () => {
       onLoadData()
     })
 
+    // 监听Preview
     events.on('preview', ({ title, ...config }) => {
       modal.open({
         component: RenderTableView,
@@ -94,7 +105,26 @@ export default defineComponent({
         width: '80%',
         props: {
           ...config,
-          options: props.columns
+          items: props.columns
+        }
+      })
+    })
+
+    // 监听Preview
+    events.on('edit', ({ title, ...config }) => {
+      if (!props.editForms || props.editForms.length === 0) {
+        console.error('未配置编辑表单项')
+        return
+      }
+
+      modal.open({
+        component: renderTableForm,
+        title,
+        width: '80%',
+        props: {
+          ...config,
+          items: props.editForms,
+          loadData: () => onLoadData()
         }
       })
     })
@@ -103,15 +133,39 @@ export default defineComponent({
      * 加载表单数据
      */
     const onLoadData = () => {
-      const formData = { ...unref(formSource) }
+      const searchFormData = { ...unref(searchFormSource) }
 
-      Object.keys(formData).forEach((key) => {
-        if (formData[key] === null) {
-          delete formData[key]
+      Object.keys(searchFormData).forEach((key) => {
+        if (searchFormData[key] === null) {
+          delete searchFormData[key]
         }
       })
 
-      props.loadData({ form: formData, update: updateTableSource })
+      props.loadData({ form: searchFormData, update: updateTableSource })
+    }
+
+    function previewRecord(params: PreviewEventParamsters) {
+      events.emit(
+        'preview',
+        Object.assign(
+          {
+            title: '数据详情'
+          },
+          params
+        )
+      )
+    }
+
+    function editRecord(params: EditEventParamsters) {
+      events.emit(
+        'edit',
+        Object.assign(
+          {
+            title: '数据编辑'
+          },
+          params
+        )
+      )
     }
 
     onMounted(() => {
@@ -122,9 +176,11 @@ export default defineComponent({
 
     return {
       tableSource,
-      formSource,
-      formItems: forms,
-      reload: onLoadData
+      searchSource: searchFormSource,
+      formItems: searchForms,
+      reload: onLoadData,
+      preview: previewRecord,
+      edit: editRecord
     }
   }
 })

@@ -12,7 +12,7 @@ export default defineComponent({
       type: Object,
       required: true
     },
-    options: {
+    items: {
       type: Array as PropType<TableColumnsOptions>,
       required: true
     },
@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const columns = props.options
+    const columns = props.items
       .map((column) => ({
         options: column,
         render: toRenderTemplate(column)

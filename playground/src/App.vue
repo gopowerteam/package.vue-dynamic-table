@@ -8,7 +8,8 @@
         :pagination="pageService"
         rowKey="id"
         :load-data="loadData"
-        :forms="forms"
+        :search-forms="searchForms"
+        :edit-forms="searchForms"
         :columns="columns">
         <template #actions>
           <button @click="() => table.reload()">reload</button>
@@ -29,6 +30,7 @@ import type {
   A
 } from '@gopowerteam/request/dist/request-adapter.interface-bd32c0be'
 import type {
+  DataRecord,
   FormItemsOptions,
   LoadDataParams,
   PaginationOptions,
@@ -87,6 +89,8 @@ class PageService implements RequestPlugin, PaginationOptions {
   }
 }
 
+const table = useTable('table')
+
 const pageService = new PageService(1, 1)
 
 function loadData({ form, update }: LoadDataParams) {
@@ -104,18 +108,25 @@ function loadData({ form, update }: LoadDataParams) {
     })
 }
 
-const forms: FormItemsOptions = [
+const searchForms: FormItemsOptions = [
+  {
+    key: 'test3',
+    title: 'test3',
+    rules: [{ required: true, message: '请输入名称' }],
+    render: (r) => r.input()
+  },
+
   {
     key: 'test1',
     title: 'test1',
+    rules: [{ required: true, message: '请输入名称' }],
     render: (r) =>
       r.select({
         default: 'b',
         options: new Map([
           ['a', 'aaa'],
           ['b', 'bbb']
-        ]),
-        autoSumbit: true
+        ])
       })
   },
   {
@@ -196,15 +207,18 @@ const columns: TableColumnsOptions<Administrator> = [
             }
           },
           {
-            text: '测试2',
+            text: '编辑',
             callback: (record) => {
-              console.log(record)
+              table.value.edit({
+                record,
+                submit: (data: DataRecord) => {
+                  console.log(data)
+                }
+              })
             }
           }
         ]
       })
   }
 ]
-
-const table = useTable('table')
 </script>

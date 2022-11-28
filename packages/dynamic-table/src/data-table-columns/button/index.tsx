@@ -69,7 +69,7 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
             )) === 'confirm'
           : true
 
-      if (executable) {
+      if (executable && button?.callback) {
         button.callback(record)
       }
     }

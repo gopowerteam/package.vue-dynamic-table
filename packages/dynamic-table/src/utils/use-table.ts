@@ -6,7 +6,7 @@ import { getCurrentInstance, onMounted, onUpdated, ref, type Ref } from 'vue'
  * @param key
  * @returns
  */
-export function useTable(key: string) {
+export function useTable(key: string): Readonly<Ref<DynamicTableInstance>> {
   const instance = getCurrentInstance()
   const table = ref<DynamicTableInstance>()
 

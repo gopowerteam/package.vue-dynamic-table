@@ -1,3 +1,4 @@
+import { useModal } from '@gopowerteam/vue-modal'
 import type { Slot } from 'vue'
 import type { FormItemOptions } from '..'
 
@@ -20,6 +21,19 @@ function resetButton() {
       type="reset"
       content="重置"></vxe-button>
   )
+}
+
+function cancelButton() {
+  return () => {
+    const modal = useModal()
+
+    return (
+      <vxe-button
+        type="button"
+        content="取消"
+        onClick={() => modal.close(false)}></vxe-button>
+    )
+  }
 }
 
 /**
@@ -51,7 +65,19 @@ function renderActionItems(actions?: Slot) {
   }
 }
 
-export function renderFormActions(forms: FormItemOptions[], actions?: Slot) {
+export function renderEditFormActions(actions?: Slot) {
+  return (
+    <>
+      {actions && renderActionItems(actions)}
+      {renderFormItem([submitButton, cancelButton], false)}
+    </>
+  )
+}
+
+export function renderSearchFormActions(
+  forms: FormItemOptions[],
+  actions?: Slot
+) {
   const hasCollapsed = forms.some((form) => form.collapsed)
 
   return (
