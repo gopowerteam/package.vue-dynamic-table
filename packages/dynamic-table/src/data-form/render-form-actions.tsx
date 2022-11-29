@@ -87,7 +87,9 @@ export function renderSearchFormActions(
 
   return (
     <>
-      <>{renderFormItem([submitButton, resetButton], hasCollapsed)}</>
+      {forms && forms.length > 0 && (
+        <>{renderFormItem([submitButton, resetButton], hasCollapsed)}</>
+      )}
       <div
         style={`display:flex;justify-content:${
           actionAlign === 'left' ? 'flex-start' : 'flex-end'

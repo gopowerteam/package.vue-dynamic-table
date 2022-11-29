@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.23
+
+### Patch Changes
+
+- 优化 search-form-action 显示
+
 ## 0.0.22
 
 ### Patch Changes

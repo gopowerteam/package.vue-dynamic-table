@@ -63,7 +63,8 @@ export default defineComponent({
   render() {
     return (
       <div>
-        {Object.keys(this.searchForms || {}).length > 0 && (
+        {(this.$slots.actions ||
+          Object.keys(this.searchForms || {}).length > 0) && (
           <DataSearchForm
             dataSource={unref(this.searchSource)}
             forms={this.formItems}
