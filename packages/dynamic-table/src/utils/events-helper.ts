@@ -20,14 +20,15 @@ export type EditEventParamsters = {
   columns?: number
   labelWidth?: string
   padding?: number
+  titleWidth?: string | number
+  titleColon?: string | number
+  titleAlign?: 'left' | 'right' | 'center'
   submit: (record: DataRecord) => void | Promise<unknown>
 }
 
-type Events = {
+export const events = mitt<{
   reload: void
   updateForm: Record<string, any>
   preview: PreviewEventParamsters
   edit: EditEventParamsters
-}
-
-export const events = mitt<Events>()
+}>()

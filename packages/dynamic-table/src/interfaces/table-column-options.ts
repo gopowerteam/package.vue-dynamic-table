@@ -12,7 +12,7 @@ export interface TableColumnOptions<T> {
   fixed?: 'left' | 'right'
   width?: string
   render?: TableColumnRender<T>
-  form?: Omit<FormItemOptions, 'key' | 'title'>
+  search?: Omit<FormItemOptions, 'key' | 'title'>
   formatter?: DataFormatter
 }
 

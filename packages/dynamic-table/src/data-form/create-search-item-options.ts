@@ -6,17 +6,17 @@ import type { FormItemOptions, FormItemsOptions, TableColumnsOptions } from '..'
  * @param forms
  * @returns
  */
-export function createFormItemOptions(
+export function createSearchItemOptions(
   columns: TableColumnsOptions,
   forms?: FormItemsOptions
 ) {
   const options: FormItemOptions[] = [
     ...columns
-      .filter((column) => column.form)
+      .filter((column) => column.search)
       .map((column) => ({
         key: column.key,
         title: column.title,
-        ...column.form
+        ...column.search
       }))
   ]
 

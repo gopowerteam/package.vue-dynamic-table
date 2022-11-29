@@ -34,18 +34,28 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    const [dataSource] = createFormSource(props.items)
+    const [dataSource, updateDataSource] = createFormSource(props.items)
+
+    // 更新数据源
+    updateDataSource(
+      Object.entries(dataSource.value).reduce(
+        (r, [key]) => ((r[key] = props.record[key] || null), r),
+        {} as DataRecord
+      )
+    )
 
     return () => (
-      <DataEditForm
-        dataSource={unref(dataSource)}
-        forms={props.items}
-        loadData={props.loadData}
-        submit={props.submit}>
-        {{
-          actions: context.slots.actions
-        }}
-      </DataEditForm>
+      <div style="padding:20px 10px 0">
+        <DataEditForm
+          dataSource={unref(dataSource)}
+          forms={props.items}
+          loadData={props.loadData}
+          submit={props.submit}>
+          {{
+            actions: context.slots.actions
+          }}
+        </DataEditForm>
+      </div>
     )
   }
 })

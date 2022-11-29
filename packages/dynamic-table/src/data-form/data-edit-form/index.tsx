@@ -37,9 +37,33 @@ export default defineComponent({
       type: Function as PropType<(data: DataRecord) => Promise<unknown>>,
       required: true
     },
+    /**
+     * 每行列数
+     */
     columns: {
       type: Number,
       default: 3
+    },
+    /**
+     * 标题宽度
+     */
+    titleWidth: {
+      type: [String, Number],
+      default: '100'
+    },
+    /**
+     * 标题对齐
+     */
+    titleAlign: {
+      type: String as PropType<'left' | 'right' | 'center'>,
+      default: 'right'
+    },
+    /**
+     * 标题冒号
+     */
+    titleColon: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { slots }) {
@@ -67,6 +91,9 @@ export default defineComponent({
     return () => (
       <div style="margin-bottom:15px;">
         <vxe-form
+          title-width={props.titleWidth}
+          title-align={props.titleAlign}
+          title-colon={props.titleColon}
           custom-layout
           data={props.dataSource}
           rules={formRules}

@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.21
+
+### Patch Changes
+
+- 添加 Switch 列支持
+
 ## 0.20.0
 
 ### Patch Changes

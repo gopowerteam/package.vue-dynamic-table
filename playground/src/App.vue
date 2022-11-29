@@ -110,10 +110,15 @@ function loadData({ form, update }: LoadDataParams) {
 
 const searchForms: FormItemsOptions = [
   {
-    key: 'test3',
-    title: 'test3',
+    key: 'phone',
+    title: 'phone',
     rules: [{ required: true, message: '请输入名称' }],
     render: (r) => r.input()
+  },
+  {
+    key: 'enable',
+    title: '状态',
+    render: (r) => r.switch({})
   },
 
   {
@@ -159,7 +164,7 @@ const columns: TableColumnsOptions<Administrator> = [
         color: 'red',
         text: '1'
       }),
-    form: {
+    search: {
       rules: [{ required: true, message: '请输入名称' }],
       render: (r) => r.input({ placeholder: 'asd' })
     }
@@ -167,11 +172,12 @@ const columns: TableColumnsOptions<Administrator> = [
   {
     key: 'realname',
     title: '真实姓名',
-    form: {
+    search: {
       collapsed: true,
       render: (r) => r.input({ placeholder: 'asd' })
     }
   },
+
   {
     key: 'uid',
     title: 'uid',

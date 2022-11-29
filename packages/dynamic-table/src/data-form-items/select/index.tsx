@@ -45,7 +45,7 @@ export function renderSelectItem(options: RenderSelectItemOptions) {
   }
 }
 
-export type SelectOptions = Map<string | number, string>
+export type SelectOptions = Map<string | number | boolean, string>
 
 export interface RenderSelectItemOptions {
   // 占位符
@@ -57,7 +57,7 @@ export interface RenderSelectItemOptions {
   // 多选支持
   multiple?: boolean
   // 默认值
-  default?: string
+  default?: string | number | boolean
   // 自动提交
   autoSumbit?: boolean
 }

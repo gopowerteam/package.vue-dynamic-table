@@ -8,7 +8,7 @@ import { DataSearchForm } from '../data-form'
 import DataTable from '../data-table'
 import DataPage from '../data-page'
 import { createFormSource } from './create-form-source'
-import { createFormItemOptions } from '@/data-form/create-form-item-options'
+import { createSearchItemOptions } from '@/data-form/create-search-item-options'
 import { createTableSource } from './create-table-source'
 import {
   events,
@@ -84,7 +84,10 @@ export default defineComponent({
   },
   setup(props) {
     // 获取Form配置
-    const searchForms = createFormItemOptions(props.columns, props.searchForms)
+    const searchForms = createSearchItemOptions(
+      props.columns,
+      props.searchForms
+    )
     // 创建Table数据源
     const [tableSource, updateTableSource] = createTableSource(props.columns)
     // 创建Form数据源
