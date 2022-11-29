@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.20.0
+
+### Patch Changes
+
+- 优化编辑弹窗实现
+
 ## 0.0.19
 
 ### Patch Changes
