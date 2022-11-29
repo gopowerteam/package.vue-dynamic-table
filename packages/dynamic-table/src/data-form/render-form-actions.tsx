@@ -67,23 +67,33 @@ function renderActionItems(actions?: Slot) {
 
 export function renderEditFormActions(actions?: Slot) {
   return (
-    <>
-      {actions && renderActionItems(actions)}
-      {renderFormItem([submitButton, cancelButton], false)}
-    </>
+    <div style="display:flex;justify-content:between;">
+      <div style="display:flex;justify-content:flex-start;">
+        {actions && renderActionItems(actions)}
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        {renderFormItem([submitButton, cancelButton], false)}
+      </div>
+    </div>
   )
 }
 
 export function renderSearchFormActions(
   forms: FormItemOptions[],
+  actionAlign: 'left' | 'right',
   actions?: Slot
 ) {
   const hasCollapsed = forms.some((form) => form.collapsed)
 
   return (
     <>
-      {actions && renderActionItems(actions)}
-      {renderFormItem([submitButton, resetButton], hasCollapsed)}
+      <>{renderFormItem([submitButton, resetButton], hasCollapsed)}</>
+      <div
+        style={`display:flex;justify-content:${
+          actionAlign === 'left' ? 'flex-start' : 'flex-end'
+        }`}>
+        {actions && renderActionItems(actions)}
+      </div>
     </>
   )
 }

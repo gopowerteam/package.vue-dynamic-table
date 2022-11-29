@@ -53,6 +53,10 @@ export default defineComponent({
     editForms: {
       type: Array as PropType<FormItemsOptions>,
       required: false
+    },
+    actionAlign: {
+      type: String as PropType<'left' | 'right'>,
+      required: false
     }
   },
   expose: ['tableSource', 'formSource', 'reload', 'edit', 'preview'],
@@ -64,7 +68,8 @@ export default defineComponent({
             dataSource={unref(this.searchSource)}
             forms={this.formItems}
             loadData={this.reload}
-            pagination={this.pagination}>
+            pagination={this.pagination}
+            actionAlign={this.actionAlign}>
             {{
               actions: this.$slots.actions
             }}

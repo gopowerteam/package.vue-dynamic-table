@@ -9,6 +9,7 @@
         rowKey="id"
         :load-data="loadData"
         :search-forms="searchForms"
+        action-align="right"
         :edit-forms="searchForms"
         :columns="columns">
         <template #actions>

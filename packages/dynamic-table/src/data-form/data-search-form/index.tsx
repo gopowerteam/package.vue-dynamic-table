@@ -35,12 +35,23 @@ export default defineComponent({
     pagination: {
       type: Object as PropType<PaginationOptions>,
       required: false
+    },
+    /**
+     * 操作按钮对齐方向
+     */
+    actionAlign: {
+      type: String as PropType<'left' | 'right'>,
+      default: 'left'
     }
   },
   setup(props, { slots }) {
     const formItems = props.forms.map((form) => renderFormItem(form))
 
-    const formActions = renderSearchFormActions(props.forms, slots?.actions)
+    const formActions = renderSearchFormActions(
+      props.forms,
+      props.actionAlign,
+      slots?.actions
+    )
 
     const formRules = props.forms.reduce<
       Record<string, VxeTableDefines.ValidatorRule[]>
@@ -65,6 +76,7 @@ export default defineComponent({
     return () => (
       <div style="margin-bottom:15px;">
         <vxe-form
+          custom-layout
           data={props.dataSource}
           rules={formRules}
           onSubmit={onSubmit}
