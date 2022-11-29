@@ -9,6 +9,14 @@ export default defineComponent({
       type: Object,
       required: true
     },
+    rowKey: {
+      type: String,
+      required: true
+    },
+    appendRowKey: {
+      type: Boolean,
+      default: false
+    },
     items: {
       type: Array as PropType<FormItemOptions[]>,
       required: true
@@ -24,6 +32,7 @@ export default defineComponent({
       type: Number,
       default: () => 10
     },
+
     loadData: {
       type: Function as PropType<() => void>,
       required: true
@@ -36,13 +45,18 @@ export default defineComponent({
   setup(props, context) {
     const [dataSource, updateDataSource] = createFormSource(props.items)
 
-    // 更新数据源
-    updateDataSource(
-      Object.entries(dataSource.value).reduce(
-        (r, [key]) => ((r[key] = props.record[key] || null), r),
-        {} as DataRecord
-      )
+    // 获取初始化数据
+    const record = Object.entries(dataSource.value).reduce(
+      (r, [key]) => ((r[key] = props.record[key] || null), r),
+      {} as DataRecord
     )
+
+    if (props.appendRowKey) {
+      record[props.rowKey] = props.record[props.rowKey]
+    }
+
+    // 更新数据源
+    updateDataSource(record)
 
     return () => (
       <div style="padding:20px 10px 0">

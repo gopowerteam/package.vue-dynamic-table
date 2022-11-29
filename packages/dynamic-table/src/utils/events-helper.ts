@@ -20,6 +20,7 @@ export type EditEventParamsters = {
   columns?: number
   labelWidth?: string
   padding?: number
+  appendRowKey?: boolean
   titleWidth?: string | number
   titleColon?: string | number
   titleAlign?: 'left' | 'right' | 'center'

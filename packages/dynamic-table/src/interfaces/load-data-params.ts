@@ -13,7 +13,7 @@ export interface PageService {
  * 数据加载参数
  */
 export type LoadDataParams = {
-  form: DataRecord
+  search: DataRecord
   page?: PageService
   update: (data: DataRecord[]) => void
 }

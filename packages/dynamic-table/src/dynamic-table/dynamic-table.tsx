@@ -67,7 +67,7 @@ export default defineComponent({
           Object.keys(this.searchForms || {}).length > 0) && (
           <DataSearchForm
             dataSource={unref(this.searchSource)}
-            forms={this.formItems}
+            forms={this.searchForms}
             loadData={this.reload}
             pagination={this.pagination}
             actionAlign={this.actionAlign}>
@@ -133,6 +133,7 @@ export default defineComponent({
         maskClosable: false,
         props: {
           ...config,
+          rowKey: props.rowKey,
           items: props.editForms,
           loadData: () => onLoadData()
         }
@@ -151,7 +152,7 @@ export default defineComponent({
         }
       })
 
-      props.loadData({ form: searchFormData, update: updateTableSource })
+      props.loadData({ search: searchFormData, update: updateTableSource })
     }
 
     function previewRecord(params: PreviewEventParamsters) {
@@ -187,7 +188,7 @@ export default defineComponent({
     return {
       tableSource,
       searchSource: searchFormSource,
-      formItems: searchForms,
+      searchForms: searchForms,
       reload: onLoadData,
       preview: previewRecord,
       edit: editRecord

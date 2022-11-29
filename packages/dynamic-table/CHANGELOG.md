@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.24
+
+### Patch Changes
+
+- 优化表单编辑功能
+
 ## 0.0.23
 
 ### Patch Changes

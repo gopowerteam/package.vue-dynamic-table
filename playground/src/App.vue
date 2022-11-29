@@ -94,9 +94,9 @@ const table = useTable('table')
 
 const pageService = new PageService(1, 1)
 
-function loadData({ form, update }: LoadDataParams) {
+function loadData({ search, update }: LoadDataParams) {
   administratorService
-    .findAdministrator(form, [pageService])
+    .findAdministrator(search, [pageService])
     .then(({ data }) => {
       update(
         data.map((x) => {
@@ -218,6 +218,7 @@ const columns: TableColumnsOptions<Administrator> = [
             callback: (record) => {
               table.value.edit({
                 record,
+                appendRowKey: true,
                 submit: (data: DataRecord) => {
                   console.log(data)
                 }
