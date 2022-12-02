@@ -149,15 +149,11 @@ const columns: TableColumnsOptions<Administrator> = [
     key: 'id',
     title: '名称'
   },
+
   {
     key: 'createdAt',
     title: 'date',
     render: (r) => r.date()
-  },
-  {
-    key: 'phone',
-    title: '手机号',
-    render: (r) => r.phone({ safe: true, callable: true })
   },
   {
     key: 'json',
@@ -167,6 +163,12 @@ const columns: TableColumnsOptions<Administrator> = [
     },
     render: (r) => r.json({})
   },
+  {
+    key: 'phone',
+    title: '手机号',
+    render: (r) => r.phone({ safe: true, callable: true })
+  },
+
   {
     key: 'username',
     title: '用户名',

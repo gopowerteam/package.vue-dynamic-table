@@ -59,7 +59,9 @@ export default defineComponent({
         r[r.length - 1].reduce(
           (spans, i) => (spans += i.options.preview?.span ?? 1),
           0
-        ) < props.columns
+        ) +
+          (item.options.preview?.span ?? 1) <=
+          props.columns
           ? r[r.length - 1]
           : []
 
@@ -86,7 +88,8 @@ export default defineComponent({
     const cellStyle = [
       `padding:${props.padding}px;`,
       props.border ? `border: 1px solid ${props.borderColor};` : '',
-      'border-collapse: collapse;'
+      'border-collapse: collapse;',
+      `width:${((1 / props.columns) * 100).toFixed(1)}%;`
     ]
 
     // 表格样式

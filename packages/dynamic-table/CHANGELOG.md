@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.26
+
+### Patch Changes
+
+- 修复 view 列 span 配置
+
 ## 0.0.25
 
 ### Patch Changes
