@@ -103,6 +103,8 @@ function loadData({ search, update }: LoadDataParams) {
           ;(x as any)['phone'] = '18899992222'
           ;(x as any)['createdAt'] = ''
           ;(x as any)['uid'] = '001'
+          ;(x as any)['json'] =
+            '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
           return x
         })
       )
@@ -158,6 +160,14 @@ const columns: TableColumnsOptions<Administrator> = [
     render: (r) => r.phone({ safe: true, callable: true })
   },
   {
+    key: 'json',
+    title: 'JSON',
+    preview: {
+      span: 2
+    },
+    render: (r) => r.json({})
+  },
+  {
     key: 'username',
     title: '用户名',
     render: (r) =>
@@ -187,6 +197,7 @@ const columns: TableColumnsOptions<Administrator> = [
         exclude: ['id'],
         border: true,
         borderColor: 'red',
+        columns: 2,
         buttons: [
           {
             text: '测试1',

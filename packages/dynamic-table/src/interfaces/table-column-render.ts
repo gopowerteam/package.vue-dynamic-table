@@ -3,10 +3,16 @@ import type { TableColumnOptions } from './table-column-options'
 
 interface TableColumnRenderResultType {
   $type?: string
+  $disableColumnMode?: boolean
+  $disableViewMode?: boolean
 }
 export interface TableColumnRenderResult<T>
   extends TableColumnRenderResultType {
-  (record: T, columnOptions: TableColumnOptions<T>): JSX.Element
+  (
+    record: T,
+    columnOptions: TableColumnOptions<T>,
+    isPreview?: boolean
+  ): JSX.Element
 }
 /**
  * Render函数

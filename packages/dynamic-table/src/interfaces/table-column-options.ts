@@ -2,6 +2,9 @@ import type { TableColumnRender } from './table-column-render'
 import type { DataRecord } from './load-data-params'
 import type { FormItemOptions } from './form-item-options'
 
+export interface TableColumnPreviewOptions {
+  span?: number
+}
 /**
  * 列配置
  */
@@ -14,6 +17,7 @@ export interface TableColumnOptions<T> {
   render?: TableColumnRender<T>
   search?: Omit<FormItemOptions, 'key' | 'title'>
   formatter?: DataFormatter
+  preview?: TableColumnPreviewOptions
 }
 
 // 列配置

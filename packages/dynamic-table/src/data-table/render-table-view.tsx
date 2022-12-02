@@ -1,5 +1,4 @@
 import type { RenderSingleButtonColumnOptions } from '@/data-table-columns/button'
-import { RenderColumnType } from '@/utils/create-renderer'
 import { getColumnValue } from '@/utils/get-column-value'
 import { defineComponent, type PropType } from 'vue'
 import type { DataRecord, TableColumnsOptions } from '..'
@@ -48,21 +47,19 @@ export default defineComponent({
     const columns = props.items
       .map((column) => ({
         options: column,
-        render: toRenderTemplate(column)
+        render: toRenderTemplate(column, true)
       }))
       .filter(({ options }) => !props.exclude?.includes(options.key))
-      .filter(({ render }) => {
-        if (render?.[RenderColumnType]) {
-          return !['button'].includes(render[RenderColumnType])
-        } else {
-          return true
-        }
-      })
+      .filter(({ render }) => !render?.disableViewMode)
 
     // 生成Rows
     const rows = columns.reduce<typeof columns[]>((r, item) => {
       const tr =
-        r.length && r[r.length - 1].length < props.columns
+        r.length &&
+        r[r.length - 1].reduce(
+          (spans, i) => (spans += i.options.preview?.span ?? 1),
+          0
+        ) < props.columns
           ? r[r.length - 1]
           : []
 
@@ -83,7 +80,7 @@ export default defineComponent({
     ]
 
     // Value样式
-    const valueStyle = ['word-break:break-all;']
+    const valueStyle = ['word-break:break-all;display:inline-table;']
 
     // 单元格样式
     const cellStyle = [
@@ -158,11 +155,13 @@ export default defineComponent({
           {rows.map((items) => (
             <tr>
               {items.map((item) => (
-                <td style={toStyle(cellStyle)}>
+                <td
+                  colspan={item.options.preview?.span ?? 1}
+                  style={toStyle(cellStyle)}>
                   <span style={toStyle(labelStyle)}>{item.options.title}:</span>
                   <span style={toStyle(valueStyle)}>
-                    {item.render?.default
-                      ? item.render?.default({ row: props.record })
+                    {item.render?.template
+                      ? item.render?.template({ row: props.record })
                       : getColumnValue(props.record, item.options)}
                   </span>
                 </td>

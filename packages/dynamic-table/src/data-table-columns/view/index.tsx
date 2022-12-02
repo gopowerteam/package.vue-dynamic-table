@@ -3,14 +3,14 @@ import { getColumnValue } from '@/utils/get-column-value'
 import { events } from '@/utils/events-helper'
 import { createRenderer } from '@/utils/create-renderer'
 import type { RenderSingleButtonColumnOptions } from '../button'
-import { getCurrentInstance } from 'vue'
 
 export function renderViewColumn(
   options?: RenderViewColumnOptions<DataRecord>
 ) {
   const render = (
     record: DataRecord,
-    column: TableColumnOptions<DataRecord>
+    column: TableColumnOptions<DataRecord>,
+    isPreview?: boolean
   ) => {
     function onShowView() {
       events.emit('preview', {
@@ -26,10 +26,7 @@ export function renderViewColumn(
       })
     }
 
-    const inViewModal =
-      !getCurrentInstance()?.vnode?.el?.className?.includes('vxe-table')
-
-    if (inViewModal) {
+    if (isPreview) {
       return <span>{options?.text ?? getColumnValue(record, column)}</span>
     } else {
       return (

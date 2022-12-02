@@ -4,8 +4,15 @@ export const RenderColumnType = Symbol.for('RenderColumnType')
 
 export function createRenderer<T>(
   type: string,
-  render: TableColumnRenderResult<T>
+  render: TableColumnRenderResult<T>,
+  options?: {
+    disableColumnMode?: boolean
+    disableViewMode?: boolean
+  }
 ): TableColumnRenderResult<T> {
   render.$type = type
+  render.$disableColumnMode = options?.disableColumnMode
+  render.$disableViewMode = options?.disableViewMode
+
   return render
 }

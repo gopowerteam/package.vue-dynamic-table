@@ -10,7 +10,10 @@ import { tableColumnRenders as renders } from '../data-table-columns'
  * @param render
  * @returns
  */
-export function toRenderTemplate<T>(options?: TableColumnOptions<T>) {
+export function toRenderTemplate<T>(
+  options?: TableColumnOptions<T>,
+  isPreview?: boolean
+) {
   if (!options?.render) {
     return undefined
   }
@@ -23,8 +26,10 @@ export function toRenderTemplate<T>(options?: TableColumnOptions<T>) {
 
   // 获取deault slot
   return {
-    default: ({ row }: { row: T }) => templateRender(row, options),
-    [RenderColumnType]: templateRender.$type
+    template: ({ row }: { row: T }) => templateRender(row, options, isPreview),
+    [RenderColumnType]: templateRender.$type,
+    disableColumnMode: templateRender.$disableColumnMode,
+    disableViewMode: templateRender.$disableViewMode
   }
 }
 
@@ -34,6 +39,8 @@ export function toRenderTemplate<T>(options?: TableColumnOptions<T>) {
  * @returns
  */
 export function renderTableColumn<T>(options: TableColumnOptions<T>) {
+  const { template, disableColumnMode } = toRenderTemplate(options) || {}
+
   return h(
     Column,
     {
@@ -42,10 +49,11 @@ export function renderTableColumn<T>(options: TableColumnOptions<T>) {
       width: options.width,
       showOverflow: true,
       showFooterOverflow: true,
-      showHeaderOverflow: true
+      showHeaderOverflow: true,
+      visible: !disableColumnMode
     },
     {
-      default: toRenderTemplate(options)?.default
+      default: template
     }
   )
 }

@@ -4,6 +4,7 @@ import { renderDictColumn } from './dict'
 import { renderPhoneColumn } from './phone'
 import { renderTextColumn } from './text'
 import { renderViewColumn } from './view'
+import { renderJSONColumn } from './json'
 
 export const tableColumnRenders = {
   text: renderTextColumn,
@@ -11,7 +12,8 @@ export const tableColumnRenders = {
   dict: renderDictColumn,
   date: renderDateColumn,
   button: renderButtonColumn,
-  view: renderViewColumn
+  view: renderViewColumn,
+  json: renderJSONColumn
 }
 
 export function getTableColumnRenders<T>() {
@@ -21,6 +23,7 @@ export function getTableColumnRenders<T>() {
     dict: renderDictColumn,
     date: renderDateColumn,
     button: renderButtonColumn<T>,
-    view: renderViewColumn
+    view: renderViewColumn,
+    json: renderJSONColumn
   }
 }

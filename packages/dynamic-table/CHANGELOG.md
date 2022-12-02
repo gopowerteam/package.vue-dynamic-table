@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.25
+
+### Patch Changes
+
+- 添加 JSON 列支持
+
 ## 0.0.24
 
 ### Patch Changes
