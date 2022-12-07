@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.27
+
+### Patch Changes
+
+- 修复空数据项问题
+
 ## 0.0.26
 
 ### Patch Changes

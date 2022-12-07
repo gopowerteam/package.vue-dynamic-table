@@ -146,8 +146,13 @@ export default defineComponent({
     const onLoadData = () => {
       const searchFormData = { ...unref(searchFormSource) }
 
+      // 清空空数据项
       Object.keys(searchFormData).forEach((key) => {
-        if (searchFormData[key] === null) {
+        if (
+          searchFormData[key] === null ||
+          searchFormData[key] === undefined ||
+          searchFormData[key] === ''
+        ) {
           delete searchFormData[key]
         }
       })
