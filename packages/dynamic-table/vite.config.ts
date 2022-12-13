@@ -14,10 +14,10 @@ export default defineConfig({
   build: {
     target: 'modules',
     lib: {
-      entry: resolvePath('index.ts'),
+      entry: [resolvePath('index.ts'), resolvePath('resolver.ts')],
       name: 'bundle',
-      fileName: (format) => `index.${format}.js`,
-      formats: ['es']
+      fileName: (format, name) => `${name}.${format}.js`,
+      formats: ['es', 'cjs']
     },
     rollupOptions: {
       treeshake: true,
