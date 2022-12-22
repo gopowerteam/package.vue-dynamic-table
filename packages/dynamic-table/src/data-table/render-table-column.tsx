@@ -47,6 +47,7 @@ export function renderTableColumn<T>(options: TableColumnOptions<T>) {
       field: options.key,
       title: options.title,
       width: options.width,
+      align: options.align || 'center',
       showOverflow: true,
       showFooterOverflow: true,
       showHeaderOverflow: true,

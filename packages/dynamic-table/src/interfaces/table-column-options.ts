@@ -13,6 +13,7 @@ export interface TableColumnOptions<T> {
   title: string
   index?: string
   fixed?: 'left' | 'right'
+  align?: 'left' | 'right' | 'center'
   width?: string
   render?: TableColumnRender<T>
   search?: Omit<FormItemOptions, 'key' | 'title'>

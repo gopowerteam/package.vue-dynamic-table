@@ -77,7 +77,8 @@ export default defineComponent({
     // Label样式
     const labelStyle = [
       'margin-right:10px;',
-      'color:rgba(0,0,0,0.7)',
+      'color:rgba(0,0,0,0.7);',
+      'vertical-align: top;',
       props.labelWidth ? `min-width:${props.labelWidth}` : ''
     ]
 

@@ -5,6 +5,7 @@ import { renderPhoneColumn } from './phone'
 import { renderTextColumn } from './text'
 import { renderViewColumn } from './view'
 import { renderJSONColumn } from './json'
+import { renderImageColumn } from './image'
 
 export const tableColumnRenders = {
   text: renderTextColumn,
@@ -13,7 +14,8 @@ export const tableColumnRenders = {
   date: renderDateColumn,
   button: renderButtonColumn,
   view: renderViewColumn,
-  json: renderJSONColumn
+  json: renderJSONColumn,
+  image: renderImageColumn
 }
 
 export function getTableColumnRenders<T>() {
@@ -24,6 +26,7 @@ export function getTableColumnRenders<T>() {
     date: renderDateColumn,
     button: renderButtonColumn<T>,
     view: renderViewColumn,
-    json: renderJSONColumn
+    json: renderJSONColumn,
+    image: renderImageColumn
   }
 }
