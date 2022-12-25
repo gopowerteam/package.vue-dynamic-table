@@ -44,7 +44,7 @@ export function renderTableColumn<T>(options: TableColumnOptions<T>) {
   return h(
     Column,
     {
-      field: options.key,
+      field: options.index || options.key,
       title: options.title,
       width: options.width,
       align: options.align || 'center',

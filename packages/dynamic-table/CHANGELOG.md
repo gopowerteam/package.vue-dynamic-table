@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.30
+
+### Patch Changes
+
+- 修复 index 显示
+
 ## 0.0.29
 
 ### Patch Changes

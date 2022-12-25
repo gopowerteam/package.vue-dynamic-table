@@ -104,6 +104,7 @@ function loadData({ search, update }: LoadDataParams) {
           ;(x as any)['createdAt'] = ''
           ;(x as any)['uid'] = '001'
           ;(x as any)['image'] = '-XajA0zvDavTICoysCRyt'
+          ;(x as any)['category'] = { name: 'string1' }
           ;(x as any)['json'] =
             '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
           return x
@@ -150,6 +151,11 @@ const columns: TableColumnsOptions<Administrator> = [
     key: 'id',
     title: '名称'
   },
+  {
+    key: 'category',
+    index: 'category.name',
+    title: '分类'
+  },
 
   {
     key: 'createdAt',
@@ -170,11 +176,12 @@ const columns: TableColumnsOptions<Administrator> = [
     render: (r) => r.phone({ safe: true, callable: true })
   },
   {
-    key:'image',
-    title:'图片',
-    render:r=>r.image({
-      parse: async (v)=>`https://file.gopowerteam.cn/${v}`
-    })
+    key: 'image',
+    title: '图片',
+    render: (r) =>
+      r.image({
+        parse: async (v) => `https://file.gopowerteam.cn/${v}`
+      })
   },
   {
     key: 'username',
