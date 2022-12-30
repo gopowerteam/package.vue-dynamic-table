@@ -6,7 +6,7 @@
       <data-table
         ref="table"
         :pagination="pageService"
-        rowKey="id"
+        row-key="id"
         :load-data="loadData"
         :search-forms="searchForms"
         action-align="right"
@@ -85,7 +85,7 @@ class PageService implements RequestPlugin, PaginationOptions {
     }
   }
 
-  after(response: A, options: R) {
+  after(response: A) {
     this.total.value = response.data?.total
   }
 }

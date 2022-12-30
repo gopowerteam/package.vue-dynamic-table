@@ -13,7 +13,7 @@ export function renderImageColumn(options?: RenderImageColumnOptions) {
   ) => {
     const value = getColumnValue(record, column)
 
-    if (!options?.parse) {
+    if (!options?.parse && !url.value) {
       url.value = value
     }
 

@@ -3,7 +3,7 @@ import { RenderColumnType } from '@/utils/create-renderer'
 import { h } from 'vue'
 import { Column } from 'vxe-table'
 import { DynamicTable } from '..'
-import { tableColumnRenders as renders } from '../data-table-columns'
+import { getTableColumnRenders } from '../data-table-columns'
 
 /**
  * 生成Render模板
@@ -20,7 +20,7 @@ export function toRenderTemplate<T>(
 
   // 获取渲染模板
   const templateRender = options.render({
-    ...renders,
+    ...getTableColumnRenders(),
     ...(DynamicTable?.$override?.table || {})
   })
 
