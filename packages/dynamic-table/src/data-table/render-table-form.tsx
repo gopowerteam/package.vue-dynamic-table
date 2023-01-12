@@ -32,10 +32,13 @@ export default defineComponent({
       type: Number,
       default: () => 10
     },
-
     loadData: {
       type: Function as PropType<() => void>,
       required: true
+    },
+    autoReload: {
+      type: Boolean,
+      default: false
     },
     submit: {
       type: Function as PropType<(data: DataRecord) => Promise<unknown>>,
@@ -64,6 +67,7 @@ export default defineComponent({
           dataSource={unref(dataSource)}
           forms={props.items}
           loadData={props.loadData}
+          autoReload={props.autoReload}
           submit={props.submit}>
           {{
             actions: context.slots.actions

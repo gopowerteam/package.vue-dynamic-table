@@ -24,6 +24,7 @@ export type EditEventParamsters = {
   titleWidth?: string | number
   titleColon?: string | number
   titleAlign?: 'left' | 'right' | 'center'
+  autoReload?: boolean
   submit: (record: DataRecord) => void | Promise<unknown>
 }
 

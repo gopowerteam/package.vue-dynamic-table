@@ -30,6 +30,11 @@ export default defineComponent({
       type: Function as PropType<() => void>,
       required: true
     },
+
+    autoReload: {
+      type: Boolean,
+      required: true
+    },
     /**
      * 分页配置
      */
@@ -85,7 +90,10 @@ export default defineComponent({
     const onSubmit: VxeFormEvents.Submit = async () => {
       await props.submit(props.dataSource)
       modal.close(false)
-      await props.loadData()
+
+      if (props.autoReload) {
+        await props.loadData()
+      }
     }
 
     return () => (
