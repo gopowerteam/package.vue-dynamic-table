@@ -2,10 +2,12 @@ import type { DataRecord, TableColumnOptions } from '@/interfaces'
 import { getColumnValue } from '@/utils/get-column-value'
 import { createRenderer } from '@/utils/create-renderer'
 
-export function renderJSONColumn(options?: RenderJSONColumnOptions) {
+export function renderJSONColumn<T = DataRecord>(
+  options?: RenderJSONColumnOptions
+) {
   const render = (
-    record: DataRecord,
-    column: TableColumnOptions<DataRecord>,
+    record: T,
+    column: TableColumnOptions<T>,
     isPreview?: boolean
   ) => {
     if (isPreview) {
@@ -21,7 +23,7 @@ export function renderJSONColumn(options?: RenderJSONColumnOptions) {
     }
   }
 
-  return createRenderer('json', render, { disableColumnMode: true })
+  return createRenderer<T>('json', render, { disableColumnMode: true })
 }
 
 export interface RenderJSONColumnOptions {

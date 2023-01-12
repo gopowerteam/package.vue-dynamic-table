@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.31
+
+### Patch Changes
+
+- 更新泛型类型支持
+
 ## 0.0.30
 
 ### Patch Changes

@@ -18,12 +18,11 @@ const dateFormats = {
  * @param options DateColumn列选项
  * @returns JSX
  */
-export function renderDateColumn(options?: RenderDateColumnOptions) {
-  const render = (
-    record: DataRecord,
-    column: TableColumnOptions<DataRecord>
-  ) => {
-    const value = getColumnValue(record, column)
+export function renderDateColumn<T = DataRecord>(
+  options?: RenderDateColumnOptions
+) {
+  const render = (record: T, column: TableColumnOptions<T>) => {
+    const value = getColumnValue<T>(record, column)
     const formatStr =
       typeof options?.format === 'function'
         ? options?.format()
@@ -34,7 +33,7 @@ export function renderDateColumn(options?: RenderDateColumnOptions) {
     return <span>{date.isValid() && date.format(formatStr)}</span>
   }
 
-  return createRenderer('date', render)
+  return createRenderer<T>('date', render)
 }
 
 export interface RenderDateColumnOptions {

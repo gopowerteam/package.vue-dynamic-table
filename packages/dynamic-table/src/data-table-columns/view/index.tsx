@@ -4,12 +4,12 @@ import { events } from '@/utils/events-helper'
 import { createRenderer } from '@/utils/create-renderer'
 import type { RenderSingleButtonColumnOptions } from '../button'
 
-export function renderViewColumn(
-  options?: RenderViewColumnOptions<DataRecord>
+export function renderViewColumn<T = DataRecord>(
+  options?: RenderViewColumnOptions<T>
 ) {
   const render = (
-    record: DataRecord,
-    column: TableColumnOptions<DataRecord>,
+    record: T,
+    column: TableColumnOptions<T>,
     isPreview?: boolean
   ) => {
     function onShowView() {
@@ -39,7 +39,7 @@ export function renderViewColumn(
     }
   }
 
-  return createRenderer('view', render)
+  return createRenderer<T>('view', render)
 }
 
 export interface RenderViewColumnOptions<T> {

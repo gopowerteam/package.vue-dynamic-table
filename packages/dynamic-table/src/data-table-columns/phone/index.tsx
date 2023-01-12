@@ -26,11 +26,10 @@ function formatText(value: string, separator?: string) {
     .replace(/M/g, '*')
 }
 
-export function renderPhoneColumn(options?: RenderTextColumnOptions) {
-  const render = (
-    record: DataRecord,
-    column: TableColumnOptions<DataRecord>
-  ) => {
+export function renderPhoneColumn<T = DataRecord>(
+  options?: RenderTextColumnOptions
+) {
+  const render = (record: T, column: TableColumnOptions<T>) => {
     const phone = getColumnValue(record, column)
     const value = formatText(
       options?.safe ? encryptText(phone) : phone,
@@ -50,7 +49,7 @@ export function renderPhoneColumn(options?: RenderTextColumnOptions) {
     }
   }
 
-  return createRenderer('phone', render)
+  return createRenderer<T>('phone', render)
 }
 
 export interface RenderTextColumnOptions {

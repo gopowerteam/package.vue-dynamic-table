@@ -4,14 +4,14 @@ import type { DataRecord } from '..'
 
 export type PreviewEventParamsters = {
   title: string
-  record: Record<string, any>
+  record: any
   columns?: number
   labelWidth?: string
   border?: boolean
   borderColor?: string
   padding?: number
   exclude?: string[]
-  buttons?: RenderSingleButtonColumnOptions<DataRecord>[]
+  buttons?: RenderSingleButtonColumnOptions<any>[]
 }
 
 export type EditEventParamsters = {

@@ -91,7 +91,7 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
     )
   }
 
-  return createRenderer('button', render, { disableViewMode: true })
+  return createRenderer<T>('button', render, { disableViewMode: true })
 }
 
 export type RenderButtonColumnOptions<T> =

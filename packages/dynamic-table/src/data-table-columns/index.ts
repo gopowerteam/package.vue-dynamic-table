@@ -9,13 +9,13 @@ import { renderImageColumn } from './image'
 
 export function getTableColumnRenders<T>() {
   return {
-    text: renderTextColumn,
-    phone: renderPhoneColumn,
-    dict: renderDictColumn,
-    date: renderDateColumn,
+    text: renderTextColumn<T>,
+    phone: renderPhoneColumn<T>,
+    dict: renderDictColumn<T>,
+    date: renderDateColumn<T>,
     button: renderButtonColumn<T>,
-    view: renderViewColumn,
-    json: renderJSONColumn,
-    image: renderImageColumn
+    view: renderViewColumn<T>,
+    json: renderJSONColumn<T>,
+    image: renderImageColumn<T>
   }
 }

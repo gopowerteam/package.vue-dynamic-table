@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
+    "build": "turbo run build --scope='playground' --include-dependencies",
+    "dev": "turbo run dev --scope='playground' --include-dependencies",
     "lint": "turbo run lint",
     "play": "pnpm dev --filter playground",
     "clean": "rimraf node_modules **/*/node_modules",

@@ -11,6 +11,11 @@ const resolvePath = (...filepath: string[]) =>
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
   build: {
     target: 'modules',
     lib: {
@@ -36,10 +41,5 @@ export default defineConfig({
     dts({
       entryRoot: resolvePath()
     })
-  ],
-  resolve: {
-    alias: {
-      '@': resolvePath()
-    }
-  }
+  ]
 })

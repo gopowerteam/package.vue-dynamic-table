@@ -25,11 +25,11 @@
 
 <script setup lang="ts">
 import { ModalProvider } from '@gopowerteam/vue-modal'
-import type { RequestPlugin } from '@gopowerteam/request'
 import type {
-  R,
-  A
-} from '@gopowerteam/request/dist/request-adapter.interface-bd32c0be'
+  AdapterResponse,
+  RequestPlugin,
+  RequestSendOptions
+} from '@gopowerteam/request'
 import type {
   DataRecord,
   FormItemsOptions,
@@ -77,7 +77,7 @@ class PageService implements RequestPlugin, PaginationOptions {
     this.pageIndex.value = 1
   }
 
-  before(options: R) {
+  before(options: RequestSendOptions) {
     options.paramsQuery = {
       ...options.paramsQuery,
       page: this.pageIndex.value - 1,
@@ -85,7 +85,7 @@ class PageService implements RequestPlugin, PaginationOptions {
     }
   }
 
-  after(response: A) {
+  after(response: AdapterResponse) {
     this.total.value = response.data?.total
   }
 }
@@ -244,6 +244,7 @@ const columns: TableColumnsOptions<Administrator> = [
             text: '编辑',
             callback: (record) => {
               table.value.edit({
+                title: '编辑',
                 record,
                 appendRowKey: true,
                 submit: (data: DataRecord) => {

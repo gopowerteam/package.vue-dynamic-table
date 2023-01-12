@@ -3,12 +3,14 @@ import { createRenderer } from '@/utils/create-renderer'
 import { getColumnValue } from '@/utils/get-column-value'
 import { type CSSProperties, ref } from 'vue'
 
-export function renderImageColumn(options?: RenderImageColumnOptions) {
+export function renderImageColumn<T = DataRecord>(
+  options?: RenderImageColumnOptions
+) {
   const url = ref<string>()
 
   const render = (
-    record: DataRecord,
-    column: TableColumnOptions<DataRecord>,
+    record: T,
+    column: TableColumnOptions<T>,
     isPreview?: boolean
   ) => {
     const value = getColumnValue(record, column)
@@ -44,7 +46,7 @@ export function renderImageColumn(options?: RenderImageColumnOptions) {
     )
   }
 
-  return createRenderer('image', render)
+  return createRenderer<T>('image', render)
 }
 
 export interface RenderImageColumnOptions {
