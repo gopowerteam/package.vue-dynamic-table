@@ -43,7 +43,7 @@ export default defineComponent({
       required: false
     },
     columns: {
-      type: Array as PropType<TableColumnsOptions>,
+      type: Array as PropType<TableColumnsOptions<any>>,
       required: true
     },
     searchForms: {
