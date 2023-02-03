@@ -1,14 +1,12 @@
-import type { Ref } from 'vue'
-
 export interface PaginationOptions {
   /**
    * 当前页码
    */
-  pageIndex: Ref<number>
+  pageIndex: number
   /**
    * 分页容量
    */
-  pageSize: Ref<number>
+  pageSize: number
   /**
    * 分页容量选项
    */
@@ -29,7 +27,7 @@ export interface PaginationOptions {
   /**
    * 数据总数
    */
-  total: Ref<number>
+  total: number
   /**
    * 重置分页数据
    */

@@ -38,14 +38,42 @@ import type {
   TableColumnsOptions
 } from '@gopowerteam/vue-dynamic-table'
 import { useTable } from '@gopowerteam/vue-dynamic-table'
-import { ref, type Ref } from 'vue'
 import type { Administrator } from './http/models/Administrator'
 import { AdministratorService } from './http/services/AdministratorService'
+import { reactive } from 'vue'
 const administratorService = new AdministratorService()
 
 class PageService implements RequestPlugin, PaginationOptions {
-  pageIndex: Ref<number> = ref(1)
-  pageSize: Ref<number> = ref(20)
+  private data = reactive({
+    index: 1,
+    size: 20,
+    total: 0
+  })
+
+  get pageIndex() {
+    return this.data.index
+  }
+
+  set pageIndex(value: number) {
+    this.data.index = value
+  }
+
+  get pageSize() {
+    return this.data.size
+  }
+
+  set pageSize(value: number) {
+    this.data.size = value
+  }
+
+  get total() {
+    return this.data.total
+  }
+
+  set total(value: number) {
+    this.data.total = value
+  }
+
   pageSizeOpts: number[] = [10, 20, 30, 40, 50]
   pageLayouts: (
     | 'PrevJump'
@@ -66,27 +94,25 @@ class PageService implements RequestPlugin, PaginationOptions {
     'FullJump',
     'Total'
   ]
-  total: Ref<number> = ref(0)
-
   constructor(index = 1, size = 20) {
-    this.pageIndex.value = index
-    this.pageSize.value = size
+    this.pageIndex = index
+    this.pageSize = size
   }
 
   reset(): void {
-    this.pageIndex.value = 1
+    this.pageIndex = 1
   }
 
   before(options: RequestSendOptions) {
     options.paramsQuery = {
       ...options.paramsQuery,
-      page: this.pageIndex.value - 1,
-      size: this.pageSize.value
+      page: this.pageIndex - 1,
+      size: this.pageSize
     }
   }
 
   after(response: AdapterResponse) {
-    this.total.value = response.data?.total
+    this.total = response.data?.total
   }
 }
 

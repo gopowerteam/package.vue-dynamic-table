@@ -17,7 +17,7 @@ export interface TableColumnOptions<T> {
   width?: string
   render?: TableColumnRender<T>
   search?: Omit<FormItemOptions, 'key' | 'title'>
-  formatter?: DataFormatter
+  formatter?: DataFormatter<T>
   preview?: TableColumnPreviewOptions
 }
 
@@ -25,6 +25,4 @@ export interface TableColumnOptions<T> {
 export type TableColumnsOptions<T = DataRecord> = TableColumnOptions<T>[]
 
 // Formatter格式化
-export type DataFormatter = (
-  record: DataRecord
-) => string | number | Date | undefined
+export type DataFormatter<T> = (record: T) => string | number | Date | undefined

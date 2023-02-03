@@ -1,9 +1,9 @@
 <template>
   <vxe-pager
-    v-model:current-page="currentPage"
-    v-model:page-size="pageSize"
+    v-model:current-page="pagination.pageIndex"
+    v-model:page-size="pagination.pageSize"
     perfect
-    :total="total"
+    :total="pagination.total"
     :page-sizes="pagination.pageSizeOpts"
     :layouts="pagination.pageLayouts"
     @page-change="onPageChange">
@@ -18,12 +18,8 @@ const props = defineProps<{
   loadData: () => void
 }>()
 
-const currentPage = props.pagination.pageIndex
-const pageSize = props.pagination.pageSize
-const total = props.pagination.total
-
 function onPageChange({ currentPage }: { currentPage: number }) {
-  props.pagination.pageIndex.value = currentPage
+  props.pagination.pageIndex = currentPage
   // 加载数据
   props.loadData()
 }

@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.32
+
+### Patch Changes
+
+- 更新 PageService 接口
+
 ## 0.0.31
 
 ### Patch Changes
