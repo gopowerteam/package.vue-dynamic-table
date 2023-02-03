@@ -245,6 +245,7 @@ const columns: TableColumnsOptions<Administrator> = [
             text: '测试1',
             confirm: true,
             callback: (record) => {
+              // eslint-disable-next-line no-console
               console.log(record)
             }
           }
@@ -263,6 +264,7 @@ const columns: TableColumnsOptions<Administrator> = [
             confirmText: 'gogogo',
             confirmAppend: '#test',
             callback: (record) => {
+              // eslint-disable-next-line no-console
               console.log(record)
             }
           },
@@ -274,6 +276,7 @@ const columns: TableColumnsOptions<Administrator> = [
                 record,
                 appendRowKey: true,
                 submit: (data: DataRecord) => {
+                  // eslint-disable-next-line no-console
                   console.log(data)
                 }
               })

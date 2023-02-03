@@ -17,7 +17,7 @@ export default defineComponent({
      * 列配置
      */
     columns: {
-      type: Array as PropType<TableColumnsOptions>,
+      type: Array as PropType<TableColumnsOptions<any>>,
       required: true
     }
   },

@@ -12,7 +12,7 @@ export default defineComponent({
       required: true
     },
     items: {
-      type: Array as PropType<TableColumnsOptions>,
+      type: Array as PropType<TableColumnsOptions<any>>,
       required: true
     },
     columns: {
@@ -53,7 +53,7 @@ export default defineComponent({
       .filter(({ render }) => !render?.disableViewMode)
 
     // 生成Rows
-    const rows = columns.reduce<typeof columns[]>((r, item) => {
+    const rows = columns.reduce<(typeof columns)[]>((r, item) => {
       const tr =
         r.length &&
         r[r.length - 1].reduce(

@@ -1,6 +1,6 @@
 import type { TableColumnRender } from './table-column-render'
-import type { DataRecord } from './load-data-params'
 import type { FormItemOptions } from './form-item-options'
+import type { DataRecord } from './load-data-params'
 
 export interface TableColumnPreviewOptions {
   span?: number
