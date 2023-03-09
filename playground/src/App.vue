@@ -23,7 +23,7 @@
   </ModalProvider>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ModalProvider } from '@gopowerteam/vue-modal'
 import type {
   AdapterResponse,
@@ -151,7 +151,6 @@ const searchForms: FormItemsOptions = [
     title: '状态',
     render: (r) => r.switch({})
   },
-
   {
     key: 'test1',
     title: 'test1',
@@ -182,7 +181,11 @@ const columns: TableColumnsOptions<Administrator> = [
     index: 'category.name',
     title: '分类'
   },
-
+  {
+    key: 'render',
+    title: 'Render',
+    render: (r) => r.render(({ id }) => <div>id:{id}</div>)
+  },
   {
     key: 'createdAt',
     title: 'date',

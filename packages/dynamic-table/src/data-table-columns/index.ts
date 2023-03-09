@@ -6,6 +6,7 @@ import { renderTextColumn } from './text'
 import { renderViewColumn } from './view'
 import { renderJSONColumn } from './json'
 import { renderImageColumn } from './image'
+import { renderRenderColumn } from './render'
 
 export function getTableColumnRenders<T>() {
   return {
@@ -16,6 +17,7 @@ export function getTableColumnRenders<T>() {
     button: renderButtonColumn<T>,
     view: renderViewColumn<T>,
     json: renderJSONColumn<T>,
-    image: renderImageColumn<T>
+    image: renderImageColumn<T>,
+    render: renderRenderColumn<T>
   }
 }

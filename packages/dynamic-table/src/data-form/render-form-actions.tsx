@@ -90,12 +90,19 @@ export function renderSearchFormActions(
       {forms && forms.length > 0 && (
         <>{renderFormItem([submitButton, resetButton], hasCollapsed)}</>
       )}
-      <div
-        style={`display:flex;justify-content:${
-          actionAlign === 'left' ? 'flex-start' : 'flex-end'
-        }`}>
-        {actions && renderActionItems(actions)}
-      </div>
+      {actions && (
+        <>
+          <div
+            class="divider"
+            style="height:1px;margin:10px 0;background-color:rgba(0,0,0,0.1)"></div>
+          <div
+            style={`display:flex;justify-content:${
+              actionAlign === 'left' ? 'flex-start' : 'flex-end'
+            }`}>
+            {actions && renderActionItems(actions)}
+          </div>
+        </>
+      )}
     </>
   )
 }

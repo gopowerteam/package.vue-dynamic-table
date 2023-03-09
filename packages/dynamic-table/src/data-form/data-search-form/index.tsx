@@ -74,7 +74,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div style="margin-bottom:15px;">
+      <div>
         <vxe-form
           custom-layout
           data={props.dataSource}

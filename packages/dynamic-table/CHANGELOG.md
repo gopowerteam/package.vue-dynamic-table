@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.35
+
+### Patch Changes
+
+- 添加渲染列支持
+
 ## 0.0.34
 
 ### Patch Changes

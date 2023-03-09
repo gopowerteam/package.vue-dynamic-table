@@ -97,7 +97,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div style="margin-bottom:15px;">
+      <div>
         <vxe-form
           title-width={props.titleWidth}
           title-align={props.titleAlign}
