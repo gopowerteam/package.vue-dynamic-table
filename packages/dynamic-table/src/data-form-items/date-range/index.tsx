@@ -10,10 +10,10 @@ export function renderDateRangeItem(options?: RenderDateRangeItemOptions) {
   const selected = ref('')
   let initialized = false
 
-  function autoSubmit() {
+  function autoSubmit(element: HTMLElement) {
     nextTick(() => {
-      const button = document.querySelector(
-        '.vxe-input--panel.type--date .vxe-input--date-picker-confirm'
+      const button = element.querySelector(
+        `.vxe-input--panel.type--date .vxe-input--date-picker-confirm`
       ) as HTMLButtonElement
 
       button?.click()
@@ -34,10 +34,11 @@ export function renderDateRangeItem(options?: RenderDateRangeItemOptions) {
   }
 
   return (data: DataRecord, form: FormItemOptions) => {
+    const input = ref()
+
     if (data[form.key] && selected.value === '' && !initialized) {
       selected.value = data[form.key].join(',')
     }
-
     initialized = true
 
     function onChange() {
@@ -51,7 +52,7 @@ export function renderDateRangeItem(options?: RenderDateRangeItemOptions) {
             selected.value = array.join(',')
             data[form.key] = array
 
-            autoSubmit()
+            autoSubmit(input.value?.$el)
           }
           break
         // 重置选择数据
@@ -63,6 +64,7 @@ export function renderDateRangeItem(options?: RenderDateRangeItemOptions) {
 
     return (
       <vxe-input
+        ref={input}
         style={{ width: '240px' }}
         onChange={onChange}
         v-model={selected.value}

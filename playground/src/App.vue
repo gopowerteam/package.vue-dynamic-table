@@ -196,6 +196,24 @@ const searchForms: FormItemsOptions = [
         }
       })
     // default: ['2023-01-01', '2023-01-03']
+  },
+  {
+    key: 'test4',
+    title: 'test4',
+    render: (r) =>
+      r.dateRange({
+        type: 'date',
+        clearable: true,
+        disabledDate: (value, date) => {
+          const [startDate] = value
+          if (startDate) {
+            return new Date(startDate).getMonth() !== date.getMonth()
+          }
+
+          return false
+        }
+      })
+    // default: ['2023-01-01', '2023-01-03']
   }
 ]
 
