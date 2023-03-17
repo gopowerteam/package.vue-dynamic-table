@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.38
+
+### Patch Changes
+
+- 更新参数类型
+
 ## 0.0.37
 
 ### Patch Changes

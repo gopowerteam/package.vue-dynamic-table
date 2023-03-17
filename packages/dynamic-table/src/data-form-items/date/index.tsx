@@ -34,5 +34,5 @@ export interface RenderDateItemOptions {
   clearable?: boolean
   multiple?: boolean
   type?: 'date' | 'week' | 'month' | 'year'
-  disabledDate: (value: string, date: Date) => boolean
+  disabledDate?: (value: string, date: Date) => boolean
 }

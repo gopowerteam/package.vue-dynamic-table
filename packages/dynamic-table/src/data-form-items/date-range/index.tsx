@@ -80,5 +80,5 @@ export interface RenderDateRangeItemOptions {
   clearable?: boolean
   multiple?: boolean
   type?: 'date' | 'week' | 'month' | 'year'
-  disabledDate: (value: string[], date: Date) => boolean
+  disabledDate?: (value: string[], date: Date) => boolean
 }
