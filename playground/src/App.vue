@@ -124,18 +124,28 @@ function loadData({ search, update }: LoadDataParams) {
   administratorService
     .findAdministrator(search, [pageService])
     .then(({ data }) => {
-      update(
-        data.map((x) => {
-          ;(x as any)['phone'] = '18899992222'
-          ;(x as any)['createdAt'] = ''
-          ;(x as any)['uid'] = '001'
-          ;(x as any)['image'] = '-XajA0zvDavTICoysCRyt'
-          ;(x as any)['category'] = { name: 'string1' }
-          ;(x as any)['json'] =
-            '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
-          return x
-        })
-      )
+      update([
+        {
+          id: '1',
+          phone: '18899992222',
+          createdAt: '',
+          uid: '001',
+          image:
+            'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png',
+          category: { name: 'string1' },
+          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
+        },
+        {
+          id: '2',
+          phone: '19900002222',
+          createdAt: '',
+          uid: '001',
+          image:
+            'https://img.alicdn.com/imgextra/i2/O1CN01FF1t1g1Q3PDWpSm4b_!!6000000001920-55-tps-508-135.svg',
+          category: { name: 'string1' },
+          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
+        }
+      ])
     })
 }
 
@@ -227,7 +237,7 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '图片',
     render: (r) =>
       r.image({
-        parse: async (v) => `https://file.gopowerteam.cn/${v}`
+        // parse: async (v) => `https://file.gopowerteam.cn/${v}`
       })
   },
   {

@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.39
+
+### Patch Changes
+
+- fixed support
+
 ## 0.0.38
 
 ### Patch Changes
