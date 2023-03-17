@@ -1,6 +1,6 @@
 {
   "name": "@gopowerteam/vue-dynamic-table",
-  "version": "0.0.35",
+  "version": "0.0.37",
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",
@@ -37,7 +37,7 @@
     "mitt": "3.0.0",
     "vue": "3.2.45",
     "vue-json-viewer": "3",
-    "vxe-table": "4.3.9",
+    "vxe-table": "4.3.10",
     "xe-utils": "3.5.7"
   },
   "peerDependencies": {

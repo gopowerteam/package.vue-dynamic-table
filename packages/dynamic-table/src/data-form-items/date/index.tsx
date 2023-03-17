@@ -6,12 +6,23 @@ import type { DataRecord, FormItemOptions } from '@/interfaces'
  * @returns JSX
  */
 export function renderDateItem(options?: RenderDateItemOptions) {
+  function disabledMethod({ $input, date }: { $input: any; date: Date }) {
+    const value = $input.props.modelValue
+
+    if (!options?.disabledDate) {
+      return false
+    }
+
+    return options.disabledDate(value, date)
+  }
+
   return (data: DataRecord, form: FormItemOptions) => {
     return (
       <vxe-input
         v-model={data[form.key]}
         placeholder={options?.placeholder}
         clearable={options?.clearable}
+        disabled-method={disabledMethod}
         multiple={options?.multiple}
         type={options?.type || 'date'}></vxe-input>
     )
@@ -23,4 +34,5 @@ export interface RenderDateItemOptions {
   clearable?: boolean
   multiple?: boolean
   type?: 'date' | 'week' | 'month' | 'year'
+  disabledDate: (value: string, date: Date) => boolean
 }

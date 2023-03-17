@@ -168,6 +168,24 @@ const searchForms: FormItemsOptions = [
     key: 'test2',
     title: 'test2',
     render: (r) => r.date({ type: 'year' })
+  },
+  {
+    key: 'test3',
+    title: 'test3',
+    render: (r) =>
+      r.dateRange({
+        type: 'date',
+        clearable: true,
+        disabledDate: (value, date) => {
+          const [startDate] = value
+          if (startDate) {
+            return new Date(startDate).getMonth() !== date.getMonth()
+          }
+
+          return false
+        }
+      })
+    // default: ['2023-01-01', '2023-01-03']
   }
 ]
 

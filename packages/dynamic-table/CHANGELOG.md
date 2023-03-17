@@ -1,5 +1,17 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.37
+
+### Patch Changes
+
+- 添加 disabledDate 支持
+
+## 0.0.36
+
+### Patch Changes
+
+- 添加 daterange 支持
+
 ## 0.0.35
 
 ### Patch Changes

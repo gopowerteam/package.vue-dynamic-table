@@ -72,7 +72,7 @@ importers:
       vitest: 0.27.1
       vue: 3.2.45
       vue-json-viewer: '3'
-      vxe-table: 4.3.9
+      vxe-table: 4.3.10
       xe-utils: 3.5.7
     dependencies:
       '@gopowerteam/vue-modal': 0.1.12_vue@3.2.45
@@ -80,7 +80,7 @@ importers:
       mitt: 3.0.0
       vue: 3.2.45
       vue-json-viewer: 3.0.4_vue@3.2.45
-      vxe-table: 4.3.9_vue@3.2.45+xe-utils@3.5.7
+      vxe-table: 4.3.10_vue@3.2.45+xe-utils@3.5.7
       xe-utils: 3.5.7
     devDependencies:
       '@rushstack/eslint-patch': 1.2.0
@@ -1758,7 +1758,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/plugin-transform-typescript': 7.20.2_@babel+core@7.20.5
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.20.5
-      vite: 4.0.4
+      vite: 4.0.4_@types+node@18.11.18
       vue: 3.2.45
     transitivePeerDependencies:
       - supports-color
@@ -1771,7 +1771,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.4
+      vite: 4.0.4_@types+node@18.11.18
       vue: 3.2.45
     dev: true
 
@@ -6171,8 +6171,8 @@ packages:
       '@vue/server-renderer': 3.2.45_vue@3.2.45
       '@vue/shared': 3.2.45
 
-  /vxe-table/4.3.9_vue@3.2.45+xe-utils@3.5.7:
-    resolution: {integrity: sha512-Ns7Ooa7lOHBpks90i0k0BMNyxfMpUo39ryxTgKE41X3xVnI9tGQs2U6+klfDlsuqYfmG3ibyzHN3OCrWbbKo4Q==}
+  /vxe-table/4.3.10_vue@3.2.45+xe-utils@3.5.7:
+    resolution: {integrity: sha512-qxLhA3hiAfxsm8+dbN1n7+FrRwMEzUB/676x67gEb3H63WFWulRvTc88LCe0itMcuYcpy7uZHn5ruRsz0KnorQ==}
     peerDependencies:
       vue: ^3.2.28
       xe-utils: ^3.5.0
