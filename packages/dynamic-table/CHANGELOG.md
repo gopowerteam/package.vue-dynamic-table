@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.40
+
+### Patch Changes
+
+- fixed date-range
+
 ## 0.0.39
 
 ### Patch Changes
