@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.43
+
+### Patch Changes
+
+- 修复 render 列 overflow 配置
+
 ## 0.0.42
 
 ### Patch Changes
