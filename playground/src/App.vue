@@ -131,7 +131,7 @@ function loadData({ search, update }: LoadDataParams) {
           createdAt: '',
           uid: '001',
           image:
-            'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png',
+            'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
           category: { name: 'string1' },
           json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
         },
@@ -141,7 +141,7 @@ function loadData({ search, update }: LoadDataParams) {
           createdAt: '',
           uid: '001',
           image:
-            'https://img.alicdn.com/imgextra/i2/O1CN01FF1t1g1Q3PDWpSm4b_!!6000000001920-55-tps-508-135.svg',
+            'https://img.alicdn.com/imgextra/i2/O1CN01FF1t1g1Q3PDWpSm4b_!!6000000001920-55-tps-508-135.svg___',
           category: { name: 'string1' },
           json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
         }
@@ -255,7 +255,9 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '图片',
     render: (r) =>
       r.image({
-        // parse: async (v) => `https://file.gopowerteam.cn/${v}`
+        parse: async (v) => {
+          return v.replaceAll('___', '')
+        }
       })
   },
   {

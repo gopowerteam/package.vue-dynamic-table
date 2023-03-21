@@ -1,30 +1,17 @@
 import type { DataRecord, TableColumnOptions } from '@/interfaces'
 import { createRenderer } from '@/utils/create-renderer'
 import { getColumnValue } from '@/utils/get-column-value'
-import { type CSSProperties, ref } from 'vue'
+import type { CSSProperties } from 'vue'
 
 export function renderImageColumn<T = DataRecord>(
   options?: RenderImageColumnOptions
 ) {
-  const url = ref<string>()
-
   const render = (
     record: T,
     column: TableColumnOptions<T>,
     isPreview?: boolean
   ) => {
     const value = getColumnValue(record, column)
-
-    if (!options?.parse && !url.value) {
-      url.value = value
-    }
-
-    // 获取转换值
-    if (options?.parse && !url.value) {
-      Promise.resolve(options?.parse(value)).then((v) => {
-        url.value = v
-      })
-    }
 
     const style: CSSProperties = {
       width: isPreview ? options?.width || 'auto' : '40px',
@@ -36,14 +23,32 @@ export function renderImageColumn<T = DataRecord>(
       objectFit: 'contain'
     }
 
-    return url.value ? (
-      <img
-        src={url.value}
-        style={style}
-      />
-    ) : (
-      <span>loading...</span>
-    )
+    if (!options?.parse) {
+      return (
+        <img
+          src={value}
+          style={style}
+        />
+      )
+    }
+
+    const parsedKey = `${column.index || column.key}_parsed`
+
+    // 获取转换值
+    if ((record as Record<string, string>)[parsedKey]) {
+      return (
+        <img
+          src={(record as Record<string, string>)[parsedKey]}
+          style={style}
+        />
+      )
+    } else {
+      options
+        ?.parse(value)
+        .then((v) => ((record as Record<string, string>)[parsedKey] = v))
+
+      return <div>Loading...</div>
+    }
   }
 
   return createRenderer<T>('image', render)

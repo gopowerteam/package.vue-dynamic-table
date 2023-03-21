@@ -9,6 +9,7 @@
       "@/*": ["src/*"],
       "~/*": ["src/*"]
     },
+    "lib": ["ESNext", "DOM"],
     "types": ["vite/client", "vue/ref-macros"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
