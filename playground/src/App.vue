@@ -255,6 +255,8 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '图片',
     render: (r) =>
       r.image({
+        rotate: 30,
+        preview: true,
         parse: async (v) => {
           return v.replaceAll('___', '')
         }

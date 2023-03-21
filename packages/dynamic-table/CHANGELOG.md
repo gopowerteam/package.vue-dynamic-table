@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.42
+
+### Patch Changes
+
+- 添加图片预览支持
+
 ## 0.0.41
 
 ### Patch Changes
