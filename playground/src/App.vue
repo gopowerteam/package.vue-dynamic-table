@@ -133,7 +133,8 @@ function loadData({ search, update }: LoadDataParams) {
           image:
             'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
           category: { name: 'string1' },
-          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
+          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
+          text: '---test---'.repeat(5)
         },
         {
           id: '2',
@@ -143,7 +144,8 @@ function loadData({ search, update }: LoadDataParams) {
           image:
             'https://img.alicdn.com/imgextra/i2/O1CN01FF1t1g1Q3PDWpSm4b_!!6000000001920-55-tps-508-135.svg___',
           category: { name: 'string1' },
-          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}'
+          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
+          text: '---test---'.repeat(5)
         }
       ])
     })
@@ -249,6 +251,11 @@ const columns: TableColumnsOptions<Administrator> = [
     key: 'phone',
     title: '手机号',
     render: (r) => r.phone({ safe: true, callable: true })
+  },
+  {
+    key: 'test2',
+    title: 'test2',
+    render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
   },
   {
     key: 'image',

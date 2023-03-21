@@ -15,9 +15,14 @@ export function renderImageColumn<T = DataRecord>(
       image.src = url
       image.setAttribute(
         'style',
-        `position:fixed;top:${rect.top}px;left:${
-          rect.left + rect.width
-        }px;min-width:400px;height:auto`
+        [
+          `position:fixed;`,
+          `top:${rect.top}px;`,
+          `left:${rect.left + rect.width}px;`,
+          `min-width:400px;`,
+          `height:auto;`,
+          `z-index:100;`
+        ].join('')
       )
 
       document.body.appendChild(image)
