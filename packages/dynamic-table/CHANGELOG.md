@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.41
+
+### Patch Changes
+
+- 修复图片显示问题
+
 ## 0.0.40
 
 ### Patch Changes
