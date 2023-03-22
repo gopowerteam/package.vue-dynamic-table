@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.44
+
+### Patch Changes
+
+- 添加 radio&checkbox 支持
+
 ## 0.0.43
 
 ### Patch Changes

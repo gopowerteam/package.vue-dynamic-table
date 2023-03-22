@@ -5,13 +5,21 @@
       style="background: rgba(0, 0, 0, 0.1); margin: 100px">
       <data-table
         ref="table"
-        :pagination="pageService"
+        v-model:radio="radio"
+        v-model:checkbox="checkbox"
+        :selection="{
+          type: 'radio',
+          width: 100,
+          title: 'radio',
+          selectable: dd
+        }"
         row-key="id"
+        :pagination="pageService"
         :load-data="loadData"
         :search-forms="searchForms"
-        action-align="right"
         :edit-forms="searchForms"
-        :columns="columns">
+        :columns="columns"
+        action-align="right">
         <template #actions>
           <button @click="() => table.reload()">reload</button>
           <div>1231</div>
@@ -40,7 +48,7 @@ import type {
 import { useTable } from '@gopowerteam/vue-dynamic-table'
 import type { Administrator } from './http/models/Administrator'
 import { AdministratorService } from './http/services/AdministratorService'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 const administratorService = new AdministratorService()
 
 class PageService implements RequestPlugin, PaginationOptions {
@@ -120,6 +128,9 @@ const table = useTable('table')
 
 const pageService = new PageService(1, 1)
 
+const radio = ref('1')
+const checkbox = ref(['1'])
+
 function loadData({ search, update }: LoadDataParams) {
   administratorService
     .findAdministrator(search, [pageService])
@@ -149,6 +160,10 @@ function loadData({ search, update }: LoadDataParams) {
         }
       ])
     })
+}
+
+function dd({ row }: { row: any }) {
+  return row.id === '1'
 }
 
 const searchForms: FormItemsOptions = [

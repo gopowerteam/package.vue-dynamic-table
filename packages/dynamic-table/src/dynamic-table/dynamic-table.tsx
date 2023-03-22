@@ -5,7 +5,6 @@ import type { PaginationOptions } from '@/interfaces/pagination-options'
 import { defineComponent, onMounted, unref, type PropType } from 'vue'
 
 import { DataSearchForm } from '../data-form'
-import DataTable from '../data-table'
 import DataPage from '../data-page'
 import { createFormSource } from './create-form-source'
 import { createSearchItemOptions } from '@/data-form/create-search-item-options'
@@ -18,10 +17,34 @@ import {
 import RenderTableView from '@/data-table/render-table-view'
 import { useModal } from '@gopowerteam/vue-modal'
 import renderTableForm from '@/data-table/render-table-form'
+import { renderTableColumn } from '@/data-table/render-table-column'
+import type { VxeRadioDefines, VxeCheckboxDefines } from 'vxe-table'
 
 export default defineComponent({
   name: 'DynamicTable',
   props: {
+    selection: {
+      type: [String, Object] as PropType<
+        | 'radio'
+        | 'checkbox'
+        | {
+            type: 'radio' | 'checkbox'
+            width?: number
+            title?: string
+            selectable?: (record: any) => boolean
+          }
+      >,
+      required: false
+    },
+    radio: {
+      type: String as PropType<string | number>,
+      required: false
+    },
+    checkbox: {
+      type: Array as PropType<string[]>,
+      required: false
+    },
+    // 是否进行自动加载数据
     loadAuto: {
       type: Boolean,
       required: false,
@@ -59,7 +82,15 @@ export default defineComponent({
       required: false
     }
   },
-  expose: ['tableSource', 'formSource', 'reload', 'edit', 'preview'],
+  emits: ['update:radio', 'update:checkbox'],
+  expose: [
+    'tableSource',
+    'formSource',
+    'reload',
+    'edit',
+    'preview',
+    'getTableRows'
+  ],
   render() {
     return (
       <div>
@@ -76,9 +107,14 @@ export default defineComponent({
             }}
           </DataSearchForm>
         )}
-        <DataTable
-          dataSource={unref(this.tableSource)}
-          columns={this.columns}></DataTable>
+
+        <vxe-table
+          onRadioChange={this.onRadioChange}
+          onCheckboxChange={this.onCheckboxChange}
+          data={unref(this.tableSource)}
+          {...this.tableOptions}>
+          {unref(this.tableColumns)}
+        </vxe-table>
 
         {this.pagination && (
           <DataPage
@@ -88,7 +124,15 @@ export default defineComponent({
       </div>
     )
   },
-  setup(props) {
+  setup(props, { emit }) {
+    const modal = useModal()
+
+    // 表格配置
+    const tableOptions: Record<string, any> = {
+      rowConfig: {
+        keyField: props.rowKey
+      }
+    }
     // 获取Form配置
     const searchForms = createSearchItemOptions(
       props.columns,
@@ -98,8 +142,8 @@ export default defineComponent({
     const [tableSource, updateTableSource] = createTableSource(props.columns)
     // 创建Form数据源
     const [searchFormSource] = createFormSource(searchForms)
-
-    const modal = useModal()
+    // 创建Column列
+    const tableColumns = [...props.columns.map(renderTableColumn)]
 
     // 监听Reload
     events.on('reload', () => {
@@ -184,6 +228,59 @@ export default defineComponent({
       )
     }
 
+    function onRadioChange({ rowid }: VxeRadioDefines.ChangeEventParams) {
+      emit('update:radio', rowid)
+    }
+
+    function onCheckboxChange({
+      records
+    }: VxeCheckboxDefines.ChangeEventParams) {
+      emit(
+        'update:checkbox',
+        records.map((record: any) => record[props.rowKey])
+      )
+    }
+
+    const selection =
+      typeof props.selection === 'string'
+        ? {
+            type: props.selection
+          }
+        : props.selection
+
+    switch (selection?.type) {
+      case 'radio':
+        {
+          tableColumns.unshift(
+            <vxe-column
+              title={selection.title}
+              type="radio"
+              width={selection.width || 60}></vxe-column>
+          )
+
+          tableOptions.radioConfig = {
+            checkRowKey: props.radio,
+            checkMethod: selection?.selectable
+          }
+        }
+        break
+      case 'checkbox':
+        {
+          tableColumns.unshift(
+            <vxe-column
+              type="checkbox"
+              title={selection.title}
+              width={selection.width || 60}></vxe-column>
+          )
+
+          tableOptions.checkboxConfig = {
+            checkRowKeys: props.checkbox,
+            checkMethod: selection?.selectable
+          }
+        }
+        break
+    }
+
     onMounted(() => {
       if (props.loadAuto) {
         onLoadData()
@@ -191,9 +288,13 @@ export default defineComponent({
     })
 
     return {
+      tableColumns,
       tableSource,
+      tableOptions,
       searchSource: searchFormSource,
       searchForms: searchForms,
+      onRadioChange,
+      onCheckboxChange,
       reload: onLoadData,
       preview: previewRecord,
       edit: editRecord
