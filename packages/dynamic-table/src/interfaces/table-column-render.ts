@@ -5,6 +5,7 @@ interface TableColumnRenderResultType {
   $type?: string
   $disableColumnMode?: boolean
   $disableViewMode?: boolean
+  $showOverflow?: boolean
 }
 export interface TableColumnRenderResult<T>
   extends TableColumnRenderResultType {

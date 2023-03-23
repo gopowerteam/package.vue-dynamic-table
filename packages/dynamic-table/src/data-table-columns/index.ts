@@ -7,9 +7,11 @@ import { renderViewColumn } from './view'
 import { renderJSONColumn } from './json'
 import { renderImageColumn } from './image'
 import { renderRenderColumn } from './render'
+import { renderTagColumn } from './tag'
 
 export function getTableColumnRenders<T>() {
   return {
+    tag: renderTagColumn<T>,
     text: renderTextColumn<T>,
     phone: renderPhoneColumn<T>,
     dict: renderDictColumn<T>,

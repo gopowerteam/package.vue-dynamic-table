@@ -145,7 +145,8 @@ function loadData({ search, update }: LoadDataParams) {
             'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
           category: { name: 'string1' },
           json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
-          text: '---test---'.repeat(5)
+          text: '---test---'.repeat(5),
+          tags: ['a', 'b', 'c']
         },
         {
           id: '2',
@@ -156,7 +157,8 @@ function loadData({ search, update }: LoadDataParams) {
             'https://img.alicdn.com/imgextra/i2/O1CN01FF1t1g1Q3PDWpSm4b_!!6000000001920-55-tps-508-135.svg___',
           category: { name: 'string1' },
           json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
-          text: '---test---'.repeat(5)
+          text: '---test---'.repeat(5),
+          tags: ['a', 'b', 'c', 'd', 'e', 'f']
         }
       ])
     })
@@ -244,15 +246,28 @@ const columns: TableColumnsOptions<Administrator> = [
     index: 'category.name',
     title: '分类'
   },
-  {
-    key: 'render',
-    title: 'Render',
-    render: (r) => r.render(({ id }) => <div>id:{id}</div>)
-  },
+  // {
+  //   key: 'render',
+  //   title: 'Render',
+  //   render: (r) => r.render(({ id }) => <div>id:{id}</div>)
+  // },
   {
     key: 'createdAt',
     title: 'date',
     render: (r) => r.date()
+  },
+  {
+    key: 'tags',
+    title: 'tag',
+    render: (r) =>
+      r.tag({
+        textColors: ['red', 'blue', 'green'],
+        // textColors: (v, i) => 'red',
+        backgroundColors: ['yellow'],
+        // backgroundColors: (v, i) => 'red',
+        border: 'yellow',
+        radius: 2
+      })
   },
   {
     key: 'json',
@@ -267,11 +282,11 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '手机号',
     render: (r) => r.phone({ safe: true, callable: true })
   },
-  {
-    key: 'test2',
-    title: 'test2',
-    render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
-  },
+  // {
+  //   key: 'test2',
+  //   title: 'test2',
+  //   render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
+  // },
   {
     key: 'image',
     title: '图片',

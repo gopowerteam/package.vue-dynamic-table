@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.45
+
+### Patch Changes
+
+- 添加 tag 列支持
+
 ## 0.0.44
 
 ### Patch Changes

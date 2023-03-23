@@ -30,6 +30,7 @@ export function toRenderTemplate<T>(
     [RenderColumnType]: templateRender.$type,
     disableColumnMode: templateRender.$disableColumnMode,
     disableViewMode: templateRender.$disableViewMode,
+    showOverflow: templateRender.$showOverflow,
     isRenderColumn: templateRender.$type === 'render'
   }
 }
@@ -40,7 +41,7 @@ export function toRenderTemplate<T>(
  * @returns
  */
 export function renderTableColumn<T>(options: TableColumnOptions<T>) {
-  const { template, disableColumnMode, isRenderColumn } =
+  const { template, disableColumnMode, showOverflow } =
     toRenderTemplate(options) || {}
 
   return h(
@@ -51,7 +52,7 @@ export function renderTableColumn<T>(options: TableColumnOptions<T>) {
       width: options.width,
       align: options.align || 'center',
       fixed: options.fixed,
-      showOverflow: isRenderColumn ? false : true,
+      showOverflow: showOverflow,
       showFooterOverflow: true,
       showHeaderOverflow: true,
       visible: !disableColumnMode

@@ -8,7 +8,7 @@ export function renderRenderColumn<T = DataRecord>(
     return renderer(record)
   }
 
-  return createRenderer<T>('render', render)
+  return createRenderer<T>('render', render, { showOverflow: false })
 }
 
 export interface RenderRendererColumnOptions<T> {

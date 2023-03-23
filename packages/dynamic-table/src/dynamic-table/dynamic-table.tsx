@@ -18,7 +18,6 @@ import RenderTableView from '@/data-table/render-table-view'
 import { useModal } from '@gopowerteam/vue-modal'
 import renderTableForm from '@/data-table/render-table-form'
 import { renderTableColumn } from '@/data-table/render-table-column'
-import type { VxeRadioDefines, VxeCheckboxDefines } from 'vxe-table'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -228,13 +227,11 @@ export default defineComponent({
       )
     }
 
-    function onRadioChange({ rowid }: VxeRadioDefines.ChangeEventParams) {
+    function onRadioChange({ rowid }: { rowid: string }) {
       emit('update:radio', rowid)
     }
 
-    function onCheckboxChange({
-      records
-    }: VxeCheckboxDefines.ChangeEventParams) {
+    function onCheckboxChange({ records }: { records: any[] }) {
       emit(
         'update:checkbox',
         records.map((record: any) => record[props.rowKey])
