@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.46
+
+### Patch Changes
+
+- 修复 checbox 问题
+
 ## 0.0.45
 
 ### Patch Changes

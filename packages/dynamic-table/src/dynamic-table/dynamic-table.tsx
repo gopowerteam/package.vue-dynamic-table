@@ -110,6 +110,7 @@ export default defineComponent({
         <vxe-table
           onRadioChange={this.onRadioChange}
           onCheckboxChange={this.onCheckboxChange}
+          onCheckboxAll={this.onCheckboxChange}
           data={unref(this.tableSource)}
           {...this.tableOptions}>
           {unref(this.tableColumns)}

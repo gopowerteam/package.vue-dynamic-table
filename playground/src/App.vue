@@ -8,10 +8,9 @@
         v-model:radio="radio"
         v-model:checkbox="checkbox"
         :selection="{
-          type: 'radio',
+          type: 'checkbox',
           width: 100,
-          title: 'radio',
-          selectable: dd
+          title: 'radio'
         }"
         row-key="id"
         :pagination="pageService"
@@ -29,6 +28,7 @@
       </data-table>
     </div>
   </ModalProvider>
+  <div>checked: {{ checkbox }}</div>
 </template>
 
 <script setup lang="tsx">
@@ -102,6 +102,7 @@ class PageService implements RequestPlugin, PaginationOptions {
     'FullJump',
     'Total'
   ]
+
   constructor(index = 1, size = 20) {
     this.pageIndex = index
     this.pageSize = size
@@ -130,6 +131,10 @@ const pageService = new PageService(1, 1)
 
 const radio = ref('1')
 const checkbox = ref(['1'])
+
+function printSelection() {
+  console.log(checkbox.value)
+}
 
 function loadData({ search, update }: LoadDataParams) {
   administratorService
