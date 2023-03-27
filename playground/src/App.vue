@@ -132,10 +132,6 @@ const pageService = new PageService(1, 1)
 const radio = ref('1')
 const checkbox = ref(['1'])
 
-function printSelection() {
-  console.log(checkbox.value)
-}
-
 function loadData({ search, update }: LoadDataParams) {
   administratorService
     .findAdministrator(search, [pageService])
@@ -354,7 +350,7 @@ const columns: TableColumnsOptions<Administrator> = [
       r.button({
         buttons: [
           {
-            text: '测试1',
+            text: (record) => record.username,
             confirm: true,
             confirmText: 'gogogo',
             confirmAppend: '#test',

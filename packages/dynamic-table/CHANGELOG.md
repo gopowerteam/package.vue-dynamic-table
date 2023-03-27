@@ -1,5 +1,17 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.48
+
+### Patch Changes
+
+- fixed button column
+
+## 0.0.47
+
+### Patch Changes
+
+- 更新 button 配置
+
 ## 0.0.46
 
 ### Patch Changes

@@ -81,7 +81,11 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
           .map((button) => (
             <vxe-button
               onClick={() => onCallback(button)}
-              content={button.text}
+              content={
+                typeof button.text === 'function'
+                  ? button.text(record)
+                  : button.text
+              }
               status={button.status || 'primary'}
               round={button.round}
               disabled={toBooleanValue(button.disabled, false)}
@@ -99,7 +103,7 @@ export type RenderButtonColumnOptions<T> =
   | RenderMultipleButtonColumnOptions<T>
 
 export interface RenderSingleButtonColumnOptions<T> {
-  text: string
+  text: string | ((record: T) => string)
   callback: (record: T) => void
   status?: 'primary' | 'success' | 'info' | 'warning' | 'danger'
   plain?: boolean
