@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - release/patch
+      - release/minor
+      - release/major
+jobpr
+  changelog:
+      name: create changelog pr
+      timeout-minutes: 15
+      runs-on: ubuntu-latest
+      if: ${{ github.repository_owner == 'zhuchentong' }}
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
+
+        - uses: pnpm/action-setup@v2.0.1
+          with:
+            version: ^7.0
+
+        - name: Setup Node
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18
+            cache: 'pnpm'
+
+        - name: Install dependencies
+          run: pnpm install
+
+        - name: Create Release Pull Request
+          uses: changesets/action@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        # 打包
+        - name: Build Packages
+          run: pnpm run build
+
+        - name: Set NPM TOKEN
+          run: |
+            git update-index --skip-worktree -- .npmrc
+            pnpm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
+          env:
+            NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
+        # 这一步是最重要的。使用changesets/action自动创建 PR 或者发布
+        - name: Create Release Pull Request or Publish
+          id: changesets
+          uses: changesets/action@v1
+          with:
+            # 执行更新版本和发布的命令
+            version: pnpm run version
+            publish: pnpm exec changeset publish
+            commit: '[ci] release'
+            title: '[ci] release'
+          env:
+            # 这里需要几个 Token 变量
+            # GITHUB_TOKEN 是 CI 里自带的默认 token
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # NPM_TOKEN 需要稍后在 npm 网站生成。
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
