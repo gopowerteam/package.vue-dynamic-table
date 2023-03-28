@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-jobpr
+jobs:
   publish:
       name: Create NPM Publish
       timeout-minutes: 15
