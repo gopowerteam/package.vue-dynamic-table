@@ -4,12 +4,9 @@ on:
   push:
     branches:
       - master
-      - release/patch
-      - release/minor
-      - release/major
 jobpr
-  changelog:
-      name: create changelog pr
+  publish:
+      name: Create NPM Publish
       timeout-minutes: 15
       runs-on: ubuntu-latest
       if: ${{ github.repository_owner == 'zhuchentong' }}
@@ -17,25 +14,28 @@ jobpr
         - name: Checkout Code
           uses: actions/checkout@v3
 
-        - uses: pnpm/action-setup@v2.0.1
-          with:
-            version: ^7.0
-
         - name: Setup Node
           uses: actions/setup-node@v3
           with:
             node-version: 18
             cache: 'pnpm'
 
+        - name: Setup pnpm
+          uses: pnpm/action-setup@v2.0.1
+          with:
+            version: ^7.0
+
+        - name: Setup pnpm cache
+          uses: actions/cache@v3
+          with:
+            path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+            key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+            restore-keys: |
+              ${{ runner.os }}-pnpm-store-
+
         - name: Install dependencies
           run: pnpm install
 
-        - name: Create Release Pull Request
-          uses: changesets/action@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        # 打包
         - name: Build Packages
           run: pnpm run build
 
@@ -52,12 +52,11 @@ jobpr
           uses: changesets/action@v1
           with:
             # 执行更新版本和发布的命令
-            version: pnpm run version
-            publish: pnpm exec changeset publish
+            version: pnpm cs:version
+            publish: pnpm cs:publish
             commit: '[ci] release'
             title: '[ci] release'
           env:
-            # 这里需要几个 Token 变量
             # GITHUB_TOKEN 是 CI 里自带的默认 token
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             # NPM_TOKEN 需要稍后在 npm 网站生成。

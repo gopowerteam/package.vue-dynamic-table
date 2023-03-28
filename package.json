@@ -12,7 +12,7 @@
     "cs:version": "changeset version",
     "cs:tag": "changeset tag",
     "prerelease": "pnpm build",
-    "release": "changeset publish",
+    "publish": "changeset publish",
     "prepare": "husky install",
     "commit": "git-cz",
     "preinstall": "npx only-allow pnpm"
