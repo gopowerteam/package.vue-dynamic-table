@@ -43,5 +43,13 @@ module.exports = {
     footer: '本地提交针对的ISSUE(可选):\n',
     confirmCommit: '请确认以上内容'
   },
-  allowBreakingChanges: ['feat', 'fix', 'refactor', 'perf', 'build', 'revert']
+  allowBreakingChanges: [
+    'feat',
+    'fix',
+    'refactor',
+    'perf',
+    'build',
+    'revert',
+    'ci'
+  ]
 }
