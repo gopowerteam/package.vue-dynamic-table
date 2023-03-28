@@ -1,5 +1,11 @@
 # @gopowerteam/vue-dynamic-table
 
+## 0.0.49
+
+### Patch Changes
+
+- 5e940b7: for test ci
+
 ## 0.0.48
 
 ### Patch Changes
