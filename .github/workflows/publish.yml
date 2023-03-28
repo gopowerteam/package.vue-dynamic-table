@@ -9,7 +9,6 @@ jobs:
       name: Create NPM Publish
       timeout-minutes: 15
       runs-on: ubuntu-latest
-      if: ${{ github.repository_owner == 'zhuchentong' }}
       steps:
         - name: Checkout Code
           uses: actions/checkout@v3
