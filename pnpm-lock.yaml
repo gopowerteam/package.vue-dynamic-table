@@ -20,7 +20,6 @@ importers:
       husky: 8.0.3
       lerna: ^6.6.1
       lint-staged: 13.2.0
-      pnpm: 8.0.0
       prettier: latest
       rimraf: 4.4.1
       typescript: 5.0.2
@@ -41,7 +40,6 @@ importers:
       husky: 8.0.3
       lerna: 6.6.1
       lint-staged: 13.2.0
-      pnpm: 8.0.0
       prettier: 2.8.7
       rimraf: 4.4.1
       typescript: 5.0.2
@@ -6739,12 +6737,6 @@ packages:
       jsonc-parser: 3.2.0
       mlly: 1.1.0
       pathe: 1.0.0
-    dev: true
-
-  /pnpm/8.0.0:
-    resolution: {integrity: sha512-Crsvd8LKb+SoEB/bQxRZrtSt5Ri8g9jmPg6MKyexMTI1pdLd44gPwVV6cZLq2jYYPv5q+gADPkYTbYr8SeFCeA==}
-    engines: {node: '>=16.14'}
-    hasBin: true
     dev: true
 
   /postcss-selector-parser/6.0.10:

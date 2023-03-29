@@ -61,7 +61,5 @@ module.exports = {
     release: [{ name: 'patch' }, { name: 'minor' }, { name: 'major' }]
   },
   skipEmptyScopes: true,
-  skipQuestions: ['body', 'breaking', 'footer'],
-  typePrefix: '[',
-  typeSuffix: ']'
+  skipQuestions: ['body', 'breaking', 'footer']
 }
