@@ -29,8 +29,10 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# turbo
-.turbo
+
+lerna-debug.log
+
+build/
 
 dist/
 

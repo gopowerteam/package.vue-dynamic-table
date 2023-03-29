@@ -11,7 +11,7 @@
   "dependencies": {
     "@gopowerteam/request": "^0.1.11",
     "@gopowerteam/request-generate": "^0.1.10",
-    "@gopowerteam/vue-dynamic-table": "workspace: *",
+    "@gopowerteam/vue-dynamic-table": "*",
     "@gopowerteam/vue-modal": "^0.1.12",
     "@vue/runtime-core": "^3.2.45",
     "vue": "^3.2.45"
