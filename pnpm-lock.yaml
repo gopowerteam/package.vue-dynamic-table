@@ -2241,7 +2241,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/plugin-transform-typescript': 7.20.2_@babel+core@7.20.5
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.20.5
-      vite: 4.0.4_@types+node@18.11.18
+      vite: 4.0.4
       vue: 3.2.45
     transitivePeerDependencies:
       - supports-color
@@ -2254,7 +2254,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.4_@types+node@18.11.18
+      vite: 4.0.4
       vue: 3.2.45
     dev: true
 
