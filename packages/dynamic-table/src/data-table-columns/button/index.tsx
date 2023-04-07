@@ -89,7 +89,11 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
               status={button.status || 'primary'}
               round={button.round}
               disabled={toBooleanValue(button.disabled, false)}
-              type={button.plain === false ? 'button' : 'text'}></vxe-button>
+              type={button.plain === false ? 'button' : 'text'}>
+              {{
+                icon: button.icon
+              }}
+            </vxe-button>
           ))}
       </>
     )
@@ -103,7 +107,7 @@ export type RenderButtonColumnOptions<T> =
   | RenderMultipleButtonColumnOptions<T>
 
 export interface RenderSingleButtonColumnOptions<T> {
-  text: string | ((record: T) => string)
+  text?: string | ((record: T) => string)
   callback: (record: T) => void
   status?: 'primary' | 'success' | 'info' | 'warning' | 'danger'
   plain?: boolean
@@ -111,6 +115,7 @@ export interface RenderSingleButtonColumnOptions<T> {
   show?: boolean | ((record: T) => boolean)
   disabled?: boolean | ((record: T) => boolean)
   confirm?: boolean
+  icon?: () => JSX.Element
   confirmText?: string
   confirmAppend?: string | HTMLElement
   confirmOffset?: { left: number; top: number }

@@ -350,7 +350,8 @@ const columns: TableColumnsOptions<Administrator> = [
       r.button({
         buttons: [
           {
-            text: (record) => record.username,
+            icon: () => <span>icon</span>,
+            text: 'aaa',
             confirm: true,
             confirmText: 'gogogo',
             confirmAppend: '#test',
