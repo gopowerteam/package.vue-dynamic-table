@@ -68,6 +68,7 @@ export default defineComponent({
           forms={props.items}
           loadData={props.loadData}
           autoReload={props.autoReload}
+          columns={props.columns}
           submit={props.submit}>
           {{
             actions: context.slots.actions

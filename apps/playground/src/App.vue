@@ -366,6 +366,7 @@ const columns: TableColumnsOptions<Administrator> = [
               table.value.edit({
                 title: '编辑',
                 record,
+                columns: 1,
                 appendRowKey: true,
                 submit: (data: DataRecord) => {
                   // eslint-disable-next-line no-console
