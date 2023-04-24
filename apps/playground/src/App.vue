@@ -132,7 +132,6 @@ const radio = ref('1')
 const checkbox = ref(['1'])
 
 function loadData({ search, update }: LoadDataParams) {
-  console.log('search:', search)
   administratorService
     .findAdministrator(search, [pageService])
     .then(({ data }) => {
