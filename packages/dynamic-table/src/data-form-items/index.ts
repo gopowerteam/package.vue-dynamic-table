@@ -4,6 +4,7 @@ import { renderSelectItem } from './select'
 import { renderSwitchItem } from './switch'
 import { renderDateRangeItem } from './date-range'
 import { renderTextareaItem } from './textarea'
+import { renderRenderItem } from './render'
 
 export const formItemRenders = {
   input: renderInputItem,
@@ -11,5 +12,6 @@ export const formItemRenders = {
   select: renderSelectItem,
   date: renderDateItem,
   switch: renderSwitchItem,
-  dateRange: renderDateRangeItem
+  dateRange: renderDateRangeItem,
+  render: renderRenderItem
 }

@@ -216,7 +216,7 @@ export default defineComponent({
       )
     }
 
-    function editRecord(params: EditEventParamsters) {
+    function editRecord<T>(params: EditEventParamsters<T>) {
       events.emit(
         'edit',
         Object.assign(

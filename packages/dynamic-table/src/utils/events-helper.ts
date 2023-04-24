@@ -1,6 +1,5 @@
 import type { RenderSingleButtonColumnOptions } from '@/data-table-columns/button'
 import mitt from 'mitt'
-import type { DataRecord } from '..'
 
 export type PreviewEventParamsters = {
   title: string
@@ -14,9 +13,9 @@ export type PreviewEventParamsters = {
   buttons?: RenderSingleButtonColumnOptions<any>[]
 }
 
-export type EditEventParamsters = {
+export type EditEventParamsters<T = any> = {
   title: string
-  record: Record<string, any>
+  record: T
   columns?: number
   labelWidth?: string
   padding?: number
@@ -25,7 +24,7 @@ export type EditEventParamsters = {
   titleColon?: string | number
   titleAlign?: 'left' | 'right' | 'center'
   autoReload?: boolean
-  submit: (record: DataRecord) => void | Promise<unknown>
+  submit: (record: T) => void | Promise<unknown>
 }
 
 export const events = mitt<{

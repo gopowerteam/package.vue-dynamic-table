@@ -39,7 +39,6 @@ import type {
   RequestSendOptions
 } from '@gopowerteam/request'
 import type {
-  DataRecord,
   FormItemsOptions,
   LoadDataParams,
   PaginationOptions,
@@ -133,6 +132,7 @@ const radio = ref('1')
 const checkbox = ref(['1'])
 
 function loadData({ search, update }: LoadDataParams) {
+  console.log('search:', search)
   administratorService
     .findAdministrator(search, [pageService])
     .then(({ data }) => {
@@ -170,6 +170,12 @@ function dd({ row }: { row: any }) {
 }
 
 const searchForms: FormItemsOptions = [
+  {
+    key: 'a',
+    title: 'a',
+    rules: [{ required: true, message: '请输入名称22' }],
+    render: (r) => r.render((data) => <input v-model={data.a}></input>)
+  },
   {
     key: 'phone',
     title: 'phone',
@@ -368,7 +374,7 @@ const columns: TableColumnsOptions<Administrator> = [
                 record,
                 columns: 1,
                 appendRowKey: true,
-                submit: (data: DataRecord) => {
+                submit: (data) => {
                   // eslint-disable-next-line no-console
                   console.log(data)
                 }
