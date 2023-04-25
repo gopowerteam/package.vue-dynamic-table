@@ -1,4 +1,4 @@
-import { defineComponent, unref, type PropType } from 'vue'
+import { defineComponent, unref, type PropType, provide } from 'vue'
 import type { DataRecord, FormItemOptions } from '..'
 import { DataEditForm } from '@/data-form'
 import { createFormSource } from '@/dynamic-table/create-form-source'
@@ -43,10 +43,15 @@ export default defineComponent({
     submit: {
       type: Function as PropType<(data: DataRecord) => Promise<unknown>>,
       required: true
+    },
+    tableId: {
+      type: String,
+      required: true
     }
   },
   setup(props, context) {
     const [dataSource, updateDataSource] = createFormSource(props.items)
+    provide('id', props.tableId)
 
     // 获取初始化数据
     const record = Object.entries(dataSource.value).reduce(

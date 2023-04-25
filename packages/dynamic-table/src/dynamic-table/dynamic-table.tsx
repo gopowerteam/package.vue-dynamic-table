@@ -2,7 +2,7 @@ import type { TableColumnsOptions } from '@/interfaces/table-column-options'
 import type { FormItemsOptions } from '@/interfaces/form-item-options'
 import type { LoadDataParams } from '@/interfaces/load-data-params'
 import type { PaginationOptions } from '@/interfaces/pagination-options'
-import { defineComponent, onMounted, unref, type PropType } from 'vue'
+import { defineComponent, onMounted, unref, type PropType, provide } from 'vue'
 
 import { DataSearchForm } from '../data-form'
 import DataPage from '../data-page'
@@ -10,9 +10,9 @@ import { createFormSource } from './create-form-source'
 import { createSearchItemOptions } from '@/data-form/create-search-item-options'
 import { createTableSource } from './create-table-source'
 import {
-  events,
   type EditEventParamsters,
-  type PreviewEventParamsters
+  type PreviewEventParamsters,
+  useEvents
 } from '@/utils/events-helper'
 import RenderTableView from '@/data-table/render-table-view'
 import { useModal } from '@gopowerteam/vue-modal'
@@ -83,6 +83,7 @@ export default defineComponent({
   },
   emits: ['update:radio', 'update:checkbox'],
   expose: [
+    'tableId',
     'tableSource',
     'formSource',
     'reload',
@@ -125,10 +126,15 @@ export default defineComponent({
     )
   },
   setup(props, { emit }) {
+    const id = Math.random().toString(32).slice(2).toUpperCase()
     const modal = useModal()
+    provide('id', id)
+
+    const events = useEvents(id)
 
     // 表格配置
     const tableOptions: Record<string, any> = {
+      tableId: id,
       rowConfig: {
         keyField: props.rowKey
       }
@@ -177,6 +183,7 @@ export default defineComponent({
         maskClosable: false,
         props: {
           ...config,
+          tableId: id,
           rowKey: props.rowKey,
           items: props.editForms,
           loadData: () => onLoadData()
@@ -286,6 +293,7 @@ export default defineComponent({
     })
 
     return {
+      tableId: id,
       tableColumns,
       tableSource,
       tableOptions,

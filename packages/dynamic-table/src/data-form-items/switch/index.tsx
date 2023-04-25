@@ -1,7 +1,9 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
-import { events } from '@/utils/events-helper'
+import { useEvents } from '@/utils/events-helper'
+import { inject } from 'vue'
 
 export function renderSwitchItem(options?: RenderSwitchItemOptions) {
+  const events = useEvents(inject<string>('id'))
   function onChange() {
     if (options?.autoSumbit) {
       events.emit('reload')

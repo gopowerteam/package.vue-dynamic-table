@@ -1,8 +1,10 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
-import { events } from '@/utils/events-helper'
-import { ref } from 'vue'
+import { useEvents } from '@/utils/events-helper'
+import { inject, ref } from 'vue'
 
 export function renderSelectItem(options: RenderSelectItemOptions) {
+  const events = useEvents(inject<string>('id'))
+
   let mounted = false
   const selectOptions = ref<SelectOptions>(new Map())
 

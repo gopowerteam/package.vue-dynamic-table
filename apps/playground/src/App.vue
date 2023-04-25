@@ -48,6 +48,7 @@ import { useTable } from '@gopowerteam/vue-dynamic-table'
 import type { Administrator } from './http/models/Administrator'
 import { AdministratorService } from './http/services/AdministratorService'
 import { reactive, ref } from 'vue'
+
 const administratorService = new AdministratorService()
 
 class PageService implements RequestPlugin, PaginationOptions {

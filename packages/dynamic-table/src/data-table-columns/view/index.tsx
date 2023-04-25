@@ -1,12 +1,15 @@
 import type { DataRecord, TableColumnOptions } from '@/interfaces'
 import { getColumnValue } from '@/utils/get-column-value'
-import { events } from '@/utils/events-helper'
+import { useEvents } from '@/utils/events-helper'
 import { createRenderer } from '@/utils/create-renderer'
 import type { RenderSingleButtonColumnOptions } from '../button'
+import { getCurrentInstance } from 'vue'
 
 export function renderViewColumn<T = DataRecord>(
   options?: RenderViewColumnOptions<T>
 ) {
+  const events = useEvents(getCurrentInstance()?.exposed?.tableId)
+
   const render = (
     record: T,
     column: TableColumnOptions<T>,
