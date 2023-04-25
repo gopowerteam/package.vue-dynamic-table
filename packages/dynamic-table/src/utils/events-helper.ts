@@ -61,7 +61,7 @@ function createEventOn(id: string) {
   ): void
   function on<T extends keyof Events>(
     event: T,
-    handler: (props: Events[T]) => void
+    handler: (props?: Events[T]) => void
   ): void {
     if (id) {
       emitter.on(`${id}:${event}`, handler)
