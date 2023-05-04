@@ -79,6 +79,10 @@ export default defineComponent({
     actionAlign: {
       type: String as PropType<'left' | 'right'>,
       required: false
+    },
+    height: {
+      type: Number,
+      required: false
     }
   },
   emits: ['update:radio', 'update:checkbox'],
@@ -109,6 +113,8 @@ export default defineComponent({
         )}
 
         <vxe-table
+          height={this.height}
+          scroll-y={{ enable: this.height !== undefined }}
           onRadioChange={this.onRadioChange}
           onCheckboxChange={this.onCheckboxChange}
           onCheckboxAll={this.onCheckboxChange}
@@ -297,6 +303,7 @@ export default defineComponent({
       tableColumns,
       tableSource,
       tableOptions,
+      formSource: searchFormSource,
       searchSource: searchFormSource,
       searchForms: searchForms,
       onRadioChange,
