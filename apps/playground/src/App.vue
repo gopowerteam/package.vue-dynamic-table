@@ -133,12 +133,11 @@ const radio = ref('1')
 const checkbox = ref(['1'])
 
 function loadData({ search, update }: LoadDataParams) {
-  administratorService
-    .findAdministrator(search, [pageService])
-    .then(({ data }) => {
-      update([
-        {
-          id: '1',
+  administratorService.findAdministrator(search, [pageService]).then(() => {
+    update(
+      Array.from(Array(200), (_, i) => ({
+        id: i,
+        ...{
           phone: '18899992222',
           createdAt: '',
           uid: '001',
@@ -149,22 +148,10 @@ function loadData({ search, update }: LoadDataParams) {
           json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
           text: '---test---'.repeat(5),
           tags: ['a', 'b', 'c']
-        },
-        {
-          id: '2',
-          phone: '19900002222',
-          createdAt: '',
-          uid: '001',
-          amount: 33312312312312,
-          image:
-            'https://img.alicdn.com/imgextra/i2/O1CN01FF1t1g1Q3PDWpSm4b_!!6000000001920-55-tps-508-135.svg___',
-          category: { name: 'string1' },
-          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
-          text: '---test---'.repeat(5),
-          tags: ['a', 'b', 'c', 'd', 'e', 'f']
         }
-      ])
-    })
+      }))
+    )
+  })
 }
 
 function dd({ row }: { row: any }) {

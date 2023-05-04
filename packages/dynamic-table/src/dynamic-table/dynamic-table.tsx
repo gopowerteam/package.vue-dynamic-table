@@ -114,7 +114,10 @@ export default defineComponent({
 
         <vxe-table
           height={this.height}
-          scroll-y={{ enable: this.height !== undefined }}
+          scroll-y={{
+            enable: this.height === undefined,
+            gt: this.height === undefined ? -1 : undefined
+          }}
           onRadioChange={this.onRadioChange}
           onCheckboxChange={this.onCheckboxChange}
           onCheckboxAll={this.onCheckboxChange}

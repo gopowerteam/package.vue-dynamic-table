@@ -38,7 +38,8 @@ export function renderFormItem(form: FormItemOptions, span?: string | number) {
       title: form.title,
       itemRender: {},
       folding: form.collapsed,
-      span
+      span,
+      visibleMethod: form.show
     },
     toRenderTemplate(form)
   )
