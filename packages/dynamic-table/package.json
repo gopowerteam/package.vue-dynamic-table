@@ -19,7 +19,10 @@
   "exports": {
     ".": {
       "require": "./dist/index.cjs.js",
-      "import": "./dist/index.es.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.es.js"
+      }
     },
     "./resolver": {
       "require": "./dist/resolver.cjs.js",
