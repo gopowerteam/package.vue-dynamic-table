@@ -142,6 +142,7 @@ function loadData({ search, update }: LoadDataParams) {
           phone: '18899992222',
           createdAt: '',
           uid: '001',
+          amount: 123123,
           image:
             'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
           category: { name: 'string1' },
@@ -154,6 +155,7 @@ function loadData({ search, update }: LoadDataParams) {
           phone: '19900002222',
           createdAt: '',
           uid: '001',
+          amount: 33312312312312,
           image:
             'https://img.alicdn.com/imgextra/i2/O1CN01FF1t1g1Q3PDWpSm4b_!!6000000001920-55-tps-508-135.svg___',
           category: { name: 'string1' },
@@ -249,6 +251,13 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '名称'
   },
   {
+    key: 'amount',
+    title: '名称',
+    align: 'right',
+    width: '200px',
+    render: (r) => r.currency({ suffix: '元' })
+  },
+  {
     key: 'category',
     index: 'category.name',
     title: '分类'
@@ -332,7 +341,7 @@ const columns: TableColumnsOptions<Administrator> = [
     key: 'uid',
     title: 'uid',
     render: (r) =>
-      r.view({
+      r.preview({
         exclude: ['id'],
         border: true,
         borderColor: 'red',

@@ -3,11 +3,12 @@ import { renderDateColumn } from './date'
 import { renderDictColumn } from './dict'
 import { renderPhoneColumn } from './phone'
 import { renderTextColumn } from './text'
-import { renderViewColumn } from './view'
+import { renderPreviewColumn } from './preview'
 import { renderJSONColumn } from './json'
 import { renderImageColumn } from './image'
 import { renderRenderColumn } from './render'
 import { renderTagColumn } from './tag'
+import { renderCurrencyColumn } from './currency'
 
 export function getTableColumnRenders<T>() {
   return {
@@ -17,9 +18,10 @@ export function getTableColumnRenders<T>() {
     dict: renderDictColumn<T>,
     date: renderDateColumn<T>,
     button: renderButtonColumn<T>,
-    view: renderViewColumn<T>,
+    preview: renderPreviewColumn<T>,
     json: renderJSONColumn<T>,
     image: renderImageColumn<T>,
+    currency: renderCurrencyColumn<T>,
     render: renderRenderColumn<T>
   }
 }

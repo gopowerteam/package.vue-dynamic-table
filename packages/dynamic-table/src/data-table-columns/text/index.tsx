@@ -8,7 +8,7 @@ function generateText<T>(
   record: T
 ) {
   if (typeof options?.text === 'function') {
-    return options?.text(record)
+    return options?.text(record).toString()
   }
 
   if (typeof options?.text === 'string') {
@@ -65,6 +65,6 @@ export function renderTextColumn<T = DataRecord>(
 
 export interface RenderTextColumnOptions<T> {
   color?: string | ((record: T) => string)
-  text?: string | ((record: T) => string)
+  text?: string | ((record: T) => string | number)
   size?: string | ((record: T) => string)
 }

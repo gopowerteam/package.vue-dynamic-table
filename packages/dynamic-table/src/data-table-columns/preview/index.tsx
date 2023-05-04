@@ -5,8 +5,8 @@ import { createRenderer } from '@/utils/create-renderer'
 import type { RenderSingleButtonColumnOptions } from '../button'
 import { getCurrentInstance } from 'vue'
 
-export function renderViewColumn<T = DataRecord>(
-  options?: RenderViewColumnOptions<T>
+export function renderPreviewColumn<T = DataRecord>(
+  options?: RenderPreviewColumnOptions<T>
 ) {
   const events = useEvents(getCurrentInstance()?.exposed?.tableId)
 
@@ -45,7 +45,7 @@ export function renderViewColumn<T = DataRecord>(
   return createRenderer<T>('view', render)
 }
 
-export interface RenderViewColumnOptions<T> {
+export interface RenderPreviewColumnOptions<T> {
   title?: string
   text?: string | ((record: T) => string)
   type?: 'text' | 'button'
