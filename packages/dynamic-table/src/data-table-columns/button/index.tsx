@@ -107,7 +107,7 @@ export type RenderButtonColumnOptions<T> =
   | RenderMultipleButtonColumnOptions<T>
 
 export interface RenderSingleButtonColumnOptions<T> {
-  text?: string | ((record: T) => string)
+  text?: string | ((record: T) => string | number | undefined)
   callback: (record: T) => void
   status?: 'primary' | 'success' | 'info' | 'warning' | 'danger'
   plain?: boolean

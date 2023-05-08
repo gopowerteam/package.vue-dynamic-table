@@ -65,6 +65,6 @@ export function renderTextColumn<T = DataRecord>(
 
 export interface RenderTextColumnOptions<T> {
   color?: string | ((record: T) => string)
-  text?: string | ((record: T) => string | number)
+  text?: string | ((record: T) => string | number | undefined)
   size?: string | ((record: T) => string)
 }
