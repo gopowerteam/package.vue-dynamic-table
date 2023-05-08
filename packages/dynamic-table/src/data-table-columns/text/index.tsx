@@ -8,7 +8,7 @@ function generateText<T>(
   record: T
 ) {
   if (typeof options?.text === 'function') {
-    return options?.text(record).toString()
+    return options?.text(record)?.toString()
   }
 
   if (typeof options?.text === 'string') {
