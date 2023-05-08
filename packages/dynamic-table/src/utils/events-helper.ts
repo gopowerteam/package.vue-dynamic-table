@@ -17,12 +17,11 @@ export type EditEventParamsters<T = any> = {
   title: string
   record: T
   columns?: number
-  labelWidth?: string
   padding?: number
   appendRowKey?: boolean
-  titleWidth?: string | number
-  titleColon?: string | number
-  titleAlign?: 'left' | 'right' | 'center'
+  labelWidth?: string | number
+  labelColon?: boolean
+  labelAlign?: 'left' | 'right' | 'center'
   autoReload?: boolean
   submit: (record: T) => void | Promise<unknown>
 }

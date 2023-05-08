@@ -135,7 +135,7 @@ const checkbox = ref(['1'])
 function loadData({ search, update }: LoadDataParams) {
   administratorService.findAdministrator(search, [pageService]).then(() => {
     update(
-      Array.from(Array(200), (_, i) => ({
+      Array.from(Array(20), (_, i) => ({
         id: i,
         ...{
           phone: '18899992222',
@@ -161,7 +161,7 @@ function dd({ row }: { row: any }) {
 const searchForms: FormItemsOptions = [
   {
     key: 'a',
-    title: 'a',
+    title: 'asdlkfjasdkl;jkl;sajdkfljaskl;djflajsl;dkl;asdj;fjasdk',
     rules: [{ required: true, message: '请输入名称22' }],
     render: (r) => r.render((data) => <input v-model={data.a}></input>)
   },
@@ -348,6 +348,7 @@ const columns: TableColumnsOptions<Administrator> = [
   {
     key: 'action',
     title: '操作',
+    width: '200px',
     render: (r) =>
       r.button({
         buttons: [
@@ -367,6 +368,7 @@ const columns: TableColumnsOptions<Administrator> = [
             callback: (record) => {
               table.value.edit({
                 title: '编辑',
+                labelWidth: '300px',
                 record,
                 columns: 1,
                 appendRowKey: true,

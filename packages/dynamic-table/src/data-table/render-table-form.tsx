@@ -25,9 +25,6 @@ export default defineComponent({
       type: Number,
       default: 3
     },
-    labelWidth: {
-      type: Number
-    },
     padding: {
       type: Number,
       default: () => 10
@@ -47,6 +44,27 @@ export default defineComponent({
     tableId: {
       type: String,
       required: true
+    },
+    /**
+     * 标题宽度
+     */
+    labelWidth: {
+      type: [String, Number],
+      default: '100'
+    },
+    /**
+     * 标题对齐
+     */
+    labelAlign: {
+      type: String as PropType<'left' | 'right' | 'center'>,
+      default: 'right'
+    },
+    /**
+     * 标题冒号
+     */
+    labelColon: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, context) {
@@ -74,6 +92,9 @@ export default defineComponent({
           loadData={props.loadData}
           autoReload={props.autoReload}
           columns={props.columns}
+          labelWidth={props.labelWidth}
+          labelAlign={props.labelAlign}
+          labelColon={props.labelColon}
           submit={props.submit}>
           {{
             actions: context.slots.actions

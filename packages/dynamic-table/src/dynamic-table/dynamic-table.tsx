@@ -184,7 +184,6 @@ export default defineComponent({
         console.error('未配置编辑表单项')
         return
       }
-
       modal.open({
         component: renderTableForm,
         title,

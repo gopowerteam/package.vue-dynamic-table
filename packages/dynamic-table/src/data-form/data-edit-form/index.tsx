@@ -52,21 +52,21 @@ export default defineComponent({
     /**
      * 标题宽度
      */
-    titleWidth: {
+    labelWidth: {
       type: [String, Number],
       default: '100'
     },
     /**
      * 标题对齐
      */
-    titleAlign: {
+    labelAlign: {
       type: String as PropType<'left' | 'right' | 'center'>,
       default: 'right'
     },
     /**
      * 标题冒号
      */
-    titleColon: {
+    labelColon: {
       type: Boolean,
       default: false
     }
@@ -99,9 +99,9 @@ export default defineComponent({
     return () => (
       <div>
         <vxe-form
-          title-width={props.titleWidth}
-          title-align={props.titleAlign}
-          title-colon={props.titleColon}
+          title-width={props.labelWidth}
+          title-align={props.labelAlign}
+          title-colon={props.labelColon}
           custom-layout
           data={props.dataSource}
           rules={formRules}
