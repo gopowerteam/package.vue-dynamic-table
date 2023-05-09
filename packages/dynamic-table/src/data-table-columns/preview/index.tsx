@@ -8,14 +8,14 @@ import { getCurrentInstance } from 'vue'
 export function renderPreviewColumn<T = DataRecord>(
   options?: RenderPreviewColumnOptions<T>
 ) {
-  const events = useEvents(getCurrentInstance()?.exposed?.tableId)
+  const events = useEvents((getCurrentInstance() as any)?.provides?.id)
 
   const render = (
     record: T,
     column: TableColumnOptions<T>,
     isPreview?: boolean
   ) => {
-    function onShowView() {
+    function onShowPreview() {
       events.emit('preview', {
         title: options?.title || '数据详情',
         record,
@@ -34,7 +34,7 @@ export function renderPreviewColumn<T = DataRecord>(
     } else {
       return (
         <vxe-button
-          onClick={() => onShowView()}
+          onClick={() => onShowPreview()}
           content={options?.text ?? getColumnValue(record, column)}
           status="primary"
           type="text"></vxe-button>

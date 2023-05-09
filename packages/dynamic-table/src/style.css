@@ -1,3 +1,7 @@
 .vxe-input--panel.type--date button.vxe-input--date-picker-confirm {
   display: none;
 }
+
+.vxe-table--render-default .vxe-table--border-line{
+  z-index: 0!important;
+}
