@@ -29,6 +29,7 @@ export type EditEventParamsters<T = any> = {
 export const emitter = mitt<Record<string, any>>()
 
 type Events = {
+  export: undefined
   reload: undefined
   updateForm: Record<string, any>
   preview: PreviewEventParamsters

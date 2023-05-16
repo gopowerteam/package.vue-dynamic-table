@@ -42,6 +42,9 @@ export default defineComponent({
     actionAlign: {
       type: String as PropType<'left' | 'right'>,
       default: 'left'
+    },
+    exportable: {
+      type: Boolean
     }
   },
   setup(props, { slots }) {
@@ -50,6 +53,7 @@ export default defineComponent({
     const formActions = renderSearchFormActions(
       props.forms,
       props.actionAlign,
+      props.exportable,
       slots?.actions
     )
 

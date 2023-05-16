@@ -13,11 +13,12 @@ import {
   type EditEventParamsters,
   type PreviewEventParamsters,
   useEvents
-} from '@/utils/events-helper'
+} from '@/utils/use-events'
 import RenderTableView from '@/data-table/render-table-view'
 import { useModal } from '@gopowerteam/vue-modal'
 import renderTableForm from '@/data-table/render-table-form'
 import { renderTableColumn } from '@/data-table/render-table-column'
+import { useExport } from '@/utils/use-export'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -83,6 +84,11 @@ export default defineComponent({
     height: {
       type: Number,
       required: false
+    },
+    exportable: {
+      type: [Boolean, Object] as PropType<boolean | { filename: string }>,
+      required: false,
+      default: () => false
     }
   },
   emits: ['update:radio', 'update:checkbox'],
@@ -105,7 +111,8 @@ export default defineComponent({
             forms={this.searchForms}
             loadData={this.reload}
             pagination={this.pagination}
-            actionAlign={this.actionAlign}>
+            actionAlign={this.actionAlign}
+            exportable={!!this.exportable}>
             {{
               actions: this.$slots.actions
             }}
@@ -160,6 +167,17 @@ export default defineComponent({
     // 创建Column列
     const tableColumns = [...props.columns.map(renderTableColumn)]
 
+    // 监听Reload
+    events.on('export', () => {
+      const { exportExcel } = useExport()
+      exportExcel(
+        props.columns,
+        tableSource.value,
+        typeof props.exportable === 'object'
+          ? props.exportable.filename
+          : undefined
+      )
+    })
     // 监听Reload
     events.on('reload', () => {
       onLoadData()

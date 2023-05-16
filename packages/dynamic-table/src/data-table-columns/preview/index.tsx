@@ -1,9 +1,10 @@
 import type { DataRecord, TableColumnOptions } from '@/interfaces'
 import { getColumnValue } from '@/utils/get-column-value'
-import { useEvents } from '@/utils/events-helper'
+import { useEvents } from '@/utils/use-events'
 import { createRenderer } from '@/utils/create-renderer'
 import type { RenderSingleButtonColumnOptions } from '../button'
 import { getCurrentInstance } from 'vue'
+import { VxeButton } from 'vxe-table'
 
 export function renderPreviewColumn<T = DataRecord>(
   options?: RenderPreviewColumnOptions<T>
@@ -33,11 +34,11 @@ export function renderPreviewColumn<T = DataRecord>(
       return <span>{options?.text ?? getColumnValue(record, column)}</span>
     } else {
       return (
-        <vxe-button
+        <VxeButton
           onClick={() => onShowPreview()}
           content={options?.text ?? getColumnValue(record, column)}
           status="primary"
-          type="text"></vxe-button>
+          type="text"></VxeButton>
       )
     }
   }

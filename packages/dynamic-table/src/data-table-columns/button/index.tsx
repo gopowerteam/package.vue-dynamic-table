@@ -1,5 +1,5 @@
 import { createRenderer } from '@/utils/create-renderer'
-import { VXETable } from 'vxe-table'
+import { VXETable, VxeButton } from 'vxe-table'
 
 export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
   const render = (record: T) => {
@@ -79,13 +79,13 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
         {buttons
           .filter((button) => toBooleanValue(button.show, true))
           .map((button) => (
-            <vxe-button
+            <VxeButton
               onClick={() => onCallback(button)}
-              content={
+              content={`${
                 typeof button.text === 'function'
                   ? button.text(record)
                   : button.text
-              }
+              }`}
               status={button.status || 'primary'}
               round={button.round}
               disabled={toBooleanValue(button.disabled, false)}
@@ -93,7 +93,7 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
               {{
                 icon: button.icon
               }}
-            </vxe-button>
+            </VxeButton>
           ))}
       </>
     )

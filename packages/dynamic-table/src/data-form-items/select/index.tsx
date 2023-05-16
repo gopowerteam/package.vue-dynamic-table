@@ -1,5 +1,5 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
-import { useEvents } from '@/utils/events-helper'
+import { useEvents } from '@/utils/use-events'
 import { inject, ref } from 'vue'
 
 export function renderSelectItem(options: RenderSelectItemOptions) {

@@ -37,6 +37,7 @@
   "dependencies": {
     "@gopowerteam/vue-modal": "~0.1.12",
     "dayjs": "1.11.7",
+    "exceljs": "^4.3.0",
     "mitt": "3.0.0",
     "vue": "3.2.45",
     "vue-json-viewer": "3",

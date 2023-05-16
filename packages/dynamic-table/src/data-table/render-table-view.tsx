@@ -3,7 +3,7 @@ import { getColumnValue } from '@/utils/get-column-value'
 import { defineComponent, type PropType } from 'vue'
 import type { DataRecord, TableColumnsOptions } from '..'
 import { toRenderTemplate } from './render-table-column'
-import { VXETable } from 'vxe-table'
+import { VxeButton, VXETable } from 'vxe-table'
 
 export default defineComponent({
   props: {
@@ -137,13 +137,13 @@ export default defineComponent({
           {props.buttons
             .filter((button) => toBooleanValue(button.show, true))
             .map((button) => (
-              <vxe-button
+              <VxeButton
                 onClick={() => onCallback(button)}
-                content={button.text}
+                content={`${button.text}`}
                 status={button.status || 'primary'}
                 round={button.round}
                 disabled={toBooleanValue(button.disabled, false)}
-                type={button.plain === false ? 'text' : 'button'}></vxe-button>
+                type={button.plain === false ? 'text' : 'button'}></VxeButton>
             ))}
         </div>
       )

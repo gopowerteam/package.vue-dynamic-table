@@ -1,6 +1,8 @@
 import { useModal } from '@gopowerteam/vue-modal'
-import type { Slot } from 'vue'
+import { inject, type Slot } from 'vue'
 import type { FormItemOptions } from '..'
+import { useEvents } from '@/utils/use-events'
+import { VxeButton } from 'vxe-table'
 
 /**
  * Submit Button
@@ -8,18 +10,18 @@ import type { FormItemOptions } from '..'
  */
 function submitButton() {
   return () => (
-    <vxe-button
+    <VxeButton
       type="submit"
       status="primary"
-      content="提交"></vxe-button>
+      content="提交"></VxeButton>
   )
 }
 
 function resetButton() {
   return () => (
-    <vxe-button
+    <VxeButton
       type="reset"
-      content="重置"></vxe-button>
+      content="重置"></VxeButton>
   )
 }
 
@@ -28,10 +30,21 @@ function cancelButton() {
     const modal = useModal()
 
     return (
-      <vxe-button
+      <VxeButton
         type="button"
         content="取消"
-        onClick={() => modal.close(false)}></vxe-button>
+        onClick={() => modal.close(false)}></VxeButton>
+    )
+  }
+}
+
+function exportButton(callback: () => void) {
+  return () => {
+    return () => (
+      <VxeButton
+        onClick={callback}
+        type="button"
+        content="导出"></VxeButton>
     )
   }
 }
@@ -81,14 +94,24 @@ export function renderEditFormActions(actions?: Slot) {
 export function renderSearchFormActions(
   forms: FormItemOptions[],
   actionAlign: 'left' | 'right',
+  exportable: boolean,
   actions?: Slot
 ) {
   const hasCollapsed = forms.some((form) => form.collapsed)
 
+  const defaultActions = [submitButton, resetButton]
+
+  if (exportable) {
+    const id = inject('id') as string
+    const events = useEvents(id)
+    const button = exportButton(() => events.emit('export'))
+    defaultActions.push(button)
+  }
+
   return (
     <>
       {forms && forms.length > 0 && (
-        <>{renderFormItem([submitButton, resetButton], hasCollapsed)}</>
+        <>{renderFormItem(defaultActions, hasCollapsed)}</>
       )}
       {actions && (
         <>

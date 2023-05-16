@@ -7,6 +7,7 @@
         ref="table"
         v-model:radio="radio"
         v-model:checkbox="checkbox"
+        exportable
         :selection="{
           type: 'checkbox',
           width: 100,
@@ -141,6 +142,7 @@ function loadData({ search, update }: LoadDataParams) {
           phone: '18899992222',
           createdAt: '',
           uid: '001',
+          state: true,
           amount: 123123,
           image:
             'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
@@ -193,6 +195,10 @@ const searchForms: FormItemsOptions = [
     key: 'test2',
     title: 'test2',
     render: (r) => r.date({ type: 'year' })
+  },
+  {
+    key: 'test2',
+    title: 'test2'
   },
   {
     key: 'test3',
@@ -248,6 +254,17 @@ const columns: TableColumnsOptions<Administrator> = [
     key: 'category',
     index: 'category.name',
     title: '分类'
+  },
+  {
+    key: 'state',
+    title: 'state',
+    render: (r) =>
+      r.dict(
+        new Map([
+          [true, 'yes'],
+          [false, 'no']
+        ])
+      )
   },
   // {
   //   key: 'render',
@@ -349,6 +366,7 @@ const columns: TableColumnsOptions<Administrator> = [
     key: 'action',
     title: '操作',
     width: '200px',
+    exportable: false,
     render: (r) =>
       r.button({
         buttons: [

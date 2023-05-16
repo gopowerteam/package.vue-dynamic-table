@@ -14,11 +14,18 @@ export interface TableColumnOptions<T> {
   index?: string
   fixed?: 'left' | 'right'
   align?: 'left' | 'right' | 'center'
-  width?: string
+  width?: string | number
   render?: TableColumnRender<T>
   search?: Omit<FormItemOptions, 'key' | 'title'>
   formatter?: DataFormatter<T>
   preview?: TableColumnPreviewOptions
+  exportable?: ExportColumnOptions | boolean
+}
+
+export type ExportColumnOptions = {
+  header?: string
+  width?: number
+  content?: (record: DataRecord) => string | number | undefined
 }
 
 // 列配置

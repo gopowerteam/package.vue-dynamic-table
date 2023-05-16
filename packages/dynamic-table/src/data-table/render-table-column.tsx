@@ -31,7 +31,8 @@ export function toRenderTemplate<T>(
     disableColumnMode: templateRender.$disableColumnMode,
     disableViewMode: templateRender.$disableViewMode,
     showOverflow: templateRender.$showOverflow,
-    isRenderColumn: templateRender.$type === 'render'
+    isRenderColumn: templateRender.$type === 'render',
+    type: templateRender.$type
   }
 }
 
