@@ -9,7 +9,9 @@ export function renderSelectItem(options: RenderSelectItemOptions) {
   const selectOptions = ref<SelectOptions>(new Map())
 
   // 获取SelectOptions值
-  if (options.options instanceof Promise) {
+  if (options.options instanceof Function) {
+    options.options().then((data) => (selectOptions.value = data))
+  } else if (options.options instanceof Promise) {
     options.options.then((data) => (selectOptions.value = data))
   } else {
     selectOptions.value = options.options
@@ -55,7 +57,10 @@ export interface RenderSelectItemOptions {
   // 可清楚
   clearable?: boolean
   // select options列表
-  options: SelectOptions | Promise<SelectOptions>
+  options:
+    | SelectOptions
+    | Promise<SelectOptions>
+    | (() => Promise<SelectOptions>)
   // 多选支持
   multiple?: boolean
   // 默认值
