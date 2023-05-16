@@ -118,7 +118,6 @@ function exportExcel(
   const exportRows = source.map((record) => {
     return getTableRowValue(columns, record)
   })
-  console.log(exportColumns)
   exportExcelFromJSON({
     columns: exportColumns as any,
     rows: exportRows,

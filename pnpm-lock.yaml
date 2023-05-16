@@ -105,8 +105,8 @@ importers:
   packages/dynamic-table:
     dependencies:
       '@gopowerteam/vue-modal':
-        specifier: ~0.1.12
-        version: 0.1.12(vue@3.2.45)
+        specifier: ~0.1.15
+        version: 0.1.15
       dayjs:
         specifier: 1.11.7
         version: 1.11.7
@@ -1134,6 +1134,10 @@ packages:
       vue: ^3.0.5
     dependencies:
       vue: 3.2.45
+    dev: false
+
+  /@gopowerteam/vue-modal@0.1.15:
+    resolution: {integrity: sha512-53btBB74P4XgemPctCxcbXANCI06UktJBiDY3zitaBurIox5Yr1X0SMm+w074k2DLFpFW5YSXdtSfWV0kHBQDQ==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.8:
@@ -2323,7 +2327,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/plugin-transform-typescript': 7.20.2(@babel/core@7.20.5)
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.20.5)
-      vite: 4.0.4(@types/node@18.11.18)
+      vite: 4.0.4(@types/node@18.11.9)
       vue: 3.2.45
     transitivePeerDependencies:
       - supports-color
@@ -2336,7 +2340,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.4(@types/node@18.11.18)
+      vite: 4.0.4(@types/node@18.11.9)
       vue: 3.2.45
     dev: true
 
