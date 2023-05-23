@@ -99,13 +99,15 @@ export default defineComponent({
     'reload',
     'edit',
     'preview',
+    'export',
     'getTableRows'
   ],
   render() {
     return (
       <div>
         {(this.$slots.actions ||
-          Object.keys(this.searchForms || {}).length > 0) && (
+          Object.keys(this.searchForms || {}).length > 0 ||
+          this.exportable) && (
           <DataSearchForm
             dataSource={unref(this.searchSource)}
             forms={this.searchForms}
@@ -261,6 +263,10 @@ export default defineComponent({
       )
     }
 
+    function exportTable() {
+      events.emit('export')
+    }
+
     function onRadioChange({ rowid }: { rowid: string }) {
       emit('update:radio', rowid)
     }
@@ -330,7 +336,8 @@ export default defineComponent({
       onCheckboxChange,
       reload: onLoadData,
       preview: previewRecord,
-      edit: editRecord
+      edit: editRecord,
+      export: exportTable
     }
   }
 })

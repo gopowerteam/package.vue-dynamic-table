@@ -80,6 +80,12 @@ export default defineComponent({
     return () => (
       <div>
         <vxe-form
+          style={
+            // 仅仅显示导出时，表单居右
+            props.exportable && (!props.forms || props.forms.length === 0)
+              ? 'text-align: right'
+              : ''
+          }
           custom-layout
           data={props.dataSource}
           rules={formRules}

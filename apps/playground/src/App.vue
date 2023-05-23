@@ -302,11 +302,11 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '手机号',
     render: (r) => r.phone({ safe: true, callable: true })
   },
-  // {
-  //   key: 'test2',
-  //   title: 'test2',
-  //   render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
-  // },
+  {
+    key: 'test2',
+    title: 'test2',
+    render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
+  },
   {
     key: 'image',
     title: '图片',

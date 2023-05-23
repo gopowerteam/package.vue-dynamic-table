@@ -99,7 +99,11 @@ export function renderSearchFormActions(
 ) {
   const hasCollapsed = forms.some((form) => form.collapsed)
 
-  const defaultActions = [submitButton, resetButton]
+  const defaultActions = []
+
+  if (forms && forms.length > 0) {
+    defaultActions.push(submitButton, resetButton)
+  }
 
   if (exportable) {
     const id = inject('id') as string
@@ -110,7 +114,7 @@ export function renderSearchFormActions(
 
   return (
     <>
-      {forms && forms.length > 0 && (
+      {((forms && forms.length > 0) || exportable) && (
         <>{renderFormItem(defaultActions, hasCollapsed)}</>
       )}
       {actions && (
