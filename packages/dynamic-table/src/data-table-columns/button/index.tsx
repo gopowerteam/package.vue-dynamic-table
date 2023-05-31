@@ -82,9 +82,9 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
             <VxeButton
               onClick={() => onCallback(button)}
               content={`${
-                typeof button.text === 'function'
+                (typeof button.text === 'function'
                   ? button.text(record)
-                  : button.text
+                  : button.text) || ''
               }`}
               status={button.status || 'primary'}
               round={button.round}
