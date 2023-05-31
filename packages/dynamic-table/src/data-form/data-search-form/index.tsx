@@ -39,11 +39,14 @@ export default defineComponent({
     /**
      * 操作按钮对齐方向
      */
-    actionAlign: {
+    actionsPosition: {
       type: String as PropType<'left' | 'right'>,
       default: 'left'
     },
     exportable: {
+      type: Boolean
+    },
+    refreshable: {
       type: Boolean
     }
   },
@@ -52,8 +55,9 @@ export default defineComponent({
 
     const formActions = renderSearchFormActions(
       props.forms,
-      props.actionAlign,
+      props.actionsPosition,
       props.exportable,
+      props.refreshable,
       slots?.actions
     )
 

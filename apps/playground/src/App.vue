@@ -8,6 +8,7 @@
         v-model:radio="radio"
         v-model:checkbox="checkbox"
         exportable
+        refreshable
         :selection="{
           type: 'checkbox',
           width: 100,
@@ -19,7 +20,7 @@
         :search-forms="searchForms"
         :edit-forms="searchForms"
         :columns="columns"
-        action-align="right">
+        actions-position="right">
         <template #actions>
           <button @click="() => table.reload()">reload</button>
           <div>1231</div>

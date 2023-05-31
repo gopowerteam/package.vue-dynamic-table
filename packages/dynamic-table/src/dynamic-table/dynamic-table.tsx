@@ -77,7 +77,7 @@ export default defineComponent({
       type: Array as PropType<FormItemsOptions>,
       required: false
     },
-    actionAlign: {
+    actionsPosition: {
       type: String as PropType<'left' | 'right'>,
       required: false
     },
@@ -87,6 +87,11 @@ export default defineComponent({
     },
     exportable: {
       type: [Boolean, Object] as PropType<boolean | { filename: string }>,
+      required: false,
+      default: () => false
+    },
+    refreshable: {
+      type: Boolean,
       required: false,
       default: () => false
     }
@@ -113,8 +118,9 @@ export default defineComponent({
             forms={this.searchForms}
             loadData={this.reload}
             pagination={this.pagination}
-            actionAlign={this.actionAlign}
-            exportable={!!this.exportable}>
+            actionsPosition={this.actionsPosition}
+            exportable={!!this.exportable}
+            refreshable={!!this.refreshable}>
             {{
               actions: this.$slots.actions
             }}

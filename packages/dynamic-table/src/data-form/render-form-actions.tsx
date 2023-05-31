@@ -1,20 +1,21 @@
 import { useModal } from '@gopowerteam/vue-modal'
-import { inject, type Slot } from 'vue'
 import type { FormItemOptions } from '..'
 import { useEvents } from '@/utils/use-events'
 import { VxeButton } from 'vxe-table'
+import { inject, type Slot } from 'vue'
 
 /**
  * Submit Button
  * @returns
  */
-function submitButton() {
-  return () => (
-    <VxeButton
-      type="submit"
-      status="primary"
-      content="提交"></VxeButton>
-  )
+function submitButton(text = '提交') {
+  return () => () =>
+    (
+      <VxeButton
+        type="submit"
+        status="primary"
+        content={text}></VxeButton>
+    )
 }
 
 function resetButton() {
@@ -38,15 +39,26 @@ function cancelButton() {
   }
 }
 
-function exportButton(callback: () => void) {
-  return () => {
-    return () => (
-      <VxeButton
-        onClick={callback}
-        type="button"
-        content="导出"></VxeButton>
-    )
-  }
+function exportButton() {
+  const id = inject('id') as string
+  const events = useEvents(id)
+
+  return (
+    <VxeButton
+      circle
+      icon="vxe-icon-download"
+      onClick={() => events.emit('export')}
+      type="button"></VxeButton>
+  )
+}
+
+function refreshButton() {
+  return (
+    <vxe-button
+      type="submit"
+      icon="vxe-icon-refresh"
+      circle></vxe-button>
+  )
 }
 
 /**
@@ -85,7 +97,7 @@ export function renderEditFormActions(actions?: Slot) {
         {actions && renderActionItems(actions)}
       </div>
       <div style="display:flex;justify-content:flex-end;">
-        {renderFormItem([submitButton, cancelButton], false)}
+        {renderFormItem([submitButton('提交'), cancelButton], false)}
       </div>
     </div>
   )
@@ -93,8 +105,9 @@ export function renderEditFormActions(actions?: Slot) {
 
 export function renderSearchFormActions(
   forms: FormItemOptions[],
-  actionAlign: 'left' | 'right',
+  actionsPosition: 'left' | 'right',
   exportable: boolean,
+  refreshable: boolean,
   actions?: Slot
 ) {
   const hasCollapsed = forms.some((form) => form.collapsed)
@@ -102,31 +115,30 @@ export function renderSearchFormActions(
   const defaultActions = []
 
   if (forms && forms.length > 0) {
-    defaultActions.push(submitButton, resetButton)
+    defaultActions.push(submitButton('搜索'), resetButton)
   }
 
-  if (exportable) {
-    const id = inject('id') as string
-    const events = useEvents(id)
-    const button = exportButton(() => events.emit('export'))
-    defaultActions.push(button)
-  }
+  const showActionBar = [exportable, refreshable, actions].some(Boolean)
 
   return (
     <>
       {((forms && forms.length > 0) || exportable) && (
         <>{renderFormItem(defaultActions, hasCollapsed)}</>
       )}
-      {actions && (
+      {showActionBar && (
         <>
           <div
             class="divider"
             style="height:1px;margin:10px 0;background-color:rgba(0,0,0,0.1)"></div>
           <div
-            style={`display:flex;justify-content:${
-              actionAlign === 'left' ? 'flex-start' : 'flex-end'
+            style={`display:flex;justify-content:space-between;align-items:center;flex-direction:${
+              actionsPosition === 'right' ? 'row' : 'row-reverse;'
             }`}>
-            {actions && renderActionItems(actions)}
+            <div class="tools">
+              {exportable && exportButton()}
+              {refreshable && refreshButton()}
+            </div>
+            <div class="actions">{actions && renderActionItems(actions)}</div>
           </div>
         </>
       )}
