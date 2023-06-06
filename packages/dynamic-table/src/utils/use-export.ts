@@ -15,7 +15,7 @@ function createWorkBook() {
 
 function createWorkSheet(workbook: Workbook, name = 'Sheet1') {
   const sheet = workbook.addWorksheet(name, {
-    headerFooter: { firstHeader: 'Hello Exceljs', firstFooter: 'Hello World' }
+    headerFooter: { firstHeader: '', firstFooter: '' }
   })
 
   return sheet
@@ -101,6 +101,17 @@ export function getTableRowValue(
   return row
 }
 
+function transformWidth(width: string | number | undefined) {
+  switch (true) {
+    case typeof width === 'number':
+      return (width as number) / 14
+    case typeof width === 'string' && width.endsWith('px'):
+      return parseInt((width as string).replace('px', '')) / 14
+    default:
+      return 30
+  }
+}
+
 function exportExcel(
   columns: TableColumnsOptions,
   source: DataRecord[],
@@ -112,7 +123,9 @@ function exportExcel(
       key: column.key,
       header:
         (column.exportable as ExportColumnOptions)?.header || column.title,
-      width: (column.exportable as ExportColumnOptions)?.width || column.width
+      width:
+        (column.exportable as ExportColumnOptions)?.width ||
+        transformWidth(column.width)
     }))
 
   const exportRows = source.map((record) => {

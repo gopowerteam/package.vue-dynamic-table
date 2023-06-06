@@ -248,7 +248,7 @@ const columns: TableColumnsOptions<Administrator> = [
     key: 'amount',
     title: '名称',
     align: 'right',
-    width: '200px',
+    width: 100,
     render: (r) => r.currency({ suffix: '元' })
   },
   {

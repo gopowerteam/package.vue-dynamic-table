@@ -50,7 +50,7 @@ export function renderTableColumn<T>(options: TableColumnOptions<T>) {
     {
       field: options.index || options.key,
       title: options.title,
-      width: options.width,
+      minWidth: options.width,
       align: options.align || 'center',
       fixed: options.fixed,
       showOverflow: showOverflow,

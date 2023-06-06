@@ -131,7 +131,7 @@ export function renderSearchFormActions(
             class="divider"
             style="height:1px;margin:10px 0;background-color:rgba(0,0,0,0.1)"></div>
           <div
-            style={`display:flex;justify-content:space-between;align-items:center;flex-direction:${
+            style={`padding:5px 0 10px 0;display:flex;justify-content:space-between;align-items:center;flex-direction:${
               actionsPosition === 'right' ? 'row' : 'row-reverse;'
             }`}>
             <div class="tools">
