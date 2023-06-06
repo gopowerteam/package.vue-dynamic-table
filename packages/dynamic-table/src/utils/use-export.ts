@@ -102,11 +102,12 @@ export function getTableRowValue(
 }
 
 function transformWidth(width: string | number | undefined) {
+  const ratio = 6
   switch (true) {
     case typeof width === 'number':
-      return (width as number) / 14
+      return (width as number) / ratio
     case typeof width === 'string' && width.endsWith('px'):
-      return parseInt((width as string).replace('px', '')) / 14
+      return parseInt((width as string).replace('px', '')) / ratio
     default:
       return 30
   }
