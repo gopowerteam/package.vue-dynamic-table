@@ -169,6 +169,16 @@ const searchForms: FormItemsOptions = [
     render: (r) => r.render((data) => <input v-model={data.a}></input>)
   },
   {
+    key: 'date-range',
+    title: 'date-rage',
+    render: (r) =>
+      r.dateRange({
+        type: 'date',
+        valueFormat: 'YYYY-MM-DD HH:mm:ss',
+        labelFormat: 'yyyy年MM月dd日'
+      })
+  },
+  {
     key: 'phone',
     title: 'phone',
     rules: [{ required: true, message: '请输入名称' }],
