@@ -35,7 +35,8 @@
     }
   },
   "dependencies": {
-    "@gopowerteam/vue-modal": "~0.1.15",
+    "@arco-design/web-vue": "2.50.1",
+    "@gopowerteam/vue-modal": "~0.1.16",
     "dayjs": "1.11.7",
     "exceljs": "^4.3.0",
     "mitt": "3.0.0",
@@ -48,6 +49,7 @@
     "vue": "3.2.0"
   },
   "devDependencies": {
+    "@arco-plugins/vite-vue": "^1.4.5",
     "@rushstack/eslint-patch": "1.2.0",
     "@types/jsdom": "20.0.1",
     "@types/node": "18.11.18",

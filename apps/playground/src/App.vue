@@ -135,12 +135,13 @@ const radio = ref('1')
 const checkbox = ref(['1'])
 
 function loadData({ search, update }: LoadDataParams) {
+  console.log(search)
   administratorService.findAdministrator(search, [pageService]).then(() => {
     update(
-      Array.from(Array(20), (_, i) => ({
+      Array.from(Array(1), (_, i) => ({
         id: i,
         ...{
-          phone: '18899992222',
+          phone: '17899992222',
           createdAt: '',
           uid: '001',
           state: true,
@@ -150,7 +151,7 @@ function loadData({ search, update }: LoadDataParams) {
           category: { name: 'string1' },
           json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
           text: '---test---'.repeat(5),
-          tags: ['a', 'b', 'c']
+          tags: ['a']
         }
       }))
     )
@@ -175,7 +176,7 @@ const searchForms: FormItemsOptions = [
       r.dateRange({
         type: 'date',
         valueFormat: 'YYYY-MM-DD HH:mm:ss',
-        labelFormat: 'yyyy年MM月dd日'
+        labelFormat: 'YYYY年MM月DD日'
       })
   },
   {
@@ -220,6 +221,7 @@ const searchForms: FormItemsOptions = [
         clearable: true,
         disabledDate: (value, date) => {
           const [startDate] = value
+
           if (startDate) {
             return new Date(startDate).getMonth() !== date.getMonth()
           }
@@ -313,11 +315,11 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '手机号',
     render: (r) => r.phone({ safe: true, callable: true })
   },
-  {
-    key: 'test2',
-    title: 'test2',
-    render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
-  },
+  // {
+  //   key: 'test2',
+  //   title: 'test2',
+  //   render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
+  // },
   {
     key: 'image',
     title: '图片',

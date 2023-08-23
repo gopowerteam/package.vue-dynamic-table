@@ -1,6 +1,7 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
+import { RangePicker } from '@arco-design/web-vue'
+import type { CalendarValue } from '@arco-design/web-vue/es/date-picker/interface'
 import dayjs from 'dayjs'
-import { nextTick, ref, watch } from 'vue'
 
 /**
  * 日期节点表单渲染
@@ -8,133 +9,45 @@ import { nextTick, ref, watch } from 'vue'
  * @returns JSX
  */
 export function renderDateRangeItem(options?: RenderDateRangeItemOptions) {
-  const selected = ref('')
-  let initialized = false
-
-  function autoSubmit(element: HTMLElement) {
-    nextTick(() => {
-      const button = element.querySelector(
-        `.vxe-input--panel.type--date .vxe-input--date-picker-confirm`
-      ) as HTMLButtonElement
-
-      button?.click()
-    })
-  }
-
-  function onInputPanelHidden(element: HTMLElement, callback: () => void) {
-    nextTick(() => {
-      if (!element) {
-        return
-      }
-
-      const panel = element.querySelector(
-        `.vxe-input--panel.type--date`
-      ) as HTMLButtonElement
-
-      if (!panel) {
-        return
-      }
-
-      const observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function () {
-          const visible = getComputedStyle(panel).display !== 'none'
-
-          if (!visible) {
-            callback()
-          }
-        })
-      })
-
-      observer.observe(panel, {
-        attributes: true,
-        attributeFilter: ['class']
-      })
-    })
-  }
-
-  function disabledMethod({ $input, date }: { $input: any; date: Date }) {
-    const values = $input.props.modelValue.split(',').filter(Boolean)
-
-    if (!options?.disabledDate) {
-      return false
-    }
-
-    return options.disabledDate(
-      values.length === 3 ? [values[2]] : values,
-      date
-    )
-  }
-
   return (data: DataRecord, form: FormItemOptions) => {
-    const input = ref()
+    let dates: string[] = []
 
-    // 重置操作
-    const stop = watch(
-      () => data[form.key],
-      (newValue) => {
-        if (
-          (newValue === undefined || newValue?.length === 0) &&
-          selected.value !== ''
-        ) {
-          selected.value = ''
-          stop()
-        }
-      }
-    )
-
-    if (data[form.key] && selected.value === '' && !initialized) {
-      selected.value = data[form.key].join(',')
+    function onSelect(value: (CalendarValue | undefined)[]) {
+      dates = value as string[]
     }
 
-    initialized = true
+    function onChange(values: (CalendarValue | undefined)[] | undefined) {
+      if (values && values.length === 2) {
+        const [startDateStr, endDateStr] = values.sort()
+        const startDate = dayjs(startDateStr).startOf('days')
+        const endDate = dayjs(endDateStr).endOf('days')
 
-    function onChange() {
-      const values = selected.value.split(',').filter(Boolean)
-
-      switch (values.length) {
-        // 生成选择数据
-        case 2:
-          {
-            const [startDateStr, endDateStr] = values.sort()
-            const startDate = dayjs(startDateStr).startOf('days')
-            const endDate = dayjs(endDateStr).endOf('days')
-
-            selected.value = [startDateStr, endDateStr].join(',')
-
-            data[form.key] = [
-              startDate.format(options?.valueFormat || 'YYYY-MM-DD'),
-              endDate.format(options?.valueFormat || 'YYYY-MM-DD')
-            ]
-
-            autoSubmit(input.value?.$el)
-          }
-          break
-        // 重置选择数据
-        case 3:
-          selected.value = values[2]
-          break
+        data[form.key] = [
+          startDate.format(options?.valueFormat || 'YYYY-MM-DD'),
+          endDate.format(options?.valueFormat || 'YYYY-MM-DD')
+        ]
       }
     }
 
-    nextTick(() => {
-      onInputPanelHidden(input.value?.$el, () => {
-        if (!selected.value.includes(',')) selected.value = ''
-      })
-    })
+    function disabledMethod(date: Date) {
+      if (!options?.disabledDate) {
+        return false
+      }
+
+      return options.disabledDate(dates, date)
+    }
 
     return (
       <div>
-        <vxe-input
-          ref={input}
-          style={{ width: '240px' }}
+        <RangePicker
+          style={{ width: '300px' }}
+          v-model={data[form.key]}
+          onSelect={onSelect}
           onChange={onChange}
-          v-model={selected.value}
-          placeholder={options?.placeholder}
-          clearable={options?.clearable}
-          disabled-method={disabledMethod}
-          label-format={options?.labelFormat}
-          multiple
-          type={options?.type || 'date'}></vxe-input>
+          allowClear={options?.clearable}
+          disabled-date={disabledMethod}
+          format={options?.labelFormat}
+          value-format={options?.valueFormat}></RangePicker>
       </div>
     )
   }

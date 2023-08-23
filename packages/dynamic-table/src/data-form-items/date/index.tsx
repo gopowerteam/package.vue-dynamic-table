@@ -1,4 +1,5 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
+import { DatePicker } from '@arco-design/web-vue'
 
 /**
  * 日期节点表单渲染
@@ -6,9 +7,7 @@ import type { DataRecord, FormItemOptions } from '@/interfaces'
  * @returns JSX
  */
 export function renderDateItem(options?: RenderDateItemOptions) {
-  function disabledMethod({ $input, date }: { $input: any; date: Date }) {
-    const value = $input.props.modelValue
-
+  function disabledMethod(value: string, date: Date) {
     if (!options?.disabledDate) {
       return false
     }
@@ -18,13 +17,11 @@ export function renderDateItem(options?: RenderDateItemOptions) {
 
   return (data: DataRecord, form: FormItemOptions) => {
     return (
-      <vxe-input
+      <DatePicker
         v-model={data[form.key]}
-        placeholder={options?.placeholder}
-        clearable={options?.clearable}
-        disabled-method={disabledMethod}
-        multiple={options?.multiple}
-        type={options?.type || 'date'}></vxe-input>
+        disabled-date={disabledMethod}
+        format={options?.labelFormat}
+        value-format={options?.valueFormat}></DatePicker>
     )
   }
 }
@@ -32,7 +29,7 @@ export function renderDateItem(options?: RenderDateItemOptions) {
 export interface RenderDateItemOptions {
   placeholder?: string
   clearable?: boolean
-  multiple?: boolean
-  type?: 'date' | 'week' | 'month' | 'year'
   disabledDate?: (value: string, date: Date) => boolean
+  valueFormat?: string
+  labelFormat?: string
 }

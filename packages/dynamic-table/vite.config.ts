@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
 import * as path from 'node:path'
+import { vitePluginForArco } from '@arco-plugins/vite-vue'
 
 const resolvePath = (...filepath: string[]) =>
   path.join(fileURLToPath(new URL('./src', import.meta.url)), ...filepath)
@@ -40,6 +41,9 @@ export default defineConfig({
     vueJsx(),
     dts({
       entryRoot: resolvePath()
+    }),
+    vitePluginForArco({
+      style: 'css'
     })
   ]
 })
