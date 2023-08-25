@@ -1,8 +1,7 @@
 import DynamicTable from './dynamic-table'
 import type { Plugin } from 'vue'
 import VXETable from 'vxe-table'
-import JsonViewer from 'vue-json-viewer'
-
+import JsonViewer from 'vue-json-viewer/ssr'
 import 'vxe-table/lib/style.css'
 import type {
   DataRecord,
