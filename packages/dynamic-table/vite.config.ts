@@ -36,7 +36,7 @@ export default defineConfig({
         'dayjs',
         'mitt',
         'vue-json-viewer',
-        'vue-json-viewer/ssr'
+        'vue-json-viewer/ssr.js'
       ],
       output: {
         exports: 'named',
@@ -51,11 +51,13 @@ export default defineConfig({
     vueJsx(),
     dts({
       entryRoot: resolvePath(),
-      outputDir: ['dist/lib', 'dist/es'],
-      copyDtsFiles: false
+      outDir: ['dist/lib', 'dist/es'],
+      include: 'src',
+      copyDtsFiles: false,
+      strictOutput: true
     }),
     vitePluginForArco({
       style: 'css'
-    })
+    }) as any
   ]
 })
