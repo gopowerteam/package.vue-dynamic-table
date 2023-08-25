@@ -13,26 +13,33 @@
     "resolver.d.ts",
     "README.md"
   ],
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/lib/index.js",
+  "module": "./dist/es/index.mjs",
+  "types": "./dist/es/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs.js",
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.es.js"
-      }
+      "types": "./dist/es/index.d.ts",
+      "import": "./dist/es/index.mjs",
+      "require": "./dist/lib/index.js"
+    },
+    "./es": {
+      "types": "./dist/es/index.d.ts",
+      "import": "./dist/es/index.mjs"
+    },
+    "./lib": {
+      "types": "./dist/lib/index.d.ts",
+      "require": "./dist/lib/index.js"
     },
     "./resolver": {
-      "require": "./dist/resolver.cjs.js",
-      "import": "./dist/resolver.es.js",
-      "types": "./dist/resolver.d.ts"
+      "require": "./dist/lib/resolver.js",
+      "import": "./dist/es/resolver.mjs",
+      "types": "./dist/es/resolver.d.ts"
     },
     "./dist/style.css": {
       "require": "./dist/style.css",
       "import": "./dist/style.css"
-    }
+    },
+    "./*": "./*"
   },
   "dependencies": {
     "@arco-design/web-vue": "2.50.1",
@@ -64,6 +71,7 @@
     "jsdom": "21.0.0",
     "prettier": "2.8.2",
     "typescript": "~4.9.4",
+    "unplugin-vue-components": "^0.22.12",
     "vite": "4.0.4",
     "vite-plugin-dts": "1.7.1",
     "vitest": "0.27.1"

@@ -1,4 +1,5 @@
 {
+  "extends": "nx/presets/npm.json",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
@@ -9,6 +10,10 @@
   },
   "targetDefaults": {
     "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "dev": {
       "dependsOn": ["^build"],
       "outputs": ["{projectRoot}/dist"]
     }

@@ -1,1 +1,1 @@
-export { DynamicTableResolver } from './dist/resolver.d'
+export { DynamicTableResolver } from './dist/es/resolver.d'

@@ -22,7 +22,10 @@ export default defineConfig({
     lib: {
       entry: [resolvePath('index.ts'), resolvePath('resolver.ts')],
       name: 'bundle',
-      fileName: (format, name) => `${name}.${format}.js`,
+      fileName: (format, name) =>
+        `${format === 'es' ? 'es' : 'lib'}/${name}.${
+          format === 'es' ? 'mjs' : 'js'
+        }`,
       formats: ['es', 'cjs']
     },
     rollupOptions: {
@@ -40,7 +43,9 @@ export default defineConfig({
     vue(),
     vueJsx(),
     dts({
-      entryRoot: resolvePath()
+      entryRoot: resolvePath(),
+      outputDir: ['dist/lib', 'dist/es'],
+      copyDtsFiles: false
     }),
     vitePluginForArco({
       style: 'css'

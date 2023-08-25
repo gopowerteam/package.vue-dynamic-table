@@ -49,7 +49,7 @@ import type {
 import { useTable } from '@gopowerteam/vue-dynamic-table'
 import type { Administrator } from './http/models/Administrator'
 import { AdministratorService } from './http/services/AdministratorService'
-import { onMounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 const administratorService = new AdministratorService()
 
@@ -206,7 +206,7 @@ const searchForms: FormItemsOptions = [
   {
     key: 'test2',
     title: 'test2',
-    render: (r) => r.date({ type: 'year' })
+    render: (r) => r.date()
   },
   {
     key: 'test2',
