@@ -1,28 +1,32 @@
 import { useModal } from '@gopowerteam/vue-modal'
 import type { FormItemOptions } from '..'
 import { useEvents } from '@/utils/use-events'
-import { VxeButton } from 'vxe-table'
 import { inject, type Slot } from 'vue'
-
+import { Button } from '@arco-design/web-vue'
+import { IconDownload, IconRefresh } from '@arco-design/web-vue/es/icon'
 /**
  * Submit Button
  * @returns
  */
 function submitButton(text = '提交') {
-  return () => () =>
-    (
-      <VxeButton
-        type="submit"
-        status="primary"
-        content={text}></VxeButton>
-    )
+  return () => () => (
+    <Button
+      style={{ margin: '0 5px' }}
+      htmlType="submit"
+      type="primary">
+      {text}
+    </Button>
+  )
 }
 
 function resetButton() {
   return () => (
-    <VxeButton
-      type="reset"
-      content="重置"></VxeButton>
+    <Button
+      style={{ margin: '0 5px' }}
+      htmlType="reset"
+      type="secondary">
+      重置
+    </Button>
   )
 }
 
@@ -31,10 +35,12 @@ function cancelButton() {
     const modal = useModal()
 
     return (
-      <VxeButton
-        type="button"
-        content="取消"
-        onClick={() => modal.close(false)}></VxeButton>
+      <Button
+        style={{ margin: '0 5px' }}
+        htmlType="button"
+        onClick={() => modal.close(false)}>
+        取消
+      </Button>
     )
   }
 }
@@ -44,20 +50,28 @@ function exportButton() {
   const events = useEvents(id)
 
   return (
-    <VxeButton
-      circle
-      icon="vxe-icon-download"
+    <Button
+      shape="circle"
+      style={{ margin: '0 5px' }}
       onClick={() => events.emit('export')}
-      type="button"></VxeButton>
+      htmlType="button">
+      {{
+        icon: () => <IconDownload></IconDownload>
+      }}
+    </Button>
   )
 }
 
 function refreshButton() {
   return (
-    <vxe-button
-      type="submit"
-      icon="vxe-icon-refresh"
-      circle></vxe-button>
+    <Button
+      style={{ margin: '0 5px' }}
+      htmlType="submit"
+      shape="circle">
+      {{
+        icon: () => <IconRefresh></IconRefresh>
+      }}
+    </Button>
   )
 }
 

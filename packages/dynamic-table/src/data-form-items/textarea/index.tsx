@@ -1,14 +1,14 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
+import { Textarea } from '@arco-design/web-vue'
 
 export function renderTextareaItem(options?: RenderTextareaItemOptions) {
   return (data: DataRecord, form: FormItemOptions) => {
     return (
-      <vxe-textarea
+      <Textarea
         v-model={data[form.key]}
         placeholder={options?.placeholder}
-        rows={options?.rows}
-        resize={options?.resize}
-        autosize={options?.autosize}></vxe-textarea>
+        autoSize={options?.autosize}
+        maxLength={options?.maxLength}></Textarea>
     )
   }
 }
@@ -21,4 +21,5 @@ export interface RenderTextareaItemOptions {
     minRows: number
     maxRows: number
   }
+  maxLength?: number
 }

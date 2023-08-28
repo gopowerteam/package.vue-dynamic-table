@@ -1,5 +1,6 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
 import { useEvents } from '@/utils/use-events'
+import { Switch } from '@arco-design/web-vue'
 import { inject } from 'vue'
 
 export function renderSwitchItem(options?: RenderSwitchItemOptions) {
@@ -17,13 +18,13 @@ export function renderSwitchItem(options?: RenderSwitchItemOptions) {
     }
 
     return (
-      <vxe-switch
+      <Switch
         v-model={data[form.key]}
-        open-label={options?.openLabel ?? '是'}
-        close-label={options?.closeLabel ?? '否'}
-        open-value={options?.openValue ?? true}
-        close-value={options?.closeValue ?? false}
-        onChange={onChange}></vxe-switch>
+        checkedText={options?.openLabel ?? '是'}
+        uncheckedText={options?.closeLabel ?? '否'}
+        checkedValue={options?.openValue ?? true}
+        uncheckedValue={options?.closeValue ?? false}
+        onChange={onChange}></Switch>
     )
   }
 }
@@ -32,7 +33,7 @@ export type SelectOptions = Map<string | number, string>
 
 export interface RenderSwitchItemOptions {
   // 占位符
-  size?: 'mini' | 'small' | 'medium'
+  size?: 'small' | 'medium'
   // 打开时文字
   openLabel?: string
   // 关闭时文字

@@ -1,5 +1,6 @@
 import type { DataRecord, FormItemOptions } from '@/interfaces'
 import { useEvents } from '@/utils/use-events'
+import { Option, Select } from '@arco-design/web-vue'
 import { inject, ref } from 'vue'
 
 export function renderSelectItem(options: RenderSelectItemOptions) {
@@ -31,25 +32,24 @@ export function renderSelectItem(options: RenderSelectItemOptions) {
     }
 
     return (
-      <vxe-select
+      <Select
         multiple={options.multiple}
         v-model={data[form.key]}
         placeholder={options.placeholder}
-        clearable={options.clearable}
+        allowClear={options.clearable}
         onChange={onSelectChange}>
-        {Object.entries}
         {Array.from(selectOptions.value.entries()).map(([value, label]) => (
-          <vxe-option
+          <Option
             key={value}
             value={value}
-            label={label}></vxe-option>
+            label={label}></Option>
         ))}
-      </vxe-select>
+      </Select>
     )
   }
 }
 
-export type SelectOptions = Map<string | number | boolean, string>
+export type SelectOptions = Map<string | number, string>
 
 export interface RenderSelectItemOptions {
   // 占位符
