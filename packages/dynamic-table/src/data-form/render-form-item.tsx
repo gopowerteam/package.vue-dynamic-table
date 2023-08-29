@@ -39,7 +39,10 @@ export function renderFormItem(form: FormItemOptions, span?: string | number) {
       itemRender: {},
       folding: form.collapsed,
       span,
-      visibleMethod: form.show
+      visibleMethod: form.show,
+      style: {
+        minWidth: form?.minWidth ? `${form.minWidth}px` : 'unset'
+      }
     },
     toRenderTemplate(form)
   )

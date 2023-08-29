@@ -12,6 +12,7 @@ export interface FormItemOptions {
   collapsed?: boolean
   rules?: VxeTableDefines.ValidatorRule[]
   default?: any | (() => any)
+  minWidth?: number
   show?: (record: any) => boolean
 }
 

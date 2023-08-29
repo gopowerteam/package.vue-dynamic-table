@@ -44,6 +44,7 @@ export function renderDateRangeItem(options?: RenderDateRangeItemOptions) {
           v-model={data[form.key]}
           onSelect={onSelect}
           onChange={onChange}
+          mode={options?.type}
           allowClear={options?.clearable}
           disabled-date={disabledMethod}
           format={options?.labelFormat}
@@ -57,7 +58,7 @@ export interface RenderDateRangeItemOptions {
   placeholder?: string
   clearable?: boolean
   multiple?: boolean
-  type?: 'date' | 'week' | 'month' | 'year'
+  type?: 'date' | 'year' | 'quarter' | 'month' | 'week'
   valueFormat?: string
   labelFormat?: string
   disabledDate?: (value: string[], date: Date) => boolean

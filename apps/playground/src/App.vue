@@ -127,7 +127,7 @@ class PageService implements RequestPlugin, PaginationOptions {
   }
 }
 
-const table = $(useTable('table'))
+const table = useTable('table')
 
 const pageService = new PageService(1, 1)
 
@@ -174,7 +174,6 @@ const searchForms: FormItemsOptions = [
     title: 'date-rage',
     render: (r) =>
       r.dateRange({
-        type: 'date',
         valueFormat: 'YYYY-MM-DD HH:mm:ss',
         labelFormat: 'YYYY年MM月DD日'
       })
@@ -183,7 +182,7 @@ const searchForms: FormItemsOptions = [
     key: 'phone',
     title: 'phone',
     rules: [{ required: true, message: '请输入名称' }],
-    render: (r) => r.input()
+    render: (r) => r.input({ type: 'number' })
   },
   {
     key: 'enable',
@@ -194,6 +193,7 @@ const searchForms: FormItemsOptions = [
     key: 'test1',
     title: 'test1',
     rules: [{ required: true, message: '请输入名称' }],
+    minWidth: 300,
     render: (r) =>
       r.select({
         default: 'b',
@@ -206,7 +206,7 @@ const searchForms: FormItemsOptions = [
   {
     key: 'test2',
     title: 'test2',
-    render: (r) => r.date()
+    render: (r) => r.date({ type: 'month' })
   },
   {
     key: 'test2',
