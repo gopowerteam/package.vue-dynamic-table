@@ -53,8 +53,7 @@ export default defineConfig({
       entryRoot: resolvePath(),
       outDir: ['dist/lib', 'dist/es'],
       include: 'src',
-      copyDtsFiles: false,
-      strictOutput: true
+      copyDtsFiles: false
     }),
     vitePluginForArco({
       style: 'css'

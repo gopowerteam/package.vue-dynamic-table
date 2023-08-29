@@ -22,7 +22,7 @@
         :columns="columns"
         actions-position="right">
         <template #actions>
-          <button @click="() => table.reload()">reload</button>
+          <button @click="() => table.value.reload()">reload</button>
           <div>1231</div>
           <div>1231</div>
           <div>1231</div>
@@ -127,7 +127,7 @@ class PageService implements RequestPlugin, PaginationOptions {
   }
 }
 
-const table = useTable('table')
+const table = $(useTable('table'))
 
 const pageService = new PageService(1, 1)
 
@@ -315,11 +315,11 @@ const columns: TableColumnsOptions<Administrator> = [
     title: '手机号',
     render: (r) => r.phone({ safe: true, callable: true })
   },
-  // {
-  //   key: 'test2',
-  //   title: 'test2',
-  //   render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
-  // },
+  {
+    key: 'test2',
+    title: 'test2',
+    render: (r) => r.render(() => <div>{'123123123'.repeat(10)}</div>)
+  },
   {
     key: 'image',
     title: '图片',
