@@ -1,4 +1,4 @@
-declare module 'vue-json-viewer/ssr.js' {
+declare module 'vue-json-viewer' {
   const vis: any
   export default vis
 }
