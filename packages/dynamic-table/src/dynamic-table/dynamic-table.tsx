@@ -102,11 +102,8 @@ export default defineComponent({
       default: () => false
     },
     treeConfig: {
-      type: [Boolean, Object] as PropType<
-        boolean | VxeTablePropTypes.TreeConfig
-      >,
-      required: false,
-      default: () => false
+      type: Object as PropType<VxeTablePropTypes.TreeConfig>,
+      required: false
     }
   },
   emits: ['update:radio', 'update:checkbox'],
