@@ -19,6 +19,7 @@ import { useModal } from '@gopowerteam/vue-modal'
 import renderTableForm from '@/data-table/render-table-form'
 import { renderTableColumn } from '@/data-table/render-table-column'
 import { useExport } from '@/utils/use-export'
+import type { VxeTablePropTypes } from 'vxe-table'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -94,6 +95,16 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: () => false
+    },
+    resizable: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    },
+    treeConfig: {
+      type: Object as PropType<VxeTablePropTypes.TreeConfig>,
+      required: false,
+      default: () => false
     }
   },
   emits: ['update:radio', 'update:checkbox'],
@@ -161,7 +172,11 @@ export default defineComponent({
       tableId: id,
       rowConfig: {
         keyField: props.rowKey
-      }
+      },
+      columnConfig: {
+        resizable: props.resizable
+      },
+      treeConfig: props.treeConfig
     }
     // 获取Form配置
     const searchForms = createSearchItemOptions(

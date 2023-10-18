@@ -19,7 +19,7 @@ export interface FormItemOptions<T = DataRecord> {
 /**
  * 表单配置
  */
-export type FormItemsOptions<T> = Array<FormItemOptions<T>>
+export type FormItemsOptions<T = DataRecord> = Array<FormItemOptions<T>>
 
 /**
  * Render函数
