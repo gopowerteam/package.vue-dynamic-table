@@ -56,7 +56,8 @@ export function renderTableColumn<T>(options: TableColumnOptions<T>) {
       showOverflow: showOverflow,
       showFooterOverflow: true,
       showHeaderOverflow: true,
-      visible: !disableColumnMode
+      visible: !disableColumnMode,
+      treeNode: options.treeNode
     },
     {
       default: template

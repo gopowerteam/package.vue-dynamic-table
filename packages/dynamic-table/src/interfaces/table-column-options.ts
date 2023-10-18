@@ -20,6 +20,7 @@ export interface TableColumnOptions<T> {
   formatter?: DataFormatter<T>
   preview?: TableColumnPreviewOptions
   exportable?: ExportColumnOptions | boolean
+  treeNode?: boolean
 }
 
 export type ExportColumnOptions = {
