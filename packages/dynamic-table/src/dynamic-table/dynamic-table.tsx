@@ -102,7 +102,9 @@ export default defineComponent({
       default: () => false
     },
     treeConfig: {
-      type: Object as PropType<VxeTablePropTypes.TreeConfig>,
+      type: [Boolean, Object] as PropType<
+        boolean | VxeTablePropTypes.TreeConfig
+      >,
       required: false,
       default: () => false
     }
