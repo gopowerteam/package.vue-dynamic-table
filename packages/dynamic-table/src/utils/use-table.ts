@@ -1,12 +1,25 @@
 import type { DynamicTableInstance } from '../dynamic-table'
-import { getCurrentInstance, onMounted, onUpdated, ref, type Ref } from 'vue'
+import {
+  getCurrentInstance,
+  onMounted,
+  onUpdated,
+  ref,
+  type ComponentPublicInstance,
+  type Ref
+} from 'vue'
 
+type DynamicTableExpose = {
+  -readonly [K in keyof Omit<
+    DynamicTableInstance,
+    keyof ComponentPublicInstance
+  >]: DynamicTableInstance[K]
+}
 /**
  * 获取DynamicTable实例
  * @param key
  * @returns
  */
-export function useTable(key: string): Readonly<Ref<DynamicTableInstance>> {
+export function useTable(key: string): Readonly<Ref<DynamicTableExpose>> {
   const instance = getCurrentInstance()
   const table = ref<DynamicTableInstance>()
 
@@ -21,5 +34,5 @@ export function useTable(key: string): Readonly<Ref<DynamicTableInstance>> {
   onMounted(updateTable)
   onUpdated(updateTable)
 
-  return table as Readonly<Ref<DynamicTableInstance>>
+  return table as unknown as Readonly<Ref<DynamicTableExpose>>
 }
