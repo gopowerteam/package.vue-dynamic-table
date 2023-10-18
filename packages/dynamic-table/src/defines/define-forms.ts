@@ -1,5 +1,5 @@
 import type { FormItemsOptions } from '@/interfaces'
 
-export function defineForms(forms: FormItemsOptions[]) {
+export function defineForms(forms: FormItemsOptions) {
   return forms
 }
