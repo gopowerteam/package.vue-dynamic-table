@@ -48,7 +48,6 @@
     "exceljs": "^4.3.0",
     "mitt": "3.0.1",
     "vue": "3.3.4",
-    "vue-json-viewer": "3",
     "vxe-table": "4.5.5",
     "xe-utils": "3.5.12"
   },

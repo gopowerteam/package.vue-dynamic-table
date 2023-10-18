@@ -149,7 +149,6 @@ function loadData({ search, update }: LoadDataParams) {
           image:
             'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
           category: { name: 'string1' },
-          json: '{"test":123,"aaa":{"bbb":"asdas","ccc":"aasd"}}',
           text: '---test---'.repeat(5),
           tags: ['a']
         }
@@ -301,14 +300,6 @@ const columns: TableColumnsOptions<Administrator> = [
         border: 'yellow',
         radius: 2
       })
-  },
-  {
-    key: 'json',
-    title: 'JSON',
-    preview: {
-      span: 2
-    },
-    render: (r) => r.json({})
   },
   {
     key: 'phone',

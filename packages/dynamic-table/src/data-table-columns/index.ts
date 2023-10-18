@@ -4,7 +4,6 @@ import { renderDictColumn } from './dict'
 import { renderPhoneColumn } from './phone'
 import { renderTextColumn } from './text'
 import { renderPreviewColumn } from './preview'
-import { renderJSONColumn } from './json'
 import { renderImageColumn } from './image'
 import { renderRenderColumn } from './render'
 import { renderTagColumn } from './tag'
@@ -19,7 +18,6 @@ export function getTableColumnRenders<T>() {
     date: renderDateColumn<T>,
     button: renderButtonColumn<T>,
     preview: renderPreviewColumn<T>,
-    json: renderJSONColumn<T>,
     image: renderImageColumn<T>,
     currency: renderCurrencyColumn<T>,
     render: renderRenderColumn<T>

@@ -1,7 +1,6 @@
 import DynamicTable from './dynamic-table'
 import type { Plugin } from 'vue'
 import VXETable from 'vxe-table'
-import JsonViewer from 'vue-json-viewer'
 import 'vxe-table/lib/style.css'
 import type {
   DataRecord,
@@ -48,7 +47,7 @@ export default {
   install(app, options?: DynamicTableOptions) {
     resetVxeTableHooks()
 
-    app.use(VXETable).use(JsonViewer)
+    app.use(VXETable)
 
     app.component(options?.name || DynamicTable.name, DynamicTable)
     // VXETable.hooks.mixin
