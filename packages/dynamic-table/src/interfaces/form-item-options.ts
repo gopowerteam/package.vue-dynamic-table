@@ -5,8 +5,8 @@ import type { DataRecord } from './load-data-params'
 /**
  * 表单项配置
  */
-export interface FormItemOptions<T = DataRecord> {
-  key: string | keyof T
+export interface FormItemOptions {
+  key: string
   title: string
   render?: FormItemRender
   collapsed?: boolean
@@ -19,7 +19,7 @@ export interface FormItemOptions<T = DataRecord> {
 /**
  * 表单配置
  */
-export type FormItemsOptions<T = DataRecord> = Array<FormItemOptions<T>>
+export type FormItemsOptions = Array<FormItemOptions>
 
 /**
  * Render函数

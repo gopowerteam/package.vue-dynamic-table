@@ -1,5 +1,5 @@
 import type { FormItemsOptions } from '@/interfaces'
 
-export function defineForms<T>(forms: FormItemsOptions<T>) {
+export function defineForms(forms: FormItemsOptions) {
   return forms
 }
