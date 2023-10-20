@@ -5,10 +5,10 @@ import type { DataRecord } from './load-data-params'
 /**
  * 表单项配置
  */
-export interface FormItemOptions {
+export interface FormItemOptions<T> {
   key: string
   title: string
-  render?: FormItemRender
+  render?: FormItemRender<T>
   collapsed?: boolean
   rules?: VxeTableDefines.ValidatorRule[]
   default?: any | (() => any)
@@ -19,15 +19,15 @@ export interface FormItemOptions {
 /**
  * 表单配置
  */
-export type FormItemsOptions = Array<FormItemOptions>
+export type FormItemsOptions<T = DataRecord> = Array<FormItemOptions<T>>
 
 /**
  * Render函数
  */
-export interface FormItemRender {
+export interface FormItemRender<T = DataRecord> {
   (
     render: FormItemRenderFun
-  ): (data: DataRecord, itemOptions: FormItemOptions) => JSX.Element
+  ): (data: T, itemOptions: FormItemOptions<T>) => JSX.Element
 }
 
 /**
