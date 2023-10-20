@@ -1,10 +1,16 @@
 import { createRenderer } from '@/utils/create-renderer'
+import { useEvents } from '@/utils/use-events'
+import { inject } from 'vue'
 import { VXETable, VxeButton } from 'vxe-table'
 
 export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
   const render = (record: T) => {
     const buttons = (
-      'buttons' in options ? options.buttons : [options]
+      Array.isArray(options)
+        ? options
+        : 'buttons' in options
+        ? options.buttons
+        : [options]
     ) as RenderSingleButtonColumnOptions<T>[]
 
     const toBooleanValue = (
@@ -72,6 +78,15 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
       if (executable && button?.callback) {
         button.callback(record)
       }
+
+      if (executable && button?.onClick) {
+        await button.onClick(record)
+
+        if (button.autoReload) {
+          const events = useEvents(inject<string>('id'))
+          events.emit('reload')
+        }
+      }
     }
 
     return (
@@ -104,11 +119,14 @@ export function renderButtonColumn<T>(options: RenderButtonColumnOptions<T>) {
 
 export type RenderButtonColumnOptions<T> =
   | RenderSingleButtonColumnOptions<T>
+  | RenderSingleButtonColumnOptions<T>[]
   | RenderMultipleButtonColumnOptions<T>
 
 export interface RenderSingleButtonColumnOptions<T> {
   text?: string | ((record: T) => string | number | undefined)
-  callback: (record: T) => void
+  callback?: (record: T) => void
+  onClick?: (record: T) => Promise<void> | void
+  autoReload?: boolean
   status?: 'primary' | 'success' | 'info' | 'warning' | 'danger'
   plain?: boolean
   round?: boolean

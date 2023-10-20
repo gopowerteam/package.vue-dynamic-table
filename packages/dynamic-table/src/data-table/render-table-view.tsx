@@ -127,8 +127,12 @@ export default defineComponent({
               )) === 'confirm'
             : true
 
-        if (executable) {
+        if (executable && button.callback) {
           button.callback(props.record)
+        }
+
+        if (executable && button.onClick) {
+          button.onClick(props.record)
         }
       }
 
