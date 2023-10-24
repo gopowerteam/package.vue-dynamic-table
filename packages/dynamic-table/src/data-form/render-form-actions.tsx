@@ -1,5 +1,5 @@
 import { useModal } from '@gopowerteam/vue-modal'
-import type { FormItemOptions } from '..'
+import type { DataRecord, FormItemOptions } from '..'
 import { useEvents } from '@/utils/use-events'
 import { inject, type Slot } from 'vue'
 import { Button } from '@arco-design/web-vue'
@@ -118,7 +118,7 @@ export function renderEditFormActions(actions?: Slot) {
 }
 
 export function renderSearchFormActions(
-  forms: FormItemOptions[],
+  forms: FormItemOptions<DataRecord>[],
   actionsPosition: 'left' | 'right',
   exportable: boolean,
   refreshable: boolean,
@@ -143,9 +143,9 @@ export function renderSearchFormActions(
         <>
           <div
             class="divider"
-            style="height:1px;margin:10px 0;background-color:rgba(0,0,0,0.1)"></div>
+            style="width:100%;height:1px;margin:10px 0;background-color:rgba(0,0,0,0.1)"></div>
           <div
-            style={`padding:5px 0 10px 0;display:flex;justify-content:space-between;align-items:center;flex-direction:${
+            style={`width:100%;padding:5px 0 10px 0;display:flex;justify-content:space-between;align-items:center;flex-direction:${
               actionsPosition === 'right' ? 'row' : 'row-reverse;'
             }`}>
             <div class="tools">
