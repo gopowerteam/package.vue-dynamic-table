@@ -49,7 +49,7 @@ import type {
 import { useTable } from '@gopowerteam/vue-dynamic-table'
 import type { Administrator } from './http/models/Administrator'
 import { AdministratorService } from './http/services/AdministratorService'
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 const administratorService = new AdministratorService()
 
@@ -132,29 +132,54 @@ const table = useTable('table')
 const pageService = new PageService(1, 1)
 
 const radio = ref('1')
-const checkbox = ref(['1'])
+const checkbox = ref(['0', '1'])
+
+onMounted(() => {
+  setTimeout(() => {
+    checkbox.value = []
+    console.log(table.value.tableInstance)
+    console.log('update heckbox')
+  }, 3000)
+})
 
 function loadData({ search, update }: LoadDataParams) {
   console.log(search)
-  administratorService.findAdministrator(search, [pageService]).then(() => {
-    update(
-      Array.from(Array(1), (_, i) => ({
-        id: i,
-        ...{
-          phone: '17899992222',
-          createdAt: '',
-          uid: '001',
-          state: true,
-          amount: 123123,
-          image:
-            'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
-          category: { name: 'string1' },
-          text: '---test---'.repeat(5),
-          tags: ['a']
-        }
-      }))
-    )
-  })
+  update(
+    Array.from(Array(10), (_, i) => ({
+      id: i,
+      ...{
+        phone: '17899992222',
+        createdAt: '',
+        uid: '001',
+        state: true,
+        amount: 123123,
+        image:
+          'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
+        category: { name: 'string1' },
+        text: '---test---'.repeat(5),
+        tags: ['a']
+      }
+    }))
+  )
+  // administratorService.findAdministrator(search, [pageService]).then(() => {
+  //   update(
+  //     Array.from(Array(1), (_, i) => ({
+  //       id: i,
+  //       ...{
+  //         phone: '17899992222',
+  //         createdAt: '',
+  //         uid: '001',
+  //         state: true,
+  //         amount: 123123,
+  //         image:
+  //           'https://gw.alicdn.com/tfs/TB1jwakrbH1gK0jSZFwXXc7aXXa-20-20.png___',
+  //         category: { name: 'string1' },
+  //         text: '---test---'.repeat(5),
+  //         tags: ['a']
+  //       }
+  //     }))
+  //   )
+  // })
 }
 
 function dd({ row }: { row: any }) {

@@ -2,7 +2,14 @@ import type { TableColumnsOptions } from '@/interfaces/table-column-options'
 import type { FormItemsOptions } from '@/interfaces/form-item-options'
 import type { LoadDataParams } from '@/interfaces/load-data-params'
 import type { PaginationOptions } from '@/interfaces/pagination-options'
-import { defineComponent, onMounted, unref, type PropType, provide } from 'vue'
+import {
+  defineComponent,
+  onMounted,
+  unref,
+  type PropType,
+  provide,
+  ref
+} from 'vue'
 
 import { DataSearchForm } from '../data-form'
 import DataPage from '../data-page'
@@ -19,7 +26,7 @@ import { useModal } from '@gopowerteam/vue-modal'
 import renderTableForm from '@/data-table/render-table-form'
 import { renderTableColumn } from '@/data-table/render-table-column'
 import { useExport } from '@/utils/use-export'
-import type { VxeTablePropTypes } from 'vxe-table'
+import type { VxeTableInstance, VxeTablePropTypes } from 'vxe-table'
 
 export default defineComponent({
   name: 'DynamicTable',
@@ -115,7 +122,8 @@ export default defineComponent({
     'edit',
     'preview',
     'export',
-    'getTableRows'
+    'getTableRows',
+    'tableInstance'
   ],
   render() {
     return (
@@ -138,6 +146,9 @@ export default defineComponent({
         )}
 
         <vxe-table
+          ref={(instance: any) =>
+            (this.tableInstance = instance as unknown as VxeTableInstance)
+          }
           height={this.height}
           scroll-y={{
             enable: this.height === undefined,
@@ -162,6 +173,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const id = Math.random().toString(32).slice(2).toUpperCase()
     const modal = useModal()
+    const tableInstance = ref<VxeTableInstance>()
     provide('id', id)
 
     const events = useEvents(id)
@@ -349,6 +361,7 @@ export default defineComponent({
       tableColumns,
       tableSource,
       tableOptions,
+      tableInstance,
       formSource: searchFormSource,
       searchSource: searchFormSource,
       searchForms: searchForms,
