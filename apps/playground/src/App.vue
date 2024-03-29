@@ -220,6 +220,7 @@ const searchForms: FormItemsOptions = [
     minWidth: 300,
     render: (r) =>
       r.select({
+        allowSearch: true,
         default: 'b',
         options: new Map([
           ['a', 'aaa'],

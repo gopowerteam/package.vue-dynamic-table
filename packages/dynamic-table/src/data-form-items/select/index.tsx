@@ -24,7 +24,7 @@ export function renderSelectItem(options: RenderSelectItemOptions) {
     }
   }
 
-  return (data: DataRecord, form: FormItemOptions) => {
+  return (data: DataRecord, form: FormItemOptions<any>) => {
     // 设置默认值
     if (options.default && !mounted) {
       data[form.key] = options.default
@@ -37,6 +37,7 @@ export function renderSelectItem(options: RenderSelectItemOptions) {
         v-model={data[form.key]}
         placeholder={options.placeholder}
         allowClear={options.clearable}
+        allowSearch={options.allowSearch}
         onChange={onSelectChange}>
         {Array.from(selectOptions.value.entries()).map(([value, label]) => (
           <Option
@@ -56,6 +57,7 @@ export interface RenderSelectItemOptions {
   placeholder?: string
   // 可清楚
   clearable?: boolean
+  allowSearch?: boolean
   // select options列表
   options:
     | SelectOptions
